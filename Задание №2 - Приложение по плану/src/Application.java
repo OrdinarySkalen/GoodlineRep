@@ -3,13 +3,8 @@
  */
 public class Application {
     public static void main(String[] args) {
-        System.out.print("Hello World!");
-        boolean x = false;
-        for (int i = 0; i < 10; i++) {
-            System.out.print("Hi!"+i+"\n");
+        for (int i = 0; i < args.length; i++) {
+            System.out.print(args[i]+"\n");
         }
-        if (x)
-        {System.exit(3);}
-        else {System.exit(2);}
     }
 }
