@@ -16,8 +16,8 @@ public class Application {
         if (args.length == 0)
             System.exit(-1);
         for (int i = 0; i < Users.length; i++) {
-            if (args[1].compareTo(Users[i].getLogin()) == 0) {
-                if (args[3].compareTo(Users[i].getPass()) == 0) {
+            if (args[1].equals(Users[i])) {
+                if (args[3].equals(Users[i])) {
                     error = 0;
                     break;
                 } else {
