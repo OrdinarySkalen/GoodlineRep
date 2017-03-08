@@ -8,17 +8,17 @@ public class Application {
         User[] Users = {fPerson, nPerson};
         int error = 0;
         for (int i = 0; i < Users.length; i++) {
-            if (args[1].compareTo(Users[i].getLogin())==0) {
-                if (args[3].compareTo(Users[i].getPass())==0) {
-                    error=0;
+            if (args[1].compareTo(Users[i].getLogin()) == 0) {
+                if (args[3].compareTo(Users[i].getPass()) == 0) {
+                    error = 0;
                     break;
                 } else {
-                    error=2;
+                    error = 2;
                     break;
                 }
 
             } else {
-                error=1;
+                error = 1;
             }
         }
         System.exit(error);
