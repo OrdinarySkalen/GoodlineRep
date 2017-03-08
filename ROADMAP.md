@@ -18,9 +18,9 @@
       * строковый массив передаваемы на вход в дальнейшем заменить на объект класса Options
    13. Создать класс UserInput (login, pass, res, role, ds, de, val) (+)
    13. Разложить входные параметры в объект UserInput (+)
-   13. Создать методы isAuthentification, isAuthorisation, isAccounting, возвращающие bool и метод getUserInput
-   13. Описываем работу программы
-   
+   13. Создать методы isAuthentification, isAuthorisation, isAccounting, возвращающие bool и метод getUserInput (+)
+   13. Описываем работу программы (+)
+       * Пришлось разбить метод getUserInput, т.к. он возвращал коды ошибкок 3,4,5 до перехода к авторизации и аккаунтингу, что противоречит пункту требований R1.11
    ```javascript
    if (isAuthentification()){
    //найти пользователя, проверить пароль
