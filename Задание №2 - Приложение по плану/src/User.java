@@ -4,10 +4,15 @@
 public class User {
     private String login;
     private String pass;
-    public User(String login, String pass)
+    private int ID;
+    private String salt;
+
+    public User(String login, String pass, int Id, String salt)
     {
         this.setLogin(login);
-        this.pass = pass;
+        this.setPass(pass);
+        this.setID(Id);
+        this.setSalt(salt);
     }
 
     public String getLogin() {
@@ -24,5 +29,21 @@ public class User {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

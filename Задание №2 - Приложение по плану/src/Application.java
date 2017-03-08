@@ -3,8 +3,8 @@
  */
 public class Application {
     public static void main(String[] args) {
-        User fPerson = new User("grom", "123qwe");
-        User nPerson = new User("groza", "ewq321");
+        User fPerson = new User("grom", "123qwe", 1, "12");
+        User nPerson = new User("groza", "ewq321", 2, "13");
         User[] Users = {fPerson, nPerson};
         int error = 0;
         for (int i = 0; i < Users.length; i++) {
