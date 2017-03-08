@@ -10,7 +10,29 @@ public class UserInput {
     private Roles role;
     private Time de;
     private Time ds;
-    private int val;
+    private Integer vol;
+
+    public boolean isAuthentification() {
+        if (this.getPass() != null & this.getLogin() != null)
+            return true;
+        else return false;
+    }
+
+    public boolean isAuthorisation() {
+        if (this.getRes() != null & this.getRole() != null)
+            return true;
+        else return false;
+    }
+
+    public boolean isAccounting() {
+        if (this.getDe() != null & this.getDs() != null /*& this.getVal()!=null*/)
+            return true;
+        else return false;
+        //придумать как зафиксировать отсутсвие параметра vol
+    }
+
+    public UserInput() {
+    }
 
     public UserInput(String login, String pass) {
         this.setLogin(login);
@@ -26,14 +48,14 @@ public class UserInput {
     }
 
     public UserInput(String login, String pass, String res,
-                     Roles role, Time de, Time ds, int val) {
+                     Roles role, Time de, Time ds, int vol) {
         this.setLogin(login);
         this.setPass(pass);
         this.setRes(res);
         this.setRole(role);
         this.setDs(ds);
         this.setDe(de);
-        this.setVal(val);
+        this.setVol(vol);
     }
 
     public String getLogin() {
@@ -84,11 +106,11 @@ public class UserInput {
         this.ds = ds;
     }
 
-    public int getVal() {
-        return val;
+    public int getVol() {
+        return vol;
     }
 
-    public void setVal(int val) {
-        this.val = val;
+    public void setVol(int vol) {
+        this.vol = vol;
     }
 }

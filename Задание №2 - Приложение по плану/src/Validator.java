@@ -39,7 +39,7 @@ public class Validator {
             }
             if (args[i].equals("-vol")) {
                 try {
-                    userInput.setVal(Integer.valueOf(args[i + 1]));
+                    userInput.setVol(Integer.valueOf(args[i + 1]));
                 } catch (Exception e) {
                     System.exit(5);
                 }
