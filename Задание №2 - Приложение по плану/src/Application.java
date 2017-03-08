@@ -4,6 +4,7 @@
  */
 public class Application {
     public static void main(String[] args) {
+        
         Validator validator = new Validator();
         UserInput userInput = new UserInput();
         //Options options = new Options();

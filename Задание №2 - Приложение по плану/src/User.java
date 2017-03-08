@@ -7,6 +7,8 @@ public class User {
     private int ID;
     private String salt;
 
+    public User() {}
+
     public User(String login, String pass, int Id, String salt) {
         this.setLogin(login);
         this.setPass(pass);
