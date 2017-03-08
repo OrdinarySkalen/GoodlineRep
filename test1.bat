@@ -1,3 +1,5 @@
+java Application
+echo %ERRORLEVEL%
 java Application login grom pass 123qwe
 echo %ERRORLEVEL%
 java Application login groza pass ewq321

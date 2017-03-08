@@ -7,6 +7,8 @@ public class Application {
         User nPerson = new User("groza", "ewq321", 2, "13");
         User[] Users = {fPerson, nPerson};
         int error = 0;
+        if (args.length==0)
+            System.exit(-1);
         for (int i = 0; i < Users.length; i++) {
             if (args[1].compareTo(Users[i].getLogin()) == 0) {
                 if (args[3].compareTo(Users[i].getPass()) == 0) {
