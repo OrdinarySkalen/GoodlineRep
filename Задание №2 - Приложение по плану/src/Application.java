@@ -19,23 +19,33 @@ public class Application {
         validator.GetUserInput(args,userInput);
 
         int error = 0;
-        if (args.length == 0)
-            System.exit(-1);
-        for (int i = 0; i < Users.length; i++) {
-            if (userInput.getLogin().equals(Users[i].getLogin())) {
-                if (userInput.getPass().equals(Users[i].getPass())) {
-                    error = 0;
-                    break;
-                } else {
-                    error = 2;
-                    break;
-                }
 
-            } else {
-                error = 1;
+        if (userInput.isAuthentification()==false)
+            System.exit(-1);
+        else
+        {
+            //Найти пользователя по логину
+            //Проверить пароль
+            validator.GetResurseInput(args,userInput);
+            if(userInput.isAuthorisation() & error==0)
+            {
+                //исправить метод класса validator так, что бы было возможно получить
+                //ошибки 3,4 в этом фрагменте кода
+                //проверка доступа
+                //разрешить доступ к ресурсу
+                //разрешить доступ к дочерним ресурсам с той же ролью
+                validator.GetSessionInput(args,userInput);
+                if(userInput.isAccounting() & error==0)
+                {
+                    //isDataValid(ds,de);
+                    //isVolValid(vol)
+                    //tryGetDate()
+                    //tryGetVol()
+                    //добавить запись о посещении ресурса
+                    System.exit(0);
+                }
             }
         }
-        System.exit(error);
     }
 }
 

@@ -13,6 +13,11 @@ public class Validator {
             if (args[i].equals("-pass")) {
                 userInput.setPass(args[i + 1]);
             }
+        }
+    }
+
+    public void GetResurseInput(String[] args, UserInput userInput) {
+        for (int i = 0; i < args.length - 1; i++) {
             if (args[i].equals("-res")) {
                 userInput.setRes(args[i + 1]);
             }
@@ -23,6 +28,11 @@ public class Validator {
                     System.exit(3);
                 }
             }
+        }
+    }
+
+    public void GetSessionInput(String[] args, UserInput userInput) {
+        for (int i = 0; i < args.length - 1; i++) {
             if (args[i].equals("-de")) {
                 try {
                     userInput.setDe(Time.valueOf(args[i + 1]));
