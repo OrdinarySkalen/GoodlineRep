@@ -1,3 +1,4 @@
+import javax.management.relation.Role;
 import java.util.List;
 
 /**
@@ -7,6 +8,12 @@ public class Resourse {
     private String Path;
     private int[] Users_ID;
     private Roles Role;
+
+    public Resourse(String path, int[] mas_id, Roles role) {
+        this.setPath(path);
+        this.setUsers_ID(mas_id);
+        this.setRole(role);
+    }
 
     public String getPath() {
         return Path;

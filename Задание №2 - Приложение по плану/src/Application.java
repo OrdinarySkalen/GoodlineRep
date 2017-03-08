@@ -6,6 +6,12 @@ public class Application {
         User fPerson = new User("grom", "123qwe", 1, "12");
         User nPerson = new User("groza", "ewq321", 2, "13");
         User[] Users = {fPerson, nPerson};
+        int[] Id_users1 = {1};
+        int[] Id_users2 = {1, 2};
+        Resourse Res1 = new Resourse("A.B", Id_users1, Roles.READ);
+        Resourse Res2 = new Resourse("A.B.C", Id_users2, Roles.READ);
+        Resourse[] massRes = {Res1, Res2};
+
         int error = 0;
         if (args.length == 0)
             System.exit(-1);
