@@ -1,7 +1,3 @@
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
 
 /**
  * Created by Artem 2 on 06.03.2017.
@@ -41,15 +37,19 @@ public class Application {
         }
 
         System.out.print("Authentification: success");
-        //validator.GetResurseInput(args, userInput); // тут вылезет ошибка 3, если она есть
+
         if (userInput.isAuthorisation()) {
-            try{
-                reqRes = serv.FindResourse(userInput.getRes(),Roles.valueOf(userInput.getRole()),massRes);
-            } catch (Exception e)
-            {
+            try {
+                reqRes = serv.FindResourse(userInput.getRes(), Roles.valueOf(userInput.getRole()), massRes);
+            } catch (Exception e) {
                 System.exit(3);
             }
-            //reqRes = serv.FindResourse(userInput.getRes(), userInput.getRole(), massRes); //найти ресурс по пути и роли
+
+            if (reqRes.getPath() == null) //вылавливаем неизвестные ресурсы
+            {
+                System.exit(4);
+            }
+
             for (int i = 0; i < reqRes.getUsers_ID().length; i++) {
                 if (reqUser.getID() == reqRes.getUsers_ID()[i]) //проверка доступа
                 {
@@ -63,8 +63,7 @@ public class Application {
             System.out.print("\nResourse " + reqRes.getPath() + " - ok");//разрешить доступ к ресурсу
             //разрешить доступ к дочерним ресурсам с той же ролью
             System.out.print("\nAuthorisation: success");
-            //validator.GetSessionInput(args, userInput);
-            if (userInput.isAccounting() & error == 0) {
+            if (userInput.isAccounting()) {
                 //isDataValid(ds,de);
                 //isVolValid(vol)
                 //tryGetDate()
