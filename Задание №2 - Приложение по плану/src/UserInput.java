@@ -7,10 +7,14 @@ public class UserInput {
     private String login;
     private String pass;
     private String res; //соответствует сво-ву Path класса Resourse
-    private Roles role;
-    private Time de;
-    private Time ds;
-    private Integer vol;
+    private String role;
+    private Roles trueRole;
+    private String ds;
+    private Time trueDs;
+    private String de;
+    private Time trueDe;
+    private String vol;
+    private Integer trueVol;
 
     public boolean isAuthentification() {
         if (this.getPass() != null & this.getLogin() != null)
@@ -32,30 +36,6 @@ public class UserInput {
     }
 
     public UserInput() {
-    }
-
-    public UserInput(String login, String pass) {
-        this.setLogin(login);
-        this.setPass(pass);
-    }
-
-    public UserInput(String login, String pass, String res,
-                     Roles role) {
-        this.setLogin(login);
-        this.setPass(pass);
-        this.setRes(res);
-        this.setRole(role);
-    }
-
-    public UserInput(String login, String pass, String res,
-                     Roles role, Time de, Time ds, int vol) {
-        this.setLogin(login);
-        this.setPass(pass);
-        this.setRes(res);
-        this.setRole(role);
-        this.setDs(ds);
-        this.setDe(de);
-        this.setVol(vol);
     }
 
     public String getLogin() {
@@ -82,35 +62,67 @@ public class UserInput {
         this.res = res;
     }
 
-    public Roles getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Roles role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public Time getDe() {
-        return de;
+    public Roles getTrueRole() {
+        return trueRole;
     }
 
-    public void setDe(Time de) {
-        this.de = de;
+    public void setTrueRole(Roles trueRole) {
+        this.trueRole = trueRole;
     }
 
-    public Time getDs() {
+    public String getDs() {
         return ds;
     }
 
-    public void setDs(Time ds) {
+    public void setDs(String ds) {
         this.ds = ds;
     }
 
-    public int getVol() {
+    public Time getTrueDs() {
+        return trueDs;
+    }
+
+    public void setTrueDs(Time trueDs) {
+        this.trueDs = trueDs;
+    }
+
+    public String getDe() {
+        return de;
+    }
+
+    public void setDe(String de) {
+        this.de = de;
+    }
+
+    public Time getTrueDe() {
+        return trueDe;
+    }
+
+    public void setTrueDe(Time trueDe) {
+        this.trueDe = trueDe;
+    }
+
+    public String getVol() {
         return vol;
     }
 
-    public void setVol(int vol) {
+    public void setVol(String vol) {
         this.vol = vol;
+    }
+
+    public Integer getTrueVol() {
+        return trueVol;
+    }
+
+    public void setTrueVol(Integer trueVol) {
+        this.trueVol = trueVol;
     }
 }
