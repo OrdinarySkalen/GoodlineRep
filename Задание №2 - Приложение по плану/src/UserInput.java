@@ -6,7 +6,7 @@ import java.time.LocalDate;
 public class UserInput {
     private String login;
     private String pass;
-    private String res; //соответствует сво-ву Path класса Resourse
+    private String res; //соответствует сво-ву Path класса Resource
     private String role;
     private Roles trueRole;
     private String ds;

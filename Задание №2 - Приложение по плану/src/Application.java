@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,7 @@ public class Application {
     public static void main(String[] args) {
         Validator validator = new Validator();
         UserInput userInput = new UserInput();
-        AAAService servise = new AAAService();
+        AAAService service = new AAAService();
 
         User fPerson = new User("grom", "123qwe", 1, "12");
         User nPerson = new User("groza", "ewq321", 2, "13");
@@ -17,31 +18,31 @@ public class Application {
         listUsers.add(fPerson);
         listUsers.add(nPerson);
 
-        Resourse res1 = new Resourse("A.B", new int[]{1}, Roles.READ);
-        Resourse res2 = new Resourse("A.B.C", new int[]{1, 2}, Roles.READ);
-        ArrayList<Resourse> listRes = new ArrayList<Resourse>();
+        Resource res1 = new Resource("A.B", new int[]{1}, Roles.READ);
+        Resource res2 = new Resource("A.B.C", new int[]{1, 2}, Roles.READ);
+        ArrayList<Resource> listRes = new ArrayList<Resource>();
         listRes.add(res1);
         listRes.add(res2);
         validator.getUserInput(userInput, args);
 
         User reqUser = new User();
-        Resourse reqRes = new Resourse();
+        Resource reqRes = new Resource();
         int error = 4;
 
-        reqUser = servise.findUserByLogin(userInput.getLogin(), listUsers);//Найти юзера по логину
+        reqUser = service.findUserByLogin(userInput.getLogin(), listUsers);//Найти юзера по логину
         if (reqUser.getLogin() == null) {
             System.exit(1);
         }
 
-        if (!servise.checkPasswordByUser(reqUser, userInput.getPass())) { //проверить пароль
+        if (!service.checkPasswordByUser(reqUser, userInput.getPass())) { //проверить пароль
             System.exit(2);
         }
 
-        System.out.print("Authentification: success");
+        System.out.print("Authentication: success");
 
         if (userInput.isAuthorisation()) {
             try {
-                reqRes = servise.findResourse(userInput.getRes(), Roles.valueOf(userInput.getRole()), listRes);
+                reqRes = service.findResource(userInput.getRes(), Roles.valueOf(userInput.getRole()), listRes);
             } catch (Exception e) {
                 System.exit(3);
             }
@@ -61,15 +62,17 @@ public class Application {
             if (error == 4) {
                 System.exit(4);
             }
-            System.out.print("\nResourse " + reqRes.getPath() + " - ok");//разрешить доступ к ресурсу
+            System.out.print("\nResource " + reqRes.getPath() + " - ok"); //разрешить доступ к ресурсу
             //разрешить доступ к дочерним ресурсам с той же ролью
             System.out.print("\nAuthorisation: success");
             if (userInput.isAccounting()) {
-                //isDataValid(ds,de);
-                //isVolValid(vol)
-                //tryGetDate()
-                //tryGetVol()
+                service.isDateValid(userInput.getDe(), userInput.getDs()); //ловим ошибку 5
+                service.isVolValid(userInput.getVol()); //ловим ошибку 5
+                LocalDate dateE = service.tryGetDate(userInput.getDe());
+                LocalDate dateS = service.tryGetDate(userInput.getDs());
+                int volume = service.tryGetVol(userInput.getVol());
                 //добавить запись о посещении ресурса
+                System.out.print("\nAccounting: success");
                 System.exit(0);
             }
         }

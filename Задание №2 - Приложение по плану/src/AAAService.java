@@ -15,9 +15,9 @@ public class AAAService {
         return reqUser;
     }
 
-    public Resourse findResourse(String path, Roles role, ArrayList<Resourse> resourses) {
-        Resourse reqRes = new Resourse();
-        for (Resourse res : resourses
+    public Resource findResource(String path, Roles role, ArrayList<Resource> resources) {
+        Resource reqRes = new Resource();
+        for (Resource res : resources
                 ) {
             if (res.getPath().equals(path) & res.getRole().equals(role))
                 reqRes = res;

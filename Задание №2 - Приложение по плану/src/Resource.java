@@ -1,18 +1,18 @@
 /**
  * Created by Artem 2 on 08.03.2017.
  */
-public class Resourse {
+public class Resource {
     private String path;
     private int[] usersId;
     private Roles role;
 
-    public Resourse(String path, int[] masId, Roles role) {
+    public Resource(String path, int[] masId, Roles role) {
         this.setPath(path);
         this.setUsersId(masId);
         this.setRole(role);
     }
 
-    public Resourse() {
+    public Resource() {
     }
 
     public String getPath() {
