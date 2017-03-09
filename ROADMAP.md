@@ -34,9 +34,9 @@
    13. Создать класс AAAServise, содержащий методы FindUserByLogin(login), CheckPasswordByUser(User) (+)
       * Дополнительно был создан метод поиска ресурса по рои и пути
    13. Написать логику проверки ресурса, является ли один ресурс подмножеством другого
-   13. Написать тесты
+   13. Написать тесты (+)
  14. Аккаунтинг
-   14. Создать методы isDataValid (ds,de), isVolValid(vol), tryGetDate(), tryGetVol() 
+   14. Создать методы isDataValid (ds,de), isVolValid(vol), tryGetDate(), tryGetVol() (+)
    14. Создать класс Accounting (дата1, дата2, объем, ресурс -> уже содержит User)
    14. Записать данные в коллекцию Accounting
    14. Написать тесты
