@@ -12,8 +12,8 @@ public class Application {
         UserInput userInput = new UserInput();
         AAAService service = new AAAService();
 
-        User fPerson = new User("grom", "123qwe", 1, "12");
-        User nPerson = new User("groza", "ewq321", 2, "13");
+        User fPerson = new User("grom", "123qwe", 1);
+        User nPerson = new User("groza", "ewq321", 2);
         ArrayList<User> listUsers = new ArrayList<User>();
         listUsers.add(fPerson);
         listUsers.add(nPerson);

@@ -1,3 +1,5 @@
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -28,9 +30,8 @@ public class AAAService {
     }
 
     public boolean checkPasswordByUser(User user, String pass) {
-        //pass = pass + user.getSalt();
-        //Хешируем pass
-        if (pass.equals(user.getPass())) {
+        pass =  DigestUtils.md5Hex(pass + user.getSalt());
+        if (pass.equals(user.getHashPass())) {
             return true;
         } else {
             return false;
