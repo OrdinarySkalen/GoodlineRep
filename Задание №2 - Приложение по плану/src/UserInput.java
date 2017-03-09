@@ -8,21 +8,9 @@ public class UserInput {
     private String pass;
     private String res; //соответствует сво-ву Path класса Resource
     private String role;
-    private Roles trueRole;
     private String ds;
-    private LocalDate trueDs;
     private String de;
-    private LocalDate trueDe;
     private String vol;
-    private Integer trueVol;
-
-    public boolean isAuthentification() {
-        if (this.getPass() != null & this.getLogin() != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public boolean isAuthorisation() {
         if (this.getRes() != null & this.getRole() != null) {
@@ -76,14 +64,6 @@ public class UserInput {
         this.role = role;
     }
 
-    public Roles getTrueRole() {
-        return trueRole;
-    }
-
-    public void setTrueRole(Roles trueRole) {
-        this.trueRole = trueRole;
-    }
-
     public String getDs() {
         return ds;
     }
@@ -106,29 +86,5 @@ public class UserInput {
 
     public void setVol(String vol) {
         this.vol = vol;
-    }
-
-    public Integer getTrueVol() {
-        return trueVol;
-    }
-
-    public void setTrueVol(Integer trueVol) {
-        this.trueVol = trueVol;
-    }
-
-    public LocalDate getTrueDs() {
-        return trueDs;
-    }
-
-    public void setTrueDs(LocalDate trueDs) {
-        this.trueDs = trueDs;
-    }
-
-    public LocalDate getTrueDe() {
-        return trueDe;
-    }
-
-    public void setTrueDe(LocalDate trueDe) {
-        this.trueDe = trueDe;
     }
 }

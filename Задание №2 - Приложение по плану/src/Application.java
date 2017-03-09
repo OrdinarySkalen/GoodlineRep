@@ -23,6 +23,7 @@ public class Application {
         ArrayList<Resource> listRes = new ArrayList<Resource>();
         listRes.add(res1);
         listRes.add(res2);
+
         validator.getUserInput(userInput, args);
 
         User reqUser = new User();
