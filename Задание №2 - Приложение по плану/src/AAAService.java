@@ -1,3 +1,5 @@
+import java.sql.Time;
+
 /**
  * Created by Artem 2 on 08.03.2017.
  */
@@ -28,5 +30,30 @@ public class AAAService {
         if (pass.equals(user.getPass())) {
             return true;
         } else return false;
+    }
+
+    public void isDateValid(String ds, String de) {
+        try {
+            Time.valueOf(ds);
+            Time.valueOf(de);
+        } catch (Exception e) {
+            System.exit(5);
+        }
+    }
+
+    public void isVolValid(String volume) {
+        try {
+            Integer.valueOf(volume);
+        } catch (Exception e) {
+            System.exit(5);
+        }
+    }
+
+    public Time tryGetDate(String date) {
+        return Time.valueOf(date);
+    }
+
+    public int tryGetVol(String volume) {
+        return Integer.valueOf(volume);
     }
 }
