@@ -26,7 +26,7 @@ public class Validator {
             usIn.setDs(line.getOptionValue("ds"));
             usIn.setDe(line.getOptionValue("de"));
             usIn.setVol(line.getOptionValue("volume"));
-            if (line.hasOption("h") | usIn.getLogin() == null | usIn.getPass() == null) {
+            if (line.hasOption("h") | (usIn.getLogin() == null) | (usIn.getPass() == null)) {
                 HelpFormatter hf = new HelpFormatter();
                 hf.printHelp("Help", options);
                 System.exit(0);

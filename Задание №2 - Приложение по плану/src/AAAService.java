@@ -9,8 +9,9 @@ public class AAAService {
         User reqUser = new User();
         for (User user : users
                 ) {
-            if (user.getLogin().equals(login))
+            if (user.getLogin().equals(login)) {
                 reqUser = user;
+            }
         }
         return reqUser;
     }
@@ -19,8 +20,9 @@ public class AAAService {
         Resource reqRes = new Resource();
         for (Resource res : resources
                 ) {
-            if (res.getPath().equals(path) & res.getRole().equals(role))
+            if ((res.getPath().equals(path)) & (res.getRole().equals(role))) {
                 reqRes = res;
+            }
         }
         return reqRes;
     }
@@ -30,7 +32,9 @@ public class AAAService {
         //Хешируем pass
         if (pass.equals(user.getPass())) {
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     public void isDateValid(String dateS, String dateE) {

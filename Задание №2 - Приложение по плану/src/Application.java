@@ -73,7 +73,7 @@ public class Application {
                 LocalDate dateE = service.tryGetDate(userInput.getDe());
                 LocalDate dateS = service.tryGetDate(userInput.getDs());
                 int volume = service.tryGetVol(userInput.getVol());
-                //добавить запись о посещении ресурса
+                //добавляем запись о посещении ресурса
                 accountings.add(new Accounting(dateS, dateE, volume, reqRes, reqUser));
                 System.out.print("\nAdd record:\n" +
                         "DateStart - " + dateS + "\n" +
