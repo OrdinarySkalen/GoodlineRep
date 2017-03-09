@@ -23,10 +23,10 @@ public class AAAService {
     }
 
     public boolean CheckPasswordByUser(User user, String pass) {
-        pass = pass + user.getSalt();
+        //pass = pass + user.getSalt();
         //Хешируем pass
-        if (pass.equals(user.getPass()))
+        if (pass.equals(user.getPass())) {
             return true;
-        else return false;
+        } else return false;
     }
 }

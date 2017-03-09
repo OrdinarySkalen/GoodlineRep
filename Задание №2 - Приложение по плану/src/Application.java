@@ -35,7 +35,7 @@ public class Application {
         if (reqUser.getLogin() == null) {
             System.exit(1);
         }
-        if (serv.CheckPasswordByUser(reqUser, userInput.getPass()) == false) ; //Проверить пароль
+        if (!serv.CheckPasswordByUser(reqUser, userInput.getPass())) ; //Проверить пароль
         {
             System.exit(2);
         }
