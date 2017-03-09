@@ -1,7 +1,4 @@
 import org.apache.commons.cli.*;
-
-import java.sql.Time;
-
 /**
  * Created by Artem 2 on 08.03.2017.
  */
@@ -10,7 +7,7 @@ public class Validator {
     CommandLineParser parser = new DefaultParser();
     Options options = new Options();
 
-    public UserInput SuperGetUserInput(UserInput ui, String[] args) {
+    public UserInput getUserInput(UserInput usIn, String[] args) {
         options.addOption("l", "login", true, "Login");
         options.addOption("pass", "pass", true, "Password");
         options.addOption("res", "resource", true, "Resource");
@@ -21,14 +18,14 @@ public class Validator {
         options.addOption("h", "help", true, "Help");
         try {
             CommandLine line = parser.parse(options, args);
-            ui.setLogin(line.getOptionValue("login"));
-            ui.setPass(line.getOptionValue("pass"));
-            ui.setRes(line.getOptionValue("resource"));
-            ui.setRole(line.getOptionValue("role"));
-            ui.setDs(line.getOptionValue("ds"));
-            ui.setDe(line.getOptionValue("de"));
-            ui.setVol(line.getOptionValue("volume"));
-            if (line.hasOption("h") | ui.getLogin() == null | ui.getPass() == null) {
+            usIn.setLogin(line.getOptionValue("login"));
+            usIn.setPass(line.getOptionValue("pass"));
+            usIn.setRes(line.getOptionValue("resource"));
+            usIn.setRole(line.getOptionValue("role"));
+            usIn.setDs(line.getOptionValue("ds"));
+            usIn.setDe(line.getOptionValue("de"));
+            usIn.setVol(line.getOptionValue("volume"));
+            if (line.hasOption("h") | usIn.getLogin() == null | usIn.getPass() == null) {
                 HelpFormatter hf = new HelpFormatter();
                 hf.printHelp("Help", options);
                 System.exit(0);
@@ -38,6 +35,6 @@ public class Validator {
             hf.printHelp("Help", options);
             System.exit(0);
         }
-        return ui;
+        return usIn;
     }
 }

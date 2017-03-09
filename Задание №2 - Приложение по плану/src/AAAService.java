@@ -1,10 +1,11 @@
-import java.sql.Time;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Created by Artem 2 on 08.03.2017.
  */
 public class AAAService {
-    public User FindUserByLogin(String login, User[] users) {
+    public User findUserByLogin(String login, ArrayList<User> users) {
         User reqUser = new User();
         for (User user : users
                 ) {
@@ -14,7 +15,7 @@ public class AAAService {
         return reqUser;
     }
 
-    public Resourse FindResourse(String path, Roles role, Resourse[] resourses) {
+    public Resourse findResourse(String path, Roles role, ArrayList<Resourse> resourses) {
         Resourse reqRes = new Resourse();
         for (Resourse res : resourses
                 ) {
@@ -24,7 +25,7 @@ public class AAAService {
         return reqRes;
     }
 
-    public boolean CheckPasswordByUser(User user, String pass) {
+    public boolean checkPasswordByUser(User user, String pass) {
         //pass = pass + user.getSalt();
         //Хешируем pass
         if (pass.equals(user.getPass())) {
@@ -32,10 +33,10 @@ public class AAAService {
         } else return false;
     }
 
-    public void isDateValid(String ds, String de) {
+    public void isDateValid(String dateS, String dateE) {
         try {
-            Time.valueOf(ds);
-            Time.valueOf(de);
+            LocalDate.parse(dateS);
+            LocalDate.parse(dateE);
         } catch (Exception e) {
             System.exit(5);
         }
@@ -49,8 +50,8 @@ public class AAAService {
         }
     }
 
-    public Time tryGetDate(String date) {
-        return Time.valueOf(date);
+    public LocalDate tryGetDate(String date) {
+        return LocalDate.parse(date);
     }
 
     public int tryGetVol(String volume) {

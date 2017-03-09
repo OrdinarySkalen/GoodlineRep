@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Created by Artem 2 on 06.03.2017.
@@ -8,31 +9,31 @@ public class Application {
     public static void main(String[] args) {
         Validator validator = new Validator();
         UserInput userInput = new UserInput();
-        AAAService serv = new AAAService();
-        /*CommandLineParser parser = new DefaultParser();
-        Options options = new Options();*/
+        AAAService servise = new AAAService();
 
         User fPerson = new User("grom", "123qwe", 1, "12");
         User nPerson = new User("groza", "ewq321", 2, "13");
-        User[] Users = {fPerson, nPerson};
-        int[] Id_users1 = {1};
-        int[] Id_users2 = {1, 2};
-        Resourse Res1 = new Resourse("A.B", Id_users1, Roles.READ);
-        Resourse Res2 = new Resourse("A.B.C", Id_users2, Roles.READ);
-        Resourse[] massRes = {Res1, Res2};
+        ArrayList<User> listUsers = new ArrayList<User>();
+        listUsers.add(fPerson);
+        listUsers.add(nPerson);
 
-        validator.SuperGetUserInput(userInput, args);
+        Resourse res1 = new Resourse("A.B", new int[]{1}, Roles.READ);
+        Resourse res2 = new Resourse("A.B.C", new int[]{1, 2}, Roles.READ);
+        ArrayList<Resourse> listRes = new ArrayList<Resourse>();
+        listRes.add(res1);
+        listRes.add(res2);
+        validator.getUserInput(userInput, args);
 
         User reqUser = new User();
         Resourse reqRes = new Resourse();
         int error = 4;
 
-        reqUser = serv.FindUserByLogin(userInput.getLogin(), Users);//Найти юзера по логину
+        reqUser = servise.findUserByLogin(userInput.getLogin(), listUsers);//Найти юзера по логину
         if (reqUser.getLogin() == null) {
             System.exit(1);
         }
 
-        if (!serv.CheckPasswordByUser(reqUser, userInput.getPass())) { //проверить пароль
+        if (!servise.checkPasswordByUser(reqUser, userInput.getPass())) { //проверить пароль
             System.exit(2);
         }
 
@@ -40,7 +41,7 @@ public class Application {
 
         if (userInput.isAuthorisation()) {
             try {
-                reqRes = serv.FindResourse(userInput.getRes(), Roles.valueOf(userInput.getRole()), massRes);
+                reqRes = servise.findResourse(userInput.getRes(), Roles.valueOf(userInput.getRole()), listRes);
             } catch (Exception e) {
                 System.exit(3);
             }
@@ -50,8 +51,8 @@ public class Application {
                 System.exit(4);
             }
 
-            for (int i = 0; i < reqRes.getUsers_ID().length; i++) {
-                if (reqUser.getID() == reqRes.getUsers_ID()[i]) //проверка доступа
+            for (int i = 0; i < reqRes.getUsersId().length; i++) {
+                if (reqUser.getId() == reqRes.getUsersId()[i]) //проверка доступа
                 {
                     error = 0;
                     break;

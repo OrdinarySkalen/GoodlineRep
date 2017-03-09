@@ -1,4 +1,4 @@
-import java.sql.Time;
+import java.time.LocalDate;
 
 /**
  * Created by Artem 2 on 08.03.2017.
@@ -10,28 +10,34 @@ public class UserInput {
     private String role;
     private Roles trueRole;
     private String ds;
-    private Time trueDs;
+    private LocalDate trueDs;
     private String de;
-    private Time trueDe;
+    private LocalDate trueDe;
     private String vol;
     private Integer trueVol;
 
     public boolean isAuthentification() {
-        if (this.getPass() != null & this.getLogin() != null)
+        if (this.getPass() != null & this.getLogin() != null) {
             return true;
-        else return false;
+        } else {
+            return false;
+        }
     }
 
     public boolean isAuthorisation() {
-        if (this.getRes() != null & this.getRole() != null)
+        if (this.getRes() != null & this.getRole() != null) {
             return true;
-        else return false;
+        } else {
+            return false;
+        }
     }
 
     public boolean isAccounting() {
-        if (this.getDe() != null & this.getDs() != null /*& this.getVal()!=null*/)
+        if (this.getDe() != null & this.getDs() != null /*& this.getVal()!=null*/) {
             return true;
-        else return false;
+        } else {
+            return false;
+        }
         //придумать как зафиксировать отсутсвие параметра vol
     }
 
@@ -86,28 +92,12 @@ public class UserInput {
         this.ds = ds;
     }
 
-    public Time getTrueDs() {
-        return trueDs;
-    }
-
-    public void setTrueDs(Time trueDs) {
-        this.trueDs = trueDs;
-    }
-
     public String getDe() {
         return de;
     }
 
     public void setDe(String de) {
         this.de = de;
-    }
-
-    public Time getTrueDe() {
-        return trueDe;
-    }
-
-    public void setTrueDe(Time trueDe) {
-        this.trueDe = trueDe;
     }
 
     public String getVol() {
@@ -124,5 +114,21 @@ public class UserInput {
 
     public void setTrueVol(Integer trueVol) {
         this.trueVol = trueVol;
+    }
+
+    public LocalDate getTrueDs() {
+        return trueDs;
+    }
+
+    public void setTrueDs(LocalDate trueDs) {
+        this.trueDs = trueDs;
+    }
+
+    public LocalDate getTrueDe() {
+        return trueDe;
+    }
+
+    public void setTrueDe(LocalDate trueDe) {
+        this.trueDe = trueDe;
     }
 }
