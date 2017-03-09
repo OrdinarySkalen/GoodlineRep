@@ -24,19 +24,22 @@ public class Validator {
                 ui.setLogin(line.getOptionValue("login"));
                 ui.setPass(line.getOptionValue("password"));
                 ui.setRes(line.getOptionValue("resource"));
-                ui.setRole(line.getOptionValue("role")); //возможно исключение
-                ui.setDs();
-                ui.setDe();
-                ui.setVol();
+                ui.setRole(line.getOptionValue("role"));
+                ui.setDs(line.getOptionValue("ds"));
+                ui.setDe(line.getOptionValue("de"));
+                ui.setVol(line.getOptionValue("volume"));
         }
         catch (ParseException exp)
         {
-
+            HelpFormatter hf = new HelpFormatter();
+            hf.printHelp("help", options);
+            System.exit(0);
         }
+        return ui;
     }
 
     // В дальнейшем заменить строковый массив на объект класса Options
-    public void GetUserInput(String[] args, UserInput userInput) {
+    /*public void GetUserInput(String[] args, UserInput userInput) {
         for (int i = 0; i < args.length - 1; i++) {
             if (args[i].equals("-login")) {
                 userInput.setLogin(args[i + 1]);
@@ -86,5 +89,5 @@ public class Validator {
                 }
             }
         }
-    }
+    }*/
 }
