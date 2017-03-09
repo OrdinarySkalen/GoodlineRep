@@ -13,8 +13,8 @@ public class Application {
         Validator validator = new Validator();
         UserInput userInput = new UserInput();
         AAAService serv = new AAAService();
-        CommandLineParser parser = new DefaultParser();
-        Options options = new Options();
+        /*CommandLineParser parser = new DefaultParser();
+        Options options = new Options();*/
 
         User fPerson = new User("grom", "123qwe", 1, "12");
         User nPerson = new User("groza", "ewq321", 2, "13");
@@ -33,14 +33,12 @@ public class Application {
 
         if (userInput.isAuthentification() == false) {
             System.exit(-1); //вызов справки
-        }
-        else {
-            reqUser = serv.FindUserByLogin(userInput.getLogin(),Users);//Найти юзера по логину
-            if (reqUser.getLogin()==null)
-            {
+        } else {
+            reqUser = serv.FindUserByLogin(userInput.getLogin(), Users);//Найти юзера по логину
+            if (reqUser.getLogin() == null) {
                 System.exit(1);
             }
-            if(serv.CheckPasswordByUser(reqUser,userInput.getPass())==false); //Проверить пароль
+            if (serv.CheckPasswordByUser(reqUser, userInput.getPass()) == false) ; //Проверить пароль
             {
                 System.exit(2);
             }
@@ -49,20 +47,19 @@ public class Application {
             if (userInput.isAuthorisation() & error == 0) {
                 //исправить метод класса validator так, что бы было возможно получить
                 //ошибки 3,4 в этом фрагменте кода
-                error=4;
-                reqRes = serv.FindResourse(userInput.getRes(),userInput.getRole(),massRes);
+                error = 4;
+                reqRes = serv.FindResourse(userInput.getRes(), userInput.getRole(), massRes); //найти ресурс по пути и роли
                 for (int i = 0; i < reqRes.getUsers_ID().length; i++) {
-                    if(reqUser.getID()==reqRes.getUsers_ID()[i]) //проверка доступа
+                    if (reqUser.getID() == reqRes.getUsers_ID()[i]) //проверка доступа
                     {
-                        error=0;
+                        error = 0;
                         break;
                     }
                 }
-                if(error==4)
-                {
+                if (error == 4) {
                     System.exit(4);
                 }
-                System.out.print("Resourse "+reqRes.getPath()+" - ok");//разрешить доступ к ресурсу
+                System.out.print("Resourse " + reqRes.getPath() + " - ok");//разрешить доступ к ресурсу
                 //разрешить доступ к дочерним ресурсам с той же ролью
                 System.out.print("Authorisation: success");
                 validator.GetSessionInput(args, userInput);
