@@ -15,6 +15,10 @@ public class Resourse {
         this.setRole(role);
     }
 
+    public Resourse() {
+
+    }
+
     public String getPath() {
         return Path;
     }

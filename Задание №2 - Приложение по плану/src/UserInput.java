@@ -6,7 +6,7 @@ import java.sql.Time;
 public class UserInput {
     private String login;
     private String pass;
-    private String res;
+    private String res; //соответствует сво-ву Path класса Resourse
     private Roles role;
     private Time de;
     private Time ds;

@@ -12,6 +12,7 @@ public class Application {
     public static void main(String[] args) {
         Validator validator = new Validator();
         UserInput userInput = new UserInput();
+        AAAService serv = new AAAService();
         CommandLineParser parser = new DefaultParser();
         Options options = new Options();
 
@@ -26,20 +27,44 @@ public class Application {
 
         validator.GetUserInput(args, userInput);
 
+        User reqUser = new User();
+        Resourse reqRes = new Resourse();
         int error = 0;
 
-        if (userInput.isAuthentification() == false)
-            System.exit(-1);
+        if (userInput.isAuthentification() == false) {
+            System.exit(-1); //вызов справки
+        }
         else {
-            //Найти пользователя по логину
-            //Проверить пароль
-            validator.GetResurseInput(args, userInput);
+            reqUser = serv.FindUserByLogin(userInput.getLogin(),Users);//Найти юзера по логину
+            if (reqUser.getLogin()==null)
+            {
+                System.exit(1);
+            }
+            if(serv.CheckPasswordByUser(reqUser,userInput.getPass())==false); //Проверить пароль
+            {
+                System.exit(2);
+            }
+            System.out.print("Authentification: success");
+            validator.GetResurseInput(args, userInput); // тут вылезет ошибка 3, если она есть
             if (userInput.isAuthorisation() & error == 0) {
                 //исправить метод класса validator так, что бы было возможно получить
                 //ошибки 3,4 в этом фрагменте кода
-                //проверка доступа
-                //разрешить доступ к ресурсу
+                error=4;
+                reqRes = serv.FindResourse(userInput.getRes(),userInput.getRole(),massRes);
+                for (int i = 0; i < reqRes.getUsers_ID().length; i++) {
+                    if(reqUser.getID()==reqRes.getUsers_ID()[i]) //проверка доступа
+                    {
+                        error=0;
+                        break;
+                    }
+                }
+                if(error==4)
+                {
+                    System.exit(4);
+                }
+                System.out.print("Resourse "+reqRes.getPath()+" - ok");//разрешить доступ к ресурсу
                 //разрешить доступ к дочерним ресурсам с той же ролью
+                System.out.print("Authorisation: success");
                 validator.GetSessionInput(args, userInput);
                 if (userInput.isAccounting() & error == 0) {
                     //isDataValid(ds,de);
