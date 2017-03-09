@@ -5,14 +5,14 @@ import java.time.LocalDate;
  */
 public class Accounting {
     private LocalDate dateStart;
-    private LocalDate dateFinish;
+    private LocalDate dateEnd;
     private int volume;
     private Resource resource;
     private User user;
 
-    public Accounting(LocalDate dateS, LocalDate dateF, int vol, Resource res, User user) {
+    public Accounting(LocalDate dateS, LocalDate dateE, int vol, Resource res, User user) {
         this.setDateStart(dateS);
-        this.setDateFinish(dateF);
+        this.setDateEnd(dateE);
         this.setVolume(vol);
         this.setResource(res);
         this.setUser(user);
@@ -26,13 +26,6 @@ public class Accounting {
         this.dateStart = dateStart;
     }
 
-    public LocalDate getDateFinish() {
-        return dateFinish;
-    }
-
-    public void setDateFinish(LocalDate dateFinish) {
-        this.dateFinish = dateFinish;
-    }
 
     public int getVolume() {
         return volume;
@@ -56,5 +49,13 @@ public class Accounting {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public LocalDate getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(LocalDate dateEnd) {
+        this.dateEnd = dateEnd;
     }
 }

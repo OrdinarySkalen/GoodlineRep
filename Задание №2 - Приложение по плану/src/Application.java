@@ -27,6 +27,7 @@ public class Application {
 
         User reqUser = new User();
         Resource reqRes = new Resource();
+        ArrayList<Accounting> accountings = new ArrayList<Accounting>();
         int error = 4;
 
         reqUser = service.findUserByLogin(userInput.getLogin(), listUsers);//Найти юзера по логину
@@ -38,7 +39,7 @@ public class Application {
             System.exit(2);
         }
 
-        System.out.print("Authentication: success");
+        System.out.print("Authentication: success\n");
 
         if (userInput.isAuthorisation()) {
             try {
@@ -64,7 +65,7 @@ public class Application {
             }
             System.out.print("\nResource " + reqRes.getPath() + " - ok"); //разрешить доступ к ресурсу
             //разрешить доступ к дочерним ресурсам с той же ролью
-            System.out.print("\nAuthorisation: success");
+            System.out.print("\nAuthorisation: success\n");
             if (userInput.isAccounting()) {
                 service.isDateValid(userInput.getDe(), userInput.getDs()); //ловим ошибку 5
                 service.isVolValid(userInput.getVol()); //ловим ошибку 5
@@ -72,6 +73,13 @@ public class Application {
                 LocalDate dateS = service.tryGetDate(userInput.getDs());
                 int volume = service.tryGetVol(userInput.getVol());
                 //добавить запись о посещении ресурса
+                accountings.add(new Accounting(dateS, dateE, volume, reqRes, reqUser));
+                System.out.print("\nAdd record:\n" +
+                        "DateStart - " + dateS + "\n" +
+                        "DateEnd - " + dateE + "\n" +
+                        "User Id - " + reqUser.getId() + "\n" +
+                        "Resource - " + reqRes.getPath() + "\n" +
+                        "Volume - " + volume);
                 System.out.print("\nAccounting: success");
                 System.exit(0);
             }

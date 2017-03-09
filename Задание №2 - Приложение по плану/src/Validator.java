@@ -13,7 +13,7 @@ public class Validator {
         options.addOption("res", "resource", true, "Resource");
         options.addOption("r", "role", true, "Role");
         options.addOption("ds", "ds", true, "Date Start");
-        options.addOption("de", "de", true, "Date Finish");
+        options.addOption("de", "de", true, "Date End");
         options.addOption("vol", "volume", true, "Volume");
         options.addOption("h", "help", true, "Help");
         try {
