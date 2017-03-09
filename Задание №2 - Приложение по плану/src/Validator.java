@@ -28,6 +28,11 @@ public class Validator {
             ui.setDs(line.getOptionValue("ds"));
             ui.setDe(line.getOptionValue("de"));
             ui.setVol(line.getOptionValue("volume"));
+            if (line.hasOption("h") | ui.getLogin() == null | ui.getPass() == null) {
+                HelpFormatter hf = new HelpFormatter();
+                hf.printHelp("Help", options);
+                System.exit(0);
+            }
         } catch (ParseException exp) {
             HelpFormatter hf = new HelpFormatter();
             hf.printHelp("Help", options);
