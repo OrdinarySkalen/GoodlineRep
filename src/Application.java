@@ -50,7 +50,7 @@ public class Application {
                 System.exit(3);
             }
 
-            if (reqRes.getPath() == null) //вылавливаем неизвестные ресурсы
+            if (reqRes == null) //вылавливаем неизвестные ресурсы
             {
                 System.exit(4);
             }

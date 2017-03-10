@@ -46,8 +46,10 @@ public class AAAService {
 
     public Resource findResource(String path, Roles role, ArrayList<Resource> resources) {
         Resource parentRes = this.findParentResource(path,resources,role);
-        Resource reqRes = new Resource(path,parentRes.getUsersId(),role);
-        return reqRes;
+        if(parentRes.getPath()!=null) {
+            Resource reqRes = new Resource(path, parentRes.getUsersId(), role);
+            return reqRes;
+        }else {return null;}
     }
 
     public boolean checkPasswordByUser(User user, String pass) {
