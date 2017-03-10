@@ -19,7 +19,7 @@ public class Application {
         listUsers.add(nPerson);
 
         Resource res1 = new Resource("A.B", new int[]{1, 2}, Roles.READ);
-        Resource res2 = new Resource("A.B.C", new int[]{1, 2}, Roles.READ);
+        Resource res2 = new Resource("A.B.C", new int[]{1, 2}, Roles.WRITE);
         ArrayList<Resource> listRes = new ArrayList<Resource>();
         ArrayList<Resource> childRes = new ArrayList<>();
         listRes.add(res1);
@@ -63,8 +63,10 @@ public class Application {
                 }
             }
             if (error == 4) {
-                System.exit(4);
+                System.exit(4); //
             }
+
+            System.out.print("\nResource " + reqRes.getPath() + " - ok");
             //ищем дочерние ресурсы
             childRes = service.findChildResources(reqRes, listRes, Roles.valueOf(userInput.getRole()));
             for (Resource res : childRes

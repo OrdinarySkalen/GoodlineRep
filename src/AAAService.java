@@ -18,31 +18,40 @@ public class AAAService {
         return reqUser;
     }
 
+    public Resource findParentResource(String path, ArrayList<Resource> resources,
+                                       Roles role) {
+        Resource parentResource = new Resource();
+        for (Resource res : resources
+                ) {
+            if (path.startsWith(res.getPath()) & res.getRole().equals(role)) {
+                parentResource = res;
+                break;
+            }
+        }
+        return parentResource;
+    }
+
     public ArrayList<Resource> findChildResources(Resource resource,
-                                                  ArrayList<Resource> resources, Roles role)
-    {
+                                                  ArrayList<Resource> resources, Roles role) {
         ArrayList<Resource> childRes = new ArrayList<>();
-        for (Resource res:resources
-             ) {
-            if(res.getPath().startsWith(resource.getPath()) & resource.getRole().equals(role))
-            {childRes.add(res);}
+        for (Resource res : resources
+                ) {
+            if (res.getPath().startsWith(resource.getPath()) & res.getRole().equals(role)
+                    & !res.getPath().equals(resource.getPath())) {
+                childRes.add(res);
+            }
         }
         return childRes;
     }
 
     public Resource findResource(String path, Roles role, ArrayList<Resource> resources) {
-        Resource reqRes = new Resource();
-        for (Resource res : resources
-                ) {
-            if ((res.getPath().equals(path)) & (res.getRole().equals(role))) {
-                reqRes = res;
-            }
-        }
+        Resource parentRes = this.findParentResource(path,resources,role);
+        Resource reqRes = new Resource(path,parentRes.getUsersId(),role);
         return reqRes;
     }
 
     public boolean checkPasswordByUser(User user, String pass) {
-        pass =  DigestUtils.md5Hex(pass + user.getSalt());
+        pass = DigestUtils.md5Hex(pass + user.getSalt());
         if (pass.equals(user.getHashPass())) {
             return true;
         } else {
