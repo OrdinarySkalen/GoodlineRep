@@ -18,6 +18,18 @@ public class AAAService {
         return reqUser;
     }
 
+    public ArrayList<Resource> findChildResources(Resource resource,
+                                                  ArrayList<Resource> resources, Roles role)
+    {
+        ArrayList<Resource> childRes = new ArrayList<>();
+        for (Resource res:resources
+             ) {
+            if(res.getPath().startsWith(resource.getPath()) & resource.getRole().equals(role))
+            {childRes.add(res);}
+        }
+        return childRes;
+    }
+
     public Resource findResource(String path, Roles role, ArrayList<Resource> resources) {
         Resource reqRes = new Resource();
         for (Resource res : resources
