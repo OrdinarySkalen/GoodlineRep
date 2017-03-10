@@ -18,9 +18,10 @@ public class Application {
         listUsers.add(fPerson);
         listUsers.add(nPerson);
 
-        Resource res1 = new Resource("A.B", new int[]{1}, Roles.READ);
+        Resource res1 = new Resource("A.B", new int[]{1, 2}, Roles.READ);
         Resource res2 = new Resource("A.B.C", new int[]{1, 2}, Roles.READ);
         ArrayList<Resource> listRes = new ArrayList<Resource>();
+        ArrayList<Resource> childRes = new ArrayList<>();
         listRes.add(res1);
         listRes.add(res2);
 
@@ -64,8 +65,13 @@ public class Application {
             if (error == 4) {
                 System.exit(4);
             }
-            System.out.print("\nResource " + reqRes.getPath() + " - ok"); //разрешить доступ к ресурсу
-            //разрешить доступ к дочерним ресурсам с той же ролью
+            //ищем дочерние ресурсы
+            childRes = service.findChildResources(reqRes, listRes, Roles.valueOf(userInput.getRole()));
+            for (Resource res : childRes
+                    ) {
+                System.out.print("\nResource " + res.getPath() + " - ok"); //разрешить доступ к ресурсам
+            }
+
             System.out.print("\nAuthorisation: success\n");
             if (userInput.isAccounting()) {
                 service.isDateValid(userInput.getDe(), userInput.getDs()); //ловим ошибку 5
