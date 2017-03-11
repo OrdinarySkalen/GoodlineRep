@@ -23,7 +23,7 @@ public class AAAService {
         Resource parentResource = new Resource();
         for (Resource res : resources
                 ) {
-            if (path.startsWith(res.getPath()) & res.getRole().equals(role)) {
+            if (path.startsWith(res.getPath()+".") & res.getRole().equals(role)) {
                 parentResource = res;
                 break;
             }
@@ -45,7 +45,7 @@ public class AAAService {
     }
 
     public Resource findResource(String path, Roles role, ArrayList<Resource> resources) {
-        Resource parentRes = this.findParentResource(path,resources,role);
+        Resource parentRes = this.findParentResource(path+".",resources,role);
         if(parentRes.getPath()!=null) {
             Resource reqRes = new Resource(path, parentRes.getUsersId(), role);
             return reqRes;

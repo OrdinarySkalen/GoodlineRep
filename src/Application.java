@@ -12,18 +12,22 @@ public class Application {
         UserInput userInput = new UserInput();
         AAAService service = new AAAService();
 
-        User fPerson = new User("grom", "123qwe", 1);
-        User nPerson = new User("groza", "ewq321", 2);
+        User JohnDoe = new User("jdoe", "sup3rpaZZ", 1);
+        User JaneRow = new User("jrow", "Qweqrty12", 2);
         ArrayList<User> listUsers = new ArrayList<User>();
-        listUsers.add(fPerson);
-        listUsers.add(nPerson);
+        listUsers.add(JohnDoe);
+        listUsers.add(JaneRow);
 
-        Resource res1 = new Resource("A.B", new int[]{1, 2}, Roles.READ);
-        Resource res2 = new Resource("A.B.C", new int[]{1, 2}, Roles.WRITE);
+        Resource res1 = new Resource("a", new int[]{JohnDoe.getId()}, Roles.READ);
+        Resource res2 = new Resource("a.b", new int[]{JohnDoe.getId()}, Roles.WRITE);
+        Resource res3 = new Resource("a.b.c", new int[]{JaneRow.getId()}, Roles.EXECUTE);
+        Resource res4 = new Resource("a.bc", new int[]{JohnDoe.getId()}, Roles.EXECUTE);
         ArrayList<Resource> listRes = new ArrayList<Resource>();
         ArrayList<Resource> childRes = new ArrayList<>();
         listRes.add(res1);
         listRes.add(res2);
+        listRes.add(res3);
+        listRes.add(res4);
 
         validator.getUserInput(userInput, args);
 
