@@ -35,7 +35,7 @@ public class Application {
             System.exit(1);
         }
 
-        if (!service.checkPasswordByUser(reqUser, userInput.getPassword())) { //проверить пароль
+        if (!service.checkPasswordByUser(userInput.getPassword(), reqUser)) { //проверить пароль
             System.exit(2);
         }
 
@@ -43,7 +43,7 @@ public class Application {
 
         if (userInput.isAuthorisation()) {
             try {
-                reqRes = service.getResource(userInput.getResource(), Roles.valueOf(userInput.getRole()), listRes);
+                reqRes = service.getResource(userInput.getResource(), listRes, Roles.valueOf(userInput.getRole()));
             } catch (Exception e) {
                 System.exit(3);
             }
@@ -53,8 +53,8 @@ public class Application {
                 System.exit(4);
             }
 
-            for (int userId: reqRes.getUsersId()
-                 ) {
+            for (int userId : reqRes.getUsersId()
+                    ) {
                 if (reqUser.getId() == userId) //проверка доступа
                 {
                     error = 0;
@@ -86,7 +86,7 @@ public class Application {
                                 "Resource - %4$s\n" +
                                 "Volume - %5$s"
                         , dateS, dateE, reqUser.getId(), reqRes.getPath(), volume);
-                System.out.println(record+"\nAccounting: success");
+                System.out.println(record + "\nAccounting: success");
                 System.exit(0);
             }
         }

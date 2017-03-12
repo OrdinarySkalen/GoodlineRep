@@ -48,11 +48,11 @@ class AAAService {
      * Получить искомый ресурс
      *
      * @param path      путь искомого ресурса
-     * @param role      роль искомого ресурса
      * @param resources лист ресурсов-родителей
+     * @param role      роль искомого ресурса
      * @return искомый ресурс
      */
-    Resource getResource(String path, Roles role, ArrayList<Resource> resources) {
+    Resource getResource(String path, ArrayList<Resource> resources, Roles role) {
         Resource parentRes = this.findParentResource(path + ".", resources, role);
         if (parentRes.getPath() != null) {
             return new Resource(path, parentRes.getUsersId(), role);
@@ -64,11 +64,11 @@ class AAAService {
     /**
      * Проверить пароль пользователя
      *
-     * @param user пользователь подвергающийся проверке
      * @param pass введенный пароль
+     * @param user пользователь подвергающийся проверке
      * @return результат проверки
      */
-    boolean checkPasswordByUser(User user, String pass) {
+    boolean checkPasswordByUser(String pass, User user) {
         pass = DigestUtils.md5Hex(DigestUtils.md2Hex(pass) + user.getSalt());
         return pass.equals(user.getHashPassword());
     }
