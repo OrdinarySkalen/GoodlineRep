@@ -1,14 +1,11 @@
 import org.apache.commons.cli.*;
 
-/**
- * Created by Artem 2 on 08.03.2017.
- */
 public class Validator {
 
-    CommandLineParser parser = new DefaultParser();
-    Options options = new Options();
+    private CommandLineParser parser = new DefaultParser();
+    private Options options = new Options();
 
-    public UserInput getUserInput(UserInput usIn, String[] args) {
+    void getUserInput(UserInput usIn, String[] args) {
         options.addOption("l", "login", true, "Login");
         options.addOption("pass", "pass", true, "Password");
         options.addOption("res", "resource", true, "Resource");
@@ -36,6 +33,5 @@ public class Validator {
             hf.printHelp("Help", options);
             System.exit(0);
         }
-        return usIn;
     }
 }

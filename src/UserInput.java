@@ -1,6 +1,3 @@
-/**
- * Created by Artem 2 on 08.03.2017.
- */
 public class UserInput {
     private String login;
     private String pass;
@@ -10,79 +7,70 @@ public class UserInput {
     private String de;
     private String vol;
 
-    public boolean isAuthorisation() {
-        if (this.getRes() != null & this.getRole() != null) {
-            return true;
-        } else {
-            return false;
-        }
+    boolean isAuthorisation() {
+        return this.getRes() != null & this.getRole() != null;
     }
 
-    public boolean isAccounting() {
-        if (this.getDe() != null & this.getDs() != null /*& this.getVal()!=null*/) {
-            return true;
-        } else {
-            return false;
-        }
-        //придумать как зафиксировать отсутсвие параметра vol
+    boolean isAccounting() {
+        return this.getDe() != null & this.getDs() != null;
     }
 
     public UserInput() {
     }
 
-    public String getLogin() {
+    String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
+    void setLogin(String login) {
         this.login = login;
     }
 
-    public String getPass() {
+    String getPass() {
         return pass;
     }
 
-    public void setPass(String pass) {
+    void setPass(String pass) {
         this.pass = pass;
     }
 
-    public String getRes() {
+    String getRes() {
         return res;
     }
 
-    public void setRes(String res) {
+    void setRes(String res) {
         this.res = res;
     }
 
-    public String getRole() {
+    String getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    void setRole(String role) {
         this.role = role;
     }
 
-    public String getDs() {
+    String getDs() {
         return ds;
     }
 
-    public void setDs(String ds) {
+    void setDs(String ds) {
         this.ds = ds;
     }
 
-    public String getDe() {
+    String getDe() {
         return de;
     }
 
-    public void setDe(String de) {
+    void setDe(String de) {
         this.de = de;
     }
 
-    public String getVol() {
+    String getVol() {
         return vol;
     }
 
-    public void setVol(String vol) {
+    void setVol(String vol) {
         this.vol = vol;
     }
 }
