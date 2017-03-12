@@ -3,11 +3,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-/**
- * Created by Artem 2 on 08.03.2017.
- */
-public class AAAService {
-    public User findUserByLogin(String login, ArrayList<User> users) {
+class AAAService {
+
+    User findUserByLogin(String login, ArrayList<User> users) {
         User reqUser = new User();
         for (User user : users
                 ) {
@@ -18,8 +16,15 @@ public class AAAService {
         return reqUser;
     }
 
-    public Resource findParentResource(String path, ArrayList<Resource> resources,
-                                       Roles role) {
+    /**
+     * Поиск родительского ресурса
+     * @param path путь ресурса, родителя которого требуется найти
+     * @param resources лист содержащий кандидатов в родители
+     * @param role роль ресурса, родителя которого требуется найти
+     * @return ресурс-родитель
+     */
+    private Resource findParentResource(String path, ArrayList<Resource> resources,
+                                        Roles role) {
         Resource parentResource = new Resource();
         for (Resource res : resources
                 ) {
@@ -31,37 +36,19 @@ public class AAAService {
         return parentResource;
     }
 
-    public ArrayList<Resource> findChildResources(Resource resource,
-                                                  ArrayList<Resource> resources, Roles role) {
-        ArrayList<Resource> childRes = new ArrayList<>();
-        for (Resource res : resources
-                ) {
-            if (res.getPath().startsWith(resource.getPath()) & res.getRole().equals(role)
-                    & !res.getPath().equals(resource.getPath())) {
-                childRes.add(res);
-            }
-        }
-        return childRes;
-    }
-
-    public Resource findResource(String path, Roles role, ArrayList<Resource> resources) {
+    Resource findResource(String path, Roles role, ArrayList<Resource> resources) {
         Resource parentRes = this.findParentResource(path+".",resources,role);
         if(parentRes.getPath()!=null) {
-            Resource reqRes = new Resource(path, parentRes.getUsersId(), role);
-            return reqRes;
+            return new Resource(path, parentRes.getUsersId(), role);
         }else {return null;}
     }
 
-    public boolean checkPasswordByUser(User user, String pass) {
-        pass = DigestUtils.md5Hex(pass + user.getSalt());
-        if (pass.equals(user.getHashPass())) {
-            return true;
-        } else {
-            return false;
-        }
+    boolean checkPasswordByUser(User user, String pass) {
+        pass = DigestUtils.md5Hex(DigestUtils.md2Hex(pass) + user.getSalt());
+        return pass.equals(user.getHashPass());
     }
 
-    public void isDateValid(String dateS, String dateE) {
+    void isDateValid(String dateS, String dateE) {
         try {
             LocalDate.parse(dateS);
             LocalDate.parse(dateE);
@@ -70,7 +57,7 @@ public class AAAService {
         }
     }
 
-    public void isVolValid(String volume) {
+    void isVolValid(String volume) {
         try {
             Integer.valueOf(volume);
         } catch (Exception e) {
@@ -78,11 +65,11 @@ public class AAAService {
         }
     }
 
-    public LocalDate tryGetDate(String date) {
+    LocalDate tryGetDate(String date) {
         return LocalDate.parse(date);
     }
 
-    public int tryGetVol(String volume) {
+    int tryGetVol(String volume) {
         return Integer.valueOf(volume);
     }
 }
