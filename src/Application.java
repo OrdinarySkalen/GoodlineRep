@@ -1,39 +1,34 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-/**
- * Created by Artem 2 on 06.03.2017.
- */
 public class Application {
-
 
     public static void main(String[] args) {
         Validator validator = new Validator();
         UserInput userInput = new UserInput();
         AAAService service = new AAAService();
 
-        User JohnDoe = new User("jdoe", "sup3rpaZZ", 1);
-        User JaneRow = new User("jrow", "Qweqrty12", 2);
-        ArrayList<User> listUsers = new ArrayList<User>();
-        listUsers.add(JohnDoe);
-        listUsers.add(JaneRow);
+        User johnDoe = new User("jdoe", "sup3rpaZZ", 1);
+        User janeRow = new User("jrow", "Qweqrty12", 2);
+        ArrayList<User> listUsers = new ArrayList<>();
+        listUsers.add(johnDoe);
+        listUsers.add(janeRow);
 
-        Resource res1 = new Resource("a", new int[]{JohnDoe.getId()}, Roles.READ);
-        Resource res2 = new Resource("a.b", new int[]{JohnDoe.getId()}, Roles.WRITE);
-        Resource res3 = new Resource("a.b.c", new int[]{JaneRow.getId()}, Roles.EXECUTE);
-        Resource res4 = new Resource("a.bc", new int[]{JohnDoe.getId()}, Roles.EXECUTE);
-        ArrayList<Resource> listRes = new ArrayList<Resource>();
-        ArrayList<Resource> childRes = new ArrayList<>();
+        Resource res1 = new Resource("a", new int[]{johnDoe.getId()}, Roles.READ);
+        Resource res2 = new Resource("a.b", new int[]{johnDoe.getId()}, Roles.WRITE);
+        Resource res3 = new Resource("a.b.c", new int[]{janeRow.getId()}, Roles.EXECUTE);
+        Resource res4 = new Resource("a.bc", new int[]{johnDoe.getId()}, Roles.EXECUTE);
+        ArrayList<Resource> listRes = new ArrayList<>();
+        ArrayList<Resource> childRes;
         listRes.add(res1);
         listRes.add(res2);
         listRes.add(res3);
         listRes.add(res4);
 
         validator.getUserInput(userInput, args);
-
-        User reqUser = new User();
+        User reqUser;
         Resource reqRes = new Resource();
-        ArrayList<Accounting> accountings = new ArrayList<Accounting>();
+        ArrayList<Accounting> accountings = new ArrayList<>();
         int error = 4;
 
         reqUser = service.findUserByLogin(userInput.getLogin(), listUsers);//Найти юзера по логину
@@ -45,7 +40,7 @@ public class Application {
             System.exit(2);
         }
 
-        System.out.print("Authentication: success\n");
+        System.out.println("Authentication: success");
 
         if (userInput.isAuthorisation()) {
             try {
@@ -59,41 +54,40 @@ public class Application {
                 System.exit(4);
             }
 
-            for (int i = 0; i < reqRes.getUsersId().length; i++) {
-                if (reqUser.getId() == reqRes.getUsersId()[i]) //проверка доступа
+            for (int userId: reqRes.getUsersId()
+                 ) {
+                if (reqUser.getId() == userId) //проверка доступа
                 {
                     error = 0;
                     break;
                 }
             }
+
             if (error == 4) {
-                System.exit(4); //
+                System.exit(4);
             }
 
-            System.out.print("\nResource " + reqRes.getPath() + " - ok");
-            //ищем дочерние ресурсы
-            childRes = service.findChildResources(reqRes, listRes, Roles.valueOf(userInput.getRole()));
-            for (Resource res : childRes
-                    ) {
-                System.out.print("\nResource " + res.getPath() + " - ok"); //разрешить доступ к ресурсам
-            }
+            System.out.println("Resource " + reqRes.getPath() + " - ok");
 
-            System.out.print("\nAuthorisation: success\n");
+            System.out.println("Authorisation: success");
             if (userInput.isAccounting()) {
                 service.isDateValid(userInput.getDe(), userInput.getDs()); //ловим ошибку 5
                 service.isVolValid(userInput.getVol()); //ловим ошибку 5
                 LocalDate dateE = service.tryGetDate(userInput.getDe());
                 LocalDate dateS = service.tryGetDate(userInput.getDs());
                 int volume = service.tryGetVol(userInput.getVol());
-                //добавляем запись о посещении ресурса
+
                 accountings.add(new Accounting(dateS, dateE, volume, reqRes, reqUser));
-                System.out.print("\nAdd record:\n" +
-                        "DateStart - " + dateS + "\n" +
-                        "DateEnd - " + dateE + "\n" +
-                        "User Id - " + reqUser.getId() + "\n" +
-                        "Resource - " + reqRes.getPath() + "\n" +
-                        "Volume - " + volume);
-                System.out.print("\nAccounting: success");
+
+                //добавляем запись о посещении ресурсе
+                String record = String.format("Add record:\n" +
+                                "DateStart - %1$s\n" +
+                                "DateEnd - %2$s\n" +
+                                "UserId - %3$s\n" +
+                                "Resource - %4$s\n" +
+                                "Volume - %5$s"
+                        , dateS, dateE, reqUser.getId(), reqRes.getPath(), volume);
+                System.out.println(record+"\nAccounting: success");
                 System.exit(0);
             }
         }
