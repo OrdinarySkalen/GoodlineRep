@@ -19,7 +19,6 @@ public class Application {
         Resource res3 = new Resource("a.b.c", new int[]{janeRow.getId()}, Roles.EXECUTE);
         Resource res4 = new Resource("a.bc", new int[]{johnDoe.getId()}, Roles.EXECUTE);
         ArrayList<Resource> listRes = new ArrayList<>();
-        ArrayList<Resource> childRes;
         listRes.add(res1);
         listRes.add(res2);
         listRes.add(res3);
@@ -36,7 +35,7 @@ public class Application {
             System.exit(1);
         }
 
-        if (!service.checkPasswordByUser(reqUser, userInput.getPass())) { //проверить пароль
+        if (!service.checkPasswordByUser(reqUser, userInput.getPassword())) { //проверить пароль
             System.exit(2);
         }
 
@@ -44,7 +43,7 @@ public class Application {
 
         if (userInput.isAuthorisation()) {
             try {
-                reqRes = service.findResource(userInput.getRes(), Roles.valueOf(userInput.getRole()), listRes);
+                reqRes = service.getResource(userInput.getResource(), Roles.valueOf(userInput.getRole()), listRes);
             } catch (Exception e) {
                 System.exit(3);
             }
@@ -71,11 +70,11 @@ public class Application {
 
             System.out.println("Authorisation: success");
             if (userInput.isAccounting()) {
-                service.isDateValid(userInput.getDe(), userInput.getDs()); //ловим ошибку 5
-                service.isVolValid(userInput.getVol()); //ловим ошибку 5
-                LocalDate dateE = service.tryGetDate(userInput.getDe());
-                LocalDate dateS = service.tryGetDate(userInput.getDs());
-                int volume = service.tryGetVol(userInput.getVol());
+                service.isDateValid(userInput.getDateEnd(), userInput.getDateStart()); //ловим ошибку 5
+                service.isVolumeValid(userInput.getVolume()); //ловим ошибку 5
+                LocalDate dateE = service.tryGetDate(userInput.getDateEnd());
+                LocalDate dateS = service.tryGetDate(userInput.getDateStart());
+                int volume = service.tryGetVolume(userInput.getVolume());
 
                 accountings.add(new Accounting(dateS, dateE, volume, reqRes, reqUser));
 

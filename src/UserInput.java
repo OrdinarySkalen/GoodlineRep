@@ -1,18 +1,18 @@
 public class UserInput {
     private String login;
-    private String pass;
-    private String res; //соответствует сво-ву Path класса Resource
+    private String password;
+    private String resource; //соответствует сво-ву Path класса Resource
     private String role;
-    private String ds;
-    private String de;
-    private String vol;
+    private String dateStart;
+    private String dateEnd;
+    private String volume;
 
     boolean isAuthorisation() {
-        return this.getRes() != null & this.getRole() != null;
+        return this.getResource() != null & this.getRole() != null;
     }
 
     boolean isAccounting() {
-        return this.getDe() != null & this.getDs() != null;
+        return this.getDateEnd() != null & this.getDateStart() != null;
     }
 
     public UserInput() {
@@ -26,20 +26,20 @@ public class UserInput {
         this.login = login;
     }
 
-    String getPass() {
-        return pass;
+    String getPassword() {
+        return password;
     }
 
-    void setPass(String pass) {
-        this.pass = pass;
+    void setPassword(String password) {
+        this.password = password;
     }
 
-    String getRes() {
-        return res;
+    String getResource() {
+        return resource;
     }
 
-    void setRes(String res) {
-        this.res = res;
+    void setResource(String resource) {
+        this.resource = resource;
     }
 
     String getRole() {
@@ -50,27 +50,27 @@ public class UserInput {
         this.role = role;
     }
 
-    String getDs() {
-        return ds;
+    String getDateStart() {
+        return dateStart;
     }
 
-    void setDs(String ds) {
-        this.ds = ds;
+    void setDateStart(String dateStart) {
+        this.dateStart = dateStart;
     }
 
-    String getDe() {
-        return de;
+    String getDateEnd() {
+        return dateEnd;
     }
 
-    void setDe(String de) {
-        this.de = de;
+    void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
-    String getVol() {
-        return vol;
+    String getVolume() {
+        return volume;
     }
 
-    void setVol(String vol) {
-        this.vol = vol;
+    void setVolume(String volume) {
+        this.volume = volume;
     }
 }

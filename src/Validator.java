@@ -5,6 +5,12 @@ public class Validator {
     private CommandLineParser parser = new DefaultParser();
     private Options options = new Options();
 
+    /**
+     * Преобразовать введенные параметры в объект класса UserInput
+     *
+     * @param usIn Пустой объект класса UserInput
+     * @param args массив аргументов переданных в программу
+     */
     void getUserInput(UserInput usIn, String[] args) {
         options.addOption("l", "login", true, "Login");
         options.addOption("pass", "pass", true, "Password");
@@ -17,20 +23,20 @@ public class Validator {
         try {
             CommandLine line = parser.parse(options, args);
             usIn.setLogin(line.getOptionValue("login"));
-            usIn.setPass(line.getOptionValue("pass"));
-            usIn.setRes(line.getOptionValue("resource"));
+            usIn.setPassword(line.getOptionValue("pass"));
+            usIn.setResource(line.getOptionValue("resource"));
             usIn.setRole(line.getOptionValue("role"));
-            usIn.setDs(line.getOptionValue("ds"));
-            usIn.setDe(line.getOptionValue("de"));
-            usIn.setVol(line.getOptionValue("volume"));
-            if (line.hasOption("h") | (usIn.getLogin() == null) | (usIn.getPass() == null)) {
-                HelpFormatter hf = new HelpFormatter();
-                hf.printHelp("Help", options);
+            usIn.setDateStart(line.getOptionValue("ds"));
+            usIn.setDateEnd(line.getOptionValue("de"));
+            usIn.setVolume(line.getOptionValue("volume"));
+            if (line.hasOption("h") | (usIn.getLogin() == null) | (usIn.getPassword() == null)) {
+                HelpFormatter helpFormatter = new HelpFormatter();
+                helpFormatter.printHelp("Help", options);
                 System.exit(0);
             }
         } catch (ParseException exp) {
-            HelpFormatter hf = new HelpFormatter();
-            hf.printHelp("Help", options);
+            HelpFormatter helpFormatter = new HelpFormatter();
+            helpFormatter.printHelp("Help", options);
             System.exit(0);
         }
     }

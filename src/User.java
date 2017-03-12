@@ -3,7 +3,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public class User {
     private String login;
-    private String hashPass;
+    private String hashPassword;
     private int id;
     private String salt;
 
@@ -14,7 +14,7 @@ public class User {
         this.setLogin(login);
         this.setId(id);
         this.setSalt();
-        this.setHashPass(pass);
+        this.setHashPassword(pass);
     }
 
     String getLogin() {
@@ -41,11 +41,11 @@ public class User {
         this.id = id;
     }
 
-    String getHashPass() {
-        return hashPass;
+    String getHashPassword() {
+        return hashPassword;
     }
 
-    private void setHashPass(String pass) {
-        this.hashPass = DigestUtils.md5Hex(DigestUtils.md2Hex(pass) + this.getSalt());
+    private void setHashPassword(String pass) {
+        this.hashPassword = DigestUtils.md5Hex(DigestUtils.md2Hex(pass) + this.getSalt());
     }
 }
