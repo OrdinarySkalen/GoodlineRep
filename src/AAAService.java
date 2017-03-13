@@ -13,8 +13,7 @@ class AAAService {
      * @return искомый пользователь
      */
     User findUserByLogin(String login, ArrayList<User> users) {
-        for (User user : users
-                ) {
+        for (User user : users) {
             if (user.getLogin().equals(login)) {
                 return user;
             }
@@ -32,8 +31,7 @@ class AAAService {
      */
     private Resource findParentResource(String path, ArrayList<Resource> resources,
                                         Roles role) {
-        for (Resource res : resources
-                ) {
+        for (Resource res : resources) {
             if (path.startsWith(res.getPath() + ".") && res.getRole().equals(role)) {
                 return res;
             }
