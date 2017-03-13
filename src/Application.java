@@ -81,7 +81,6 @@ public class Application {
 
                 accountings.add(new Accounting(dateS, dateE, volume, reqRes, reqUser));
                 System.out.println(accountings.get(0).toString());
-                System.exit(0);
             }
         }
     }
