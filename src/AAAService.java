@@ -34,7 +34,7 @@ class AAAService {
                                         Roles role) {
         for (Resource res : resources
                 ) {
-            if (path.startsWith(res.getPath() + ".") & res.getRole().equals(role)) {
+            if (path.startsWith(res.getPath() + ".") && res.getRole().equals(role)) {
                 return res;
             }
         }
@@ -66,8 +66,8 @@ class AAAService {
      * @return результат проверки
      */
     boolean checkPasswordByUser(String pass, User user) {
-        pass = DigestUtils.md5Hex(DigestUtils.md2Hex(pass) + user.getSalt());
-        return pass.equals(user.getHashPassword());
+        return DigestUtils.md5Hex(DigestUtils.md2Hex(pass) +
+                user.getSalt()).equals(user.getHashPassword());
     }
 
     /**

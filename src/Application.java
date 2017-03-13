@@ -80,16 +80,7 @@ public class Application {
                 int volume = service.tryGetVolume(userInput.getVolume());
 
                 accountings.add(new Accounting(dateS, dateE, volume, reqRes, reqUser));
-
-                //добавляем запись о посещении ресурсе
-                String record = String.format("Add record:\n" +
-                                "DateStart - %1$s\n" +
-                                "DateEnd - %2$s\n" +
-                                "UserId - %3$s\n" +
-                                "Resource - %4$s\n" +
-                                "Volume - %5$s\nAccounting: success"
-                        , dateS, dateE, reqUser.getId(), reqRes.getPath(), volume);
-                System.out.println(record);
+                System.out.println(accountings.get(0).toString());
                 System.exit(0);
             }
         }

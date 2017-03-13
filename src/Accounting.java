@@ -35,4 +35,16 @@ public class Accounting {
     private void setDateEnd(LocalDate dateEnd) {
         this.dateEnd = dateEnd;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Add record:\n" +
+                        "DateStart - %1$s\n" +
+                        "DateEnd - %2$s\n" +
+                        "UserId - %3$s\n" +
+                        "Resource - %4$s\n" +
+                        "Volume - %5$s\nAccounting: success"
+                , this.dateStart, this.dateEnd, this.user.getId(),
+                this.resource.getPath(), this.volume);
+    }
 }
