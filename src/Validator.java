@@ -29,7 +29,7 @@ public class Validator {
             usIn.setDateStart(line.getOptionValue("ds"));
             usIn.setDateEnd(line.getOptionValue("de"));
             usIn.setVolume(line.getOptionValue("volume"));
-            if (line.hasOption("h") | (usIn.getLogin() == null) | (usIn.getPassword() == null)) {
+            if (line.hasOption("h") || (usIn.getLogin() == null) || (usIn.getPassword() == null)) {
                 HelpFormatter helpFormatter = new HelpFormatter();
                 helpFormatter.printHelp("Help", options);
                 System.exit(0);

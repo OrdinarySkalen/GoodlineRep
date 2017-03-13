@@ -8,11 +8,11 @@ public class UserInput {
     private String volume;
 
     boolean isAuthorisation() {
-        return this.getResource() != null & this.getRole() != null;
+        return this.getResource() != null && this.getRole() != null;
     }
 
     boolean isAccounting() {
-        return this.getDateEnd() != null & this.getDateStart() != null;
+        return this.getDateEnd() != null && this.getDateStart() != null;
     }
 
     public UserInput() {

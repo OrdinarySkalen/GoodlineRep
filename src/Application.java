@@ -28,14 +28,16 @@ public class Application {
         User reqUser;
         Resource reqRes = new Resource();
         ArrayList<Accounting> accountings = new ArrayList<>();
-        int error = 4;
+        boolean access = false;
 
-        reqUser = service.findUserByLogin(userInput.getLogin(), listUsers);//Найти юзера по логину
-        if (reqUser.getLogin() == null) {
+        //Найти юзера по логину
+        reqUser = service.findUserByLogin(userInput.getLogin(), listUsers);
+        if (reqUser == null) {
             System.exit(1);
         }
 
-        if (!service.checkPasswordByUser(userInput.getPassword(), reqUser)) { //проверить пароль
+        //проверить пароль
+        if (!service.checkPasswordByUser(userInput.getPassword(), reqUser)) {
             System.exit(2);
         }
 
@@ -48,21 +50,20 @@ public class Application {
                 System.exit(3);
             }
 
-            if (reqRes == null) //вылавливаем неизвестные ресурсы
-            {
+            //вылавливаем неизвестные ресурсы
+            if (reqRes == null) {
                 System.exit(4);
             }
 
-            for (int userId : reqRes.getUsersId()
-                    ) {
-                if (reqUser.getId() == userId) //проверка доступа
-                {
-                    error = 0;
+            //проверка доступа
+            for (int userId : reqRes.getUsersId()) {
+                if (reqUser.getId() == userId) {
+                    access = true;
                     break;
                 }
             }
 
-            if (error == 4) {
+            if (!access) {
                 System.exit(4);
             }
 
@@ -70,8 +71,10 @@ public class Application {
 
             System.out.println("Authorisation: success");
             if (userInput.isAccounting()) {
-                service.isDateValid(userInput.getDateEnd(), userInput.getDateStart()); //ловим ошибку 5
-                service.isVolumeValid(userInput.getVolume()); //ловим ошибку 5
+                //ловим ошибку 5
+                service.isDateValid(userInput.getDateEnd(), userInput.getDateStart());
+                service.isVolumeValid(userInput.getVolume());
+
                 LocalDate dateE = service.tryGetDate(userInput.getDateEnd());
                 LocalDate dateS = service.tryGetDate(userInput.getDateStart());
                 int volume = service.tryGetVolume(userInput.getVolume());
@@ -84,9 +87,9 @@ public class Application {
                                 "DateEnd - %2$s\n" +
                                 "UserId - %3$s\n" +
                                 "Resource - %4$s\n" +
-                                "Volume - %5$s"
+                                "Volume - %5$s\nAccounting: success"
                         , dateS, dateE, reqUser.getId(), reqRes.getPath(), volume);
-                System.out.println(record + "\nAccounting: success");
+                System.out.println(record);
                 System.exit(0);
             }
         }

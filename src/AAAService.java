@@ -13,14 +13,13 @@ class AAAService {
      * @return искомый пользователь
      */
     User findUserByLogin(String login, ArrayList<User> users) {
-        User reqUser = new User();
         for (User user : users
                 ) {
             if (user.getLogin().equals(login)) {
-                reqUser = user;
+                return user;
             }
         }
-        return reqUser;
+        return null;
     }
 
     /**
@@ -33,15 +32,13 @@ class AAAService {
      */
     private Resource findParentResource(String path, ArrayList<Resource> resources,
                                         Roles role) {
-        Resource parentResource = new Resource();
         for (Resource res : resources
                 ) {
             if (path.startsWith(res.getPath() + ".") & res.getRole().equals(role)) {
-                parentResource = res;
-                break;
+                return res;
             }
         }
-        return parentResource;
+        return new Resource();
     }
 
     /**
