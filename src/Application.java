@@ -28,7 +28,7 @@ public class Application {
         User reqUser;
         Resource reqRes = new Resource();
         ArrayList<Accounting> accountings = new ArrayList<>();
-        boolean access = false;
+        boolean accessToRes = false;
 
         //Найти юзера по логину
         reqUser = service.findUserByLogin(userInput.getLogin(), listUsers);
@@ -58,12 +58,12 @@ public class Application {
             //проверка доступа
             for (int userId : reqRes.getUsersId()) {
                 if (reqUser.getId() == userId) {
-                    access = true;
+                    accessToRes = true;
                     break;
                 }
             }
 
-            if (!access) {
+            if (!accessToRes) {
                 System.exit(4);
             }
 
