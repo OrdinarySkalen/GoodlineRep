@@ -1,5 +1,6 @@
 #!/bin/bash
-fullError=0
+./BUILD.sh #
+fullError=0 #
 echo "Start test"
 ./RUN.sh #
 error=$? #
