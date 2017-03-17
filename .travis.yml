@@ -1,2 +1,2 @@
 language: java
-./TEST.sh
+script: ./TEST.sh
