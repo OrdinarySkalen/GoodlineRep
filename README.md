@@ -1,13 +1,10 @@
 
 # Гаврилов Артем  [![Build Status](https://travis-ci.org/OrdinarySkalen/GoodlineRep.svg?branch=master)](https://travis-ci.org/OrdinarySkalen/GoodlineRep)
-* Ссылка на [GitPages](https://ordinaryskalen.github.io/GoodlineRep/).
-* [ROADMAP - план разработки приложения](./ROADMAP.md)
-* [ROADMAP2 - план разработки документации](./ROADMAP2.md)
 
 ### Описание приложения
   Данное приложение осуществляет доступ к ресурсам авторизированному пользователю. Пример вызова приложения из командной строки:
    ```
-   java -jar Application.jar -login XXX -pass XXX
+   ./RUN.sh -login XXX -pass XXX
    ```
    
 ### Инструкция по сборке
@@ -18,3 +15,7 @@
 
 ### Инструкция по тестированию
 Выполнить из командной строки файл TEST.sh. Результатом успешности прохождения тестирования является exit-код "0". Тестиование считается непройденным, если хотя бы один из тестов не был пройден, в данном случае по окончании тестирование будет выдан exit-код "1".
+
+* Ссылка на [GitPages](https://ordinaryskalen.github.io/GoodlineRep/).
+* [ROADMAP - план разработки приложения](./ROADMAP.md)
+* [ROADMAP2 - план разработки документации](./ROADMAP2.md)
