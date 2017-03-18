@@ -2,4 +2,4 @@
 *.xml
 PracLab1.iml
 .idea/.name
-out/artifacts/PracLab1_jar/test1.bat
+/out/*
