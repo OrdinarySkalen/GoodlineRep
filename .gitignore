@@ -6,3 +6,5 @@
 /out/*
 /src/META-INF/*
 *.MF
+*.xml
+*.iml
