@@ -1,6 +1,7 @@
 *.xml
 PracLab1.iml
 .idea/.name
+/out/*
 test1.bat
 test1.bat
 *.class
