@@ -1,1 +1,9 @@
-
+*.class
+*.xml
+*.iml
+.idea/.name
+/idea/*
+/out/*
+/src/META-INF/*
+*.MF
+*.jar
