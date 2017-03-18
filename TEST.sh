@@ -34,7 +34,7 @@ else #
 echo "Test 3 is passed (0)" #
 fi #
 #
-./RUN.sh "-login jdoe -pass XXX "
+./RUN.sh "-login jdoe -pass sup3rpaZZ "
 error=$?
 answer=2
 if [[ $answer != $error ]] #
