@@ -1,7 +1,7 @@
 #!/bin/bash
-mkdir out2 #
-javac -cp "./libs/*" -d "./out2" src/*.java #
+mkdir bin #
+javac -cp "./libs/*" -d "./bin" src/*.java #
 echo "Classes create" 
-jar cvmf manifest.mf Application.jar -C ./out2 / #
+jar cvmf manifest.mf Application.jar -C ./bin / #
 echo "Jar good"
-rm -rf out2 #
+rm -rf bin #
