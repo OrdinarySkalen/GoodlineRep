@@ -4,6 +4,7 @@
 .idea/.name
 /idea/*
 /out/*
+/h2/*
 /src/META-INF/*
 *.MF
 Application.jar
