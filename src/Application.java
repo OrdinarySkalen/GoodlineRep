@@ -8,6 +8,9 @@ public class Application {
         Validator validator = new Validator();
         UserInput userInput = new UserInput();
         AAAService service = new AAAService();
+        Connection dbConnection = null;
+        Statement statement = null;
+        String query;
 
         User johnDoe = new User("jdoe", "sup3rpaZZ", 1);
         User janeRow = new User("jrow", "Qweqrty12", 2);
@@ -24,6 +27,41 @@ public class Application {
         listRes.add(res2);
         listRes.add(res3);
         listRes.add(res4);
+
+        try {
+            dbConnection = getDBConnection();
+            statement = dbConnection.createStatement();
+            // Очиcтим таблицы
+            //statement.execute("DELETE FROM USER ALL");
+            //statement.execute("DELETE FROM RESOURCE ALL");
+            // Заполняем таблицу USER
+            /*for (User user : listUsers
+                    ) {
+                query = String.format("INSERT INTO USER (NAME,PASS,SALT, ID) VALUES ('%s','%s','%s','%s')",
+                        user.getLogin(), user.getHashPassword(), user.getSalt(), user.getId());
+                statement.executeUpdate(query);
+            }
+            // Заполняем таблицу RESOURCE
+            for (Resource res: listRes
+                 ) {
+                query = String.format("INSERT INTO RESOURCE (PATH,USER_ID,ROLE) VALUES ('%s','%s','%s')",
+                        res.getPath(), res.getUsersId()[0], res.getRole());
+                statement.executeUpdate(query);
+            }*/
+            ResultSet result = statement.executeQuery("SELECT * FROM USER");
+            while (result.next()) {
+                System.out.println(result.getString("ID")+" "+result.getString("NAME")+" "+result.getString("SALT"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                dbConnection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         validator.getUserInput(userInput, args);
         User reqUser;

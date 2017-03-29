@@ -906,3 +906,1027 @@ Caused by: java.text.ParseException: Unparseable date: "2000"
 	at java.text.DateFormat.parse(Unknown Source)
 	at org.h2.util.DateTimeUtils.parseDateTime(DateTimeUtils.java:616)
 	... 17 more
+2017-03-29 22:45:26 database: flush
+org.h2.message.DbException: Внутренняя ошибка: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Artem 2/applicationDB.mv.db [1.4.194/7]"
+General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Artem 2/applicationDB.mv.db [1.4.194/7]" [50000-194]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:95)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:378)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:361)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2930)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:155)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:100)
+	at org.h2.engine.Database.getPageStore(Database.java:2474)
+	at org.h2.engine.Database.open(Database.java:697)
+	at org.h2.engine.Database.openDatabase(Database.java:276)
+	at org.h2.engine.Database.<init>(Database.java:270)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:354)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:100)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:247)
+	at Application.getDBConnection(Application.java:39)
+	at Application.main(Application.java:10)
+Caused by: org.h2.jdbc.JdbcSQLException: Внутренняя ошибка: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Artem 2/applicationDB.mv.db [1.4.194/7]"
+General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Artem 2/applicationDB.mv.db [1.4.194/7]" [50000-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 25 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Artem 2/applicationDB.mv.db [1.4.194/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:765)
+	at org.h2.mvstore.FileStore.open(FileStore.java:173)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:347)
+	... 20 more
+2017-03-29 23:21:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "[*]""INSERT INTO USER (NAME,PASS,SALT) VALUES ('','','')"
+Syntax error in SQL statement "[*]""INSERT INTO USER (NAME,PASS,SALT) VALUES ('','','')"; SQL statement:
+"INSERT INTO USER (NAME,PASS,SALT) VALUES ('','','') [42000-194]
+2017-03-30 00:02:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_2" не найдено
+Constraint "CONSTRAINT_INDEX_2" not found; SQL statement:
+ALTER TABLE uSER DROP FOREIGN  KEY CONSTRAINT_INDEX_2 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:02:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_2" не найдено
+Constraint "CONSTRAINT_INDEX_2" not found; SQL statement:
+ALTER TABLE USER DROP FOREIGN KEY CONSTRAINT_INDEX_2 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:02:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE DROP FOREIGN KEY CONSTRAINT_INDEX_1 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:02:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1A" не найдено
+Constraint "CONSTRAINT_INDEX_1A" not found; SQL statement:
+ALTER TABLE RESOURCE DROP FOREIGN KEY CONSTRAINT_INDEX_1A [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:03:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "CONSTRAINT_INDEX_1A" не найден
+Column "CONSTRAINT_INDEX_1A" not found; SQL statement:
+ALTER TABLE RESOURCE DROP CONSTRAINT_INDEX_1A [42122-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.getColumn(Table.java:676)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5629)
+	at org.h2.command.Parser.parseAlter(Parser.java:4920)
+	at org.h2.command.Parser.parsePrepared(Parser.java:346)
+	at org.h2.command.Parser.parse(Parser.java:319)
+	at org.h2.command.Parser.parse(Parser.java:291)
+	at org.h2.command.Parser.prepareCommand(Parser.java:256)
+	at org.h2.engine.Session.prepareLocal(Session.java:564)
+	at org.h2.engine.Session.prepareCommand(Session.java:505)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:03:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "CONSTRAINT_INDEX_1" не найден
+Column "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE DROP CONSTRAINT_INDEX_1 [42122-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.getColumn(Table.java:676)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5629)
+	at org.h2.command.Parser.parseAlter(Parser.java:4920)
+	at org.h2.command.Parser.parsePrepared(Parser.java:346)
+	at org.h2.command.Parser.parse(Parser.java:319)
+	at org.h2.command.Parser.parse(Parser.java:291)
+	at org.h2.command.Parser.prepareCommand(Parser.java:256)
+	at org.h2.engine.Session.prepareLocal(Session.java:564)
+	at org.h2.engine.Session.prepareCommand(Session.java:505)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:03:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "CONSTRAINT_INDEX_1A" не найден
+Column "CONSTRAINT_INDEX_1A" not found; SQL statement:
+ALTER TABLE RESOURCE DROP CONSTRAINT_INDEX_1A [42122-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.getColumn(Table.java:676)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5629)
+	at org.h2.command.Parser.parseAlter(Parser.java:4920)
+	at org.h2.command.Parser.parsePrepared(Parser.java:346)
+	at org.h2.command.Parser.parse(Parser.java:319)
+	at org.h2.command.Parser.parse(Parser.java:291)
+	at org.h2.command.Parser.prepareCommand(Parser.java:256)
+	at org.h2.engine.Session.prepareLocal(Session.java:564)
+	at org.h2.engine.Session.prepareCommand(Session.java:505)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:04:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Индекс "CONSTRAINT_INDEX_1A" относится к ограничению "CONSTRAINT_1"
+Index "CONSTRAINT_INDEX_1A" belongs to constraint "CONSTRAINT_1"; SQL statement:
+ALTER TABLE RESOURCE DROP INDEX CONSTRAINT_INDEX_1A [90085-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.command.ddl.DropIndex.update(DropIndex.java:63)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:04:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE RESOURCE DROP FOREIGN KEY ([*]CONSTRAINT_INDEX_1A)"; ожидалось "identifier"
+Syntax error in SQL statement "ALTER TABLE RESOURCE DROP FOREIGN KEY ([*]CONSTRAINT_INDEX_1A)"; expected "identifier"; SQL statement:
+ALTER TABLE RESOURCE DROP FOREIGN KEY (CONSTRAINT_INDEX_1A) [42001-194]
+2017-03-30 00:04:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE RESOURCE DROP FOREIGN KEY ([*]'CONSTRAINT_INDEX_1A')"; ожидалось "identifier"
+Syntax error in SQL statement "ALTER TABLE RESOURCE DROP FOREIGN KEY ([*]'CONSTRAINT_INDEX_1A')"; expected "identifier"; SQL statement:
+ALTER TABLE RESOURCE DROP FOREIGN KEY ('CONSTRAINT_INDEX_1A') [42001-194]
+2017-03-30 00:05:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE RESOURCE DROP CONSTRAINT [*]'CONSTRAINT_INDEX_1A"
+Syntax error in SQL statement "ALTER TABLE RESOURCE DROP CONSTRAINT [*]'CONSTRAINT_INDEX_1A"; SQL statement:
+ALTER TABLE RESOURCE DROP CONSTRAINT 'CONSTRAINT_INDEX_1A [42000-194]
+2017-03-30 00:05:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1A" не найдено
+Constraint "CONSTRAINT_INDEX_1A" not found; SQL statement:
+ALTER TABLE RESOURCE DROP CONSTRAINT CONSTRAINT_INDEX_1A [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:06:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1A" не найдено
+Constraint "CONSTRAINT_INDEX_1A" not found; SQL statement:
+ALTER TABLE RESOURCE  DROP CONSTRAINT CONSTRAINT_INDEX_1A [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:06:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "USER_ID" не найдено
+Constraint "USER_ID" not found; SQL statement:
+ALTER TABLE RESOURCE  DROP CONSTRAINT USER_ID [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:06:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "ID" не найдено
+Constraint "ID" not found; SQL statement:
+ALTER TABLE RESOURCE  DROP CONSTRAINT ID [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:07:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE RESOURCE  DROP CONSTRAINT ID 
+ALTER[*] TABLE RESOURCE   DROP FOREIGN KEY ""CONSTRAINT_INDEX_1"" "
+Syntax error in SQL statement "ALTER TABLE RESOURCE  DROP CONSTRAINT ID 
+ALTER[*] TABLE RESOURCE   DROP FOREIGN KEY ""CONSTRAINT_INDEX_1"" "; SQL statement:
+ALTER TABLE RESOURCE  DROP CONSTRAINT ID 
+ALTER TABLE RESOURCE   DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [42000-194]
+2017-03-30 00:07:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE   DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:07:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE   DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:07:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE   DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:07:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE   DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:07:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE   DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:07:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE   DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:07:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE   DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:07:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:08:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE RESOURCE,[*]USER  DROP FOREIGN KEY ""CONSTRAINT_INDEX_1"" "; ожидалось "., ADD, SET, RENAME, DROP, CHANGE, MODIFY, ALTER"
+Syntax error in SQL statement "ALTER TABLE RESOURCE,[*]USER  DROP FOREIGN KEY ""CONSTRAINT_INDEX_1"" "; expected "., ADD, SET, RENAME, DROP, CHANGE, MODIFY, ALTER"; SQL statement:
+ALTER TABLE RESOURCE,USER  DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [42001-194]
+2017-03-30 00:08:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Схема "RESOURCE" не найдена
+Schema "RESOURCE" not found; SQL statement:
+ALTER TABLE RESOURCE.USER  DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [90079-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.getSchema(Parser.java:681)
+	at org.h2.command.Parser.getSchema(Parser.java:687)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5521)
+	at org.h2.command.Parser.parseAlter(Parser.java:4920)
+	at org.h2.command.Parser.parsePrepared(Parser.java:346)
+	at org.h2.command.Parser.parse(Parser.java:319)
+	at org.h2.command.Parser.parse(Parser.java:291)
+	at org.h2.command.Parser.prepareCommand(Parser.java:256)
+	at org.h2.engine.Session.prepareLocal(Session.java:564)
+	at org.h2.engine.Session.prepareCommand(Session.java:505)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:08:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE RESOURCE USER[*]  DROP FOREIGN KEY ""CONSTRAINT_INDEX_1"" "; ожидалось "., ADD, SET, RENAME, DROP, CHANGE, MODIFY, ALTER"
+Syntax error in SQL statement "ALTER TABLE RESOURCE USER[*]  DROP FOREIGN KEY ""CONSTRAINT_INDEX_1"" "; expected "., ADD, SET, RENAME, DROP, CHANGE, MODIFY, ALTER"; SQL statement:
+ALTER TABLE RESOURCE USER  DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [42001-194]
+2017-03-30 00:09:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE 'RESOURCE'[*] . 'USER'  DROP FOREIGN KEY ""CONSTRAINT_INDEX_1"" "; ожидалось "identifier"
+Syntax error in SQL statement "ALTER TABLE 'RESOURCE'[*] . 'USER'  DROP FOREIGN KEY ""CONSTRAINT_INDEX_1"" "; expected "identifier"; SQL statement:
+ALTER TABLE 'RESOURCE' . 'USER'  DROP FOREIGN KEY `CONSTRAINT_INDEX_1` [42001-194]
+2017-03-30 00:09:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT [*]"; ожидалось "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"
+Syntax error in SQL statement "SELECT [*]"; expected "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"; SQL statement:
+SHOW CREATE TABLE RESOURCE [42001-194]
+2017-03-30 00:10:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE USER DROP FOREIGN  KEY[*]"; ожидалось "identifier"
+Syntax error in SQL statement "ALTER TABLE USER DROP FOREIGN  KEY[*]"; expected "identifier"; SQL statement:
+ALTER TABLE USER DROP FOREIGN  KEY [42001-194]
+2017-03-30 00:10:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_2" не найдено
+Constraint "CONSTRAINT_INDEX_2" not found; SQL statement:
+ALTER TABLE USER DROP FOREIGN KEY CONSTRAINT_INDEX_2 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:11:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE USER DROP FOREIGN KEY=[*]CONSTRAINT_INDEX_2"; ожидалось "identifier"
+Syntax error in SQL statement "ALTER TABLE USER DROP FOREIGN KEY=[*]CONSTRAINT_INDEX_2"; expected "identifier"; SQL statement:
+ALTER TABLE USER DROP FOREIGN KEY=CONSTRAINT_INDEX_2 [42001-194]
+2017-03-30 00:12:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE  DROP CONSTRAINT CONSTRAINT_INDEX_1 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:13:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE  DROP CONSTRAINT CONSTRAINT_INDEX_1 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:13:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE  DROP CONSTRAINT CONSTRAINT_INDEX_1 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:13:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE  DROP CONSTRAINT CONSTRAINT_INDEX_1 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:13:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE  DROP CONSTRAINT CONSTRAINT_INDEX_1 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:13:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE  DROP FOREIGN KEY CONSTRAINT_INDEX_1 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:13:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "USER_ID" не найдено
+Constraint "USER_ID" not found; SQL statement:
+ALTER TABLE RESOURCE  DROP FOREIGN KEY USER_ID [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:13:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "USER_ID" не найдено
+Constraint "USER_ID" not found; SQL statement:
+ALTER TABLE RESOURCE  DROP FOREIGN KEY USER_ID [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:13:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT [*]"; ожидалось "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"
+Syntax error in SQL statement "SELECT [*]"; expected "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"; SQL statement:
+SHOW CREATE TABLE RESOURCE [42001-194]
+2017-03-30 00:14:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT [*]"; ожидалось "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"
+Syntax error in SQL statement "SELECT [*]"; expected "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"; SQL statement:
+SHOW CREATE TABLE RESOURCE [42001-194]
+2017-03-30 00:14:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT [*]"; ожидалось "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"
+Syntax error in SQL statement "SELECT [*]"; expected "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"; SQL statement:
+SHOW CREATE TABLE RESOURCE [42001-194]
+2017-03-30 00:14:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT [*]"; ожидалось "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"
+Syntax error in SQL statement "SELECT [*]"; expected "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"; SQL statement:
+SHOW CREATE TABLE RESOURCE [42001-194]
+2017-03-30 00:14:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT [*]"; ожидалось "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"
+Syntax error in SQL statement "SELECT [*]"; expected "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"; SQL statement:
+SHOW CREATE TABLE RESOURCE [42001-194]
+2017-03-30 00:14:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE IF EXISTS RESOURCE DROP CONSTRAINT PRIMARY[*] KEY"; ожидалось "identifier"
+Syntax error in SQL statement "ALTER TABLE IF EXISTS RESOURCE DROP CONSTRAINT PRIMARY[*] KEY"; expected "identifier"; SQL statement:
+ALTER TABLE IF EXISTS RESOURCE DROP CONSTRAINT PRIMARY KEY [42001-194]
+2017-03-30 00:15:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Индекс "PRIMARY_KEY_" не найден
+Index "PRIMARY_KEY_" not found; SQL statement:
+ALTER TABLE IF EXISTS RESOURCE DROP PRIMARY KEY [42112-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.getPrimaryKey(Table.java:771)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5609)
+	at org.h2.command.Parser.parseAlter(Parser.java:4920)
+	at org.h2.command.Parser.parsePrepared(Parser.java:346)
+	at org.h2.command.Parser.parse(Parser.java:319)
+	at org.h2.command.Parser.parse(Parser.java:291)
+	at org.h2.command.Parser.prepareCommand(Parser.java:256)
+	at org.h2.engine.Session.prepareLocal(Session.java:564)
+	at org.h2.engine.Session.prepareCommand(Session.java:505)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:15:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE IF EXISTS RESOURCE DROP CONSTRAINT[*]"; ожидалось "identifier"
+Syntax error in SQL statement "ALTER TABLE IF EXISTS RESOURCE DROP CONSTRAINT[*]"; expected "identifier"; SQL statement:
+ALTER TABLE IF EXISTS RESOURCE DROP CONSTRAINT [42001-194]
+2017-03-30 00:15:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "CONSTRAINT_INDEX" не найден
+Column "CONSTRAINT_INDEX" not found; SQL statement:
+ALTER TABLE IF EXISTS RESOURCE DROP CONSTRAINT_INDEX [42122-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.getColumn(Table.java:676)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5629)
+	at org.h2.command.Parser.parseAlter(Parser.java:4920)
+	at org.h2.command.Parser.parsePrepared(Parser.java:346)
+	at org.h2.command.Parser.parse(Parser.java:319)
+	at org.h2.command.Parser.parse(Parser.java:291)
+	at org.h2.command.Parser.prepareCommand(Parser.java:256)
+	at org.h2.engine.Session.prepareLocal(Session.java:564)
+	at org.h2.engine.Session.prepareCommand(Session.java:505)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:15:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "CONSTRAINT_INDEX_1" не найден
+Column "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE IF EXISTS RESOURCE DROP CONSTRAINT_INDEX_1 [42122-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.getColumn(Table.java:676)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5629)
+	at org.h2.command.Parser.parseAlter(Parser.java:4920)
+	at org.h2.command.Parser.parsePrepared(Parser.java:346)
+	at org.h2.command.Parser.parse(Parser.java:319)
+	at org.h2.command.Parser.parse(Parser.java:291)
+	at org.h2.command.Parser.prepareCommand(Parser.java:256)
+	at org.h2.engine.Session.prepareLocal(Session.java:564)
+	at org.h2.engine.Session.prepareCommand(Session.java:505)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:16:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE IF EXISTS RESOURCE DROP CONSTRAINT CONSTRAINT_INDEX_1 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:16:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE DROP CONSTRAINT CONSTRAINT_INDEX_1 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:16:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "CONSTRAINT_INDEX_1" не найдено
+Constraint "CONSTRAINT_INDEX_1" not found; SQL statement:
+ALTER TABLE RESOURCE DROP CONSTRAINT CONSTRAINT_INDEX_1 [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:17:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "USER_ID" не найдено
+Constraint "USER_ID" not found; SQL statement:
+ALTER TABLE RESOURCE DROP CONSTRAINT USER_ID [90057-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:20:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: "USER_ID"
+Unknown data type: "USER_ID"; SQL statement:
+Alter table RESOURCE add int USER_ID [50004-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:4144)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3994)
+	at org.h2.command.Parser.parseAlterTableAddColumn(Parser.java:5808)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5528)
+	at org.h2.command.Parser.parseAlter(Parser.java:4920)
+	at org.h2.command.Parser.parsePrepared(Parser.java:346)
+	at org.h2.command.Parser.parse(Parser.java:319)
+	at org.h2.command.Parser.parse(Parser.java:291)
+	at org.h2.command.Parser.prepareCommand(Parser.java:256)
+	at org.h2.engine.Session.prepareLocal(Session.java:564)
+	at org.h2.engine.Session.prepareCommand(Session.java:505)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:21:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE RESOURCE ADD COLLUMN INT USER_ID[*] "
+Syntax error in SQL statement "ALTER TABLE RESOURCE ADD COLLUMN INT USER_ID[*] "; SQL statement:
+Alter table RESOURCE add collumn int USER_ID [42000-194]
+2017-03-30 00:21:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: "USER_ID"
+Unknown data type: "USER_ID"; SQL statement:
+Alter table RESOURCE add COLUMN int USER_ID [50004-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:4144)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3994)
+	at org.h2.command.Parser.parseAlterTableAddColumn(Parser.java:5808)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5528)
+	at org.h2.command.Parser.parseAlter(Parser.java:4920)
+	at org.h2.command.Parser.parsePrepared(Parser.java:346)
+	at org.h2.command.Parser.parse(Parser.java:319)
+	at org.h2.command.Parser.parse(Parser.java:291)
+	at org.h2.command.Parser.prepareCommand(Parser.java:256)
+	at org.h2.engine.Session.prepareLocal(Session.java:564)
+	at org.h2.engine.Session.prepareCommand(Session.java:505)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:21:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: "ALTER"
+Unknown data type: "ALTER"; SQL statement:
+Alter table RESOURCE add COLUMN USER_ID
+ALTER TABLE [ IF EXISTS ] tableName ADD [ COLUMN ]  [ IF NOT EXISTS ] columnDefinition | (   columnDefinition   [,...] )  
+[   BEFORE | AFTER   columnName ] [50004-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:4144)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3994)
+	at org.h2.command.Parser.parseAlterTableAddColumn(Parser.java:5808)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5528)
+	at org.h2.command.Parser.parseAlter(Parser.java:4920)
+	at org.h2.command.Parser.parsePrepared(Parser.java:346)
+	at org.h2.command.Parser.parse(Parser.java:319)
+	at org.h2.command.Parser.parse(Parser.java:291)
+	at org.h2.command.Parser.prepareCommand(Parser.java:256)
+	at org.h2.engine.Session.prepareLocal(Session.java:564)
+	at org.h2.engine.Session.prepareCommand(Session.java:505)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:22:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: 
+Unknown data type: ; SQL statement:
+Alter table RESOURCE add COLUMN USER_ID [50004-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:4144)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3994)
+	at org.h2.command.Parser.parseAlterTableAddColumn(Parser.java:5808)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5528)
+	at org.h2.command.Parser.parseAlter(Parser.java:4920)
+	at org.h2.command.Parser.parsePrepared(Parser.java:346)
+	at org.h2.command.Parser.parse(Parser.java:319)
+	at org.h2.command.Parser.parse(Parser.java:291)
+	at org.h2.command.Parser.prepareCommand(Parser.java:256)
+	at org.h2.engine.Session.prepareLocal(Session.java:564)
+	at org.h2.engine.Session.prepareCommand(Session.java:505)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:22:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: "USER_ID"
+Unknown data type: "USER_ID"; SQL statement:
+Alter table RESOURCE add COLUMN INT USER_ID [50004-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:4144)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3994)
+	at org.h2.command.Parser.parseAlterTableAddColumn(Parser.java:5808)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5528)
+	at org.h2.command.Parser.parseAlter(Parser.java:4920)
+	at org.h2.command.Parser.parsePrepared(Parser.java:346)
+	at org.h2.command.Parser.parse(Parser.java:319)
+	at org.h2.command.Parser.parse(Parser.java:291)
+	at org.h2.command.Parser.prepareCommand(Parser.java:256)
+	at org.h2.engine.Session.prepareLocal(Session.java:564)
+	at org.h2.engine.Session.prepareCommand(Session.java:505)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1380)
+	at org.h2.server.web.WebApp.query(WebApp.java:1053)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1015)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1002)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-03-30 00:24:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE USER ADD PRIMARY KEY ID[*] "; ожидалось "HASH, ("
+Syntax error in SQL statement "ALTER TABLE USER ADD PRIMARY KEY ID[*] "; expected "HASH, ("; SQL statement:
+Alter table USER add primary key id [42001-194]
+2017-03-30 00:27:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "LOGIN" не найден
+Column "LOGIN" not found [42122-194]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3146)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3234)
+	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:308)
+	at Application.main(Application.java:53)
