@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.sql.*;
 
 public class Application {
 
@@ -83,6 +84,23 @@ public class Application {
                 System.out.println(accountings.get(0).toString());
             }
         }
+    }
+
+    private static Connection getDBConnection() {
+        Connection dbConnection = null;
+        try {
+            Class.forName("org.h2.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            dbConnection = DriverManager.getConnection("jdbc:h2:./db/applicationDB",
+                    "artem", "123");
+            return dbConnection;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return dbConnection;
     }
 }
 
