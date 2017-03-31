@@ -6,16 +6,14 @@ import java.sql.*;
 
 public class Application {
 
-    public static final String URL = "jdbc:h2:./db/applicationDB";
+    public static final String URL = "jdbc:h2:./res/db/applicationDB";
     public static final String USER = "artem";
     public static final String PASSWORD = "123";
 
     public static void main(String[] args) {
-        // Create the Flyway instance
+
         Flyway flyway = new Flyway();
-
         flyway.setDataSource(URL, USER, PASSWORD);
-
         flyway.migrate();
 
         Validator validator = new Validator();
