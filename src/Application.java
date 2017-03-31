@@ -1,10 +1,23 @@
+import org.flywaydb.core.Flyway;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.*;
 
 public class Application {
 
+    public static final String URL = "jdbc:h2:./db/applicationDB";
+    public static final String USER = "artem";
+    public static final String PASSWORD = "123";
+
     public static void main(String[] args) {
+        // Create the Flyway instance
+        Flyway flyway = new Flyway();
+
+        flyway.setDataSource(URL, USER, PASSWORD);
+
+        flyway.migrate();
+
         Validator validator = new Validator();
         UserInput userInput = new UserInput();
         AAAService service = new AAAService();
@@ -50,7 +63,7 @@ public class Application {
             }*/
             ResultSet result = statement.executeQuery("SELECT * FROM USER");
             while (result.next()) {
-                System.out.println(result.getString("ID")+" "+result.getString("NAME")+" "+result.getString("SALT"));
+                System.out.println(result.getString("ID") + " " + result.getString("NAME") + " " + result.getString("SALT"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -132,8 +145,7 @@ public class Application {
             System.out.println(e.getMessage());
         }
         try {
-            dbConnection = DriverManager.getConnection("jdbc:h2:./db/applicationDB",
-                    "artem", "123");
+            dbConnection = DriverManager.getConnection(URL, USER, PASSWORD);
             return dbConnection;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
