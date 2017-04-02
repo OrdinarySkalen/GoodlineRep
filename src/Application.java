@@ -6,21 +6,25 @@ import java.sql.*;
 
 public class Application {
 
-    public static final String URL = "jdbc:h2:./res/db/applicationDB";
-    public static final String USER = "artem";
-    public static final String PASSWORD = "123";
+    private static final String URL = "jdbc:h2:./res/db/applicationDB";
+    private static final String USER = "artem";
+    private static final String PASSWORD = "123";
 
     public static void main(String[] args) {
 
         Flyway flyway = new Flyway();
         flyway.setDataSource(URL, USER, PASSWORD);
-        flyway.migrate();
+        try {
+            flyway.migrate();
+        } catch (Exception e) {
+            flyway.baseline();
+        }
 
         Validator validator = new Validator();
         UserInput userInput = new UserInput();
         AAAService service = new AAAService();
         Connection dbConnection = null;
-        Statement statement = null;
+        Statement statement;
         String query;
 
         User johnDoe = new User("jdoe", "sup3rpaZZ", 1);
@@ -61,7 +65,11 @@ public class Application {
             }*/
             ResultSet result = statement.executeQuery("SELECT * FROM USER");
             while (result.next()) {
-                System.out.println(result.getString("ID") + " " + result.getString("NAME") + " " + result.getString("SALT"));
+                System.out.println(result.getString("ID") + " " + result.getString("NAME") + " " + result.getString("PASS") + " " + result.getString("SALT"));
+            }
+            result = statement.executeQuery("SELECT * FROM RESOURCE");
+            while (result.next()) {
+                System.out.println(result.getString("USER_ID") + " " + result.getString("PATH") + " " + result.getString("ROLE"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
