@@ -73,18 +73,4 @@ public class UserInput {
     void setVolume(String volume) {
         this.volume = volume;
     }
-
-    @Override
-    public String toString() {
-        if (this.isAccounting()) {
-            return String.format("Входные параметры: login - %s, pass - %s, res - %s, role - %s, dateStart - %s, dateEnd - %s, volume - %s",
-                    this.login, this.password, this.resource, this.role, this.dateStart, this.dateEnd, this.volume);
-        } else if (this.isAuthorisation()) {
-            return String.format("Входные параметры: login - %s, pass - %s, res - %s, role - %s",
-                    this.login, this.password, this.resource, this.role);
-        } else {
-            return String.format("Входные параметры: login - %s, pass - %s",
-                    this.login, this.password);
-        }
-    }
 }

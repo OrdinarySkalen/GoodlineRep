@@ -32,15 +32,22 @@ public class Validator {
             usIn.setDateStart(line.getOptionValue("ds"));
             usIn.setDateEnd(line.getOptionValue("de"));
             usIn.setVolume(line.getOptionValue("volume"));
-            logger.debug(usIn.toString());
+            String input = "";
+            for (String s : args
+                    ) {
+                input = String.format("%s %s", input, s);
+            }
+            logger.debug(String.format("User input:%s", input));
             if (line.hasOption("h") || (usIn.getLogin() == null) || (usIn.getPassword() == null)) {
                 HelpFormatter helpFormatter = new HelpFormatter();
                 helpFormatter.printHelp("Help", options);
+                logger.debug("Unknown parameters");
                 System.exit(0);
             }
         } catch (ParseException exp) {
             HelpFormatter helpFormatter = new HelpFormatter();
             helpFormatter.printHelp("Help", options);
+            logger.debug("There is not any parameters");
             System.exit(0);
         }
     }

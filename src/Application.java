@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
 public class Application {
-
     private static final String URL = "jdbc:h2:./res/db/applicationDB";
     private static final String USER = "artem";
     private static final String PASSWORD = "123";
@@ -65,14 +64,14 @@ public class Application {
         //Найти юзера по логину
         reqUser = service.findUserByLogin(userInput.getLogin(), listUsers);
         if (reqUser == null) {
-            logger.error(String.format("Пользоваля %s не существует.(Код ошибки - 1)",
+            logger.error(String.format("User %s doesn't exist.(Exit-code 1)",
                     userInput.getLogin()));
             System.exit(1);
         }
 
         //проверить пароль
         if (!service.checkPasswordByUser(userInput.getPassword(), reqUser)) {
-            logger.error(String.format("Пароль %s для пользователя %s неверный.(Код ошибки - 2)",
+            logger.error(String.format("Password %s is incorrect for the user %s.(Exit-code - 2)",
                     userInput.getPassword(), userInput.getLogin()));
             System.exit(2);
         }
@@ -83,13 +82,13 @@ public class Application {
             try {
                 reqRes = service.getResource(userInput.getResource(), listRes, Roles.valueOf(userInput.getRole()));
             } catch (Exception e) {
-                logger.error(String.format("Роли %s не существует.(Код ошибки - 3)", userInput.getRole()));
+                logger.error(String.format("Role %s doesn't exist.(Exit-code - 3)", userInput.getRole()));
                 System.exit(3);
             }
 
             //вылавливаем неизвестные ресурсы
             if (reqRes == null) {
-                logger.error(String.format("Ресурс %s не найден.(Код ошибки - 4)", userInput.getResource()));
+                logger.error(String.format("Resource %s with role %s isn't found.(Exit-code - 4)", userInput.getResource(), userInput.getRole()));
                 System.exit(4);
             }
 
@@ -102,7 +101,7 @@ public class Application {
             }
 
             if (!accessToRes) {
-                logger.error(String.format("У пользователя %s нет доступа к ресурсу %s.(Код ошибки - 4)",
+                logger.error(String.format("User %s don't have access to the resource %s.(Exit-code - 4)",
                         userInput.getLogin(), userInput.getResource()));
                 System.exit(4);
             }
