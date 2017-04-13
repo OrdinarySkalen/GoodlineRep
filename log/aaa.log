@@ -1,4 +1,14 @@
-13-04-2017 17:41:00 [TRACE][Application] [main:16] - Entering application.
-13-04-2017 17:41:00 [TRACE][Application] [main:20] - Trying make migrations.
-13-04-2017 17:41:00 [TRACE][Application] [main:22] - Success migrations.
-13-04-2017 17:41:00 [TRACE][Application] [main:28] - Work this data base complited.
+13-04-2017 23:54:58 [DEBUG][Validator  ] [getUserInput:35] - Входные параметры: login - jdoe, pass - sup3rpaZZ, res - a, role - READ, dateStart - 2017-12-12, dateEnd - 2017-12-12, volume - 10
+13-04-2017 23:54:58 [DEBUG][Application] [main        :79] - Authentication: success
+13-04-2017 23:54:58 [DEBUG][Application] [main        :109] - Resource a - ok
+13-04-2017 23:54:58 [DEBUG][Application] [main        :110] - Authorisation: success
+13-04-2017 23:54:58 [DEBUG][Application] [main        :122] - Add record: DateStart - 2017-12-12, DateEnd - 2017-12-12, UserId - 1, Resource - a, Volume - 10
+13-04-2017 23:54:58 [DEBUG][Application] [main        :123] - Accounting: success
+13-04-2017 23:56:51 [DEBUG][Application] [main        :18] - Start session
+13-04-2017 23:56:51 [DEBUG][Validator  ] [getUserInput:35] - Входные параметры: login - jdoe, pass - sup3rpaZZ, res - a, role - READ, dateStart - 2017-12-12, dateEnd - 2017-12-12, volume - 10
+13-04-2017 23:56:51 [DEBUG][Application] [main        :80] - Authentication: success
+13-04-2017 23:56:51 [DEBUG][Application] [main        :110] - Resource a - ok
+13-04-2017 23:56:51 [DEBUG][Application] [main        :111] - Authorisation: success
+13-04-2017 23:56:51 [DEBUG][Application] [main        :123] - Add record: DateStart - 2017-12-12, DateEnd - 2017-12-12, UserId - 1, Resource - a, Volume - 10
+13-04-2017 23:56:51 [DEBUG][Application] [main        :124] - Accounting: success
+13-04-2017 23:56:51 [DEBUG][Application] [main        :127] - End session

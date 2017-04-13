@@ -1,9 +1,12 @@
 import org.apache.commons.cli.*;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class Validator {
 
     private CommandLineParser parser = new DefaultParser();
     private Options options = new Options();
+    private static final Logger logger = LogManager.getLogger(Validator.class);
 
     /**
      * Преобразовать введенные параметры в объект класса UserInput
@@ -29,6 +32,7 @@ public class Validator {
             usIn.setDateStart(line.getOptionValue("ds"));
             usIn.setDateEnd(line.getOptionValue("de"));
             usIn.setVolume(line.getOptionValue("volume"));
+            logger.debug(usIn.toString());
             if (line.hasOption("h") || (usIn.getLogin() == null) || (usIn.getPassword() == null)) {
                 HelpFormatter helpFormatter = new HelpFormatter();
                 helpFormatter.printHelp("Help", options);

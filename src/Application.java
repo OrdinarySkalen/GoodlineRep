@@ -1,7 +1,9 @@
 import org.flywaydb.core.Flyway;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.*;
+
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -13,19 +15,15 @@ public class Application {
     private static final Logger logger = LogManager.getLogger(Application.class);
 
     public static void main(String[] args) {
-        logger.trace("Entering application.");
+        logger.debug("Start session");
         Flyway flyway = new Flyway();
         flyway.setDataSource(URL, USER, PASSWORD);
         try {
-            logger.trace("Trying make migrations.");
             flyway.migrate();
-            logger.trace("Success migrations.");
         } catch (Exception e) {
-            logger.error("Migrations failed. Get now base.");
             flyway.baseline();
         }
 
-        logger.trace("Work this data base complited.");
         Validator validator = new Validator();
         UserInput userInput = new UserInput();
         AAAService service = new AAAService();
@@ -40,8 +38,8 @@ public class Application {
             statement = dbConnection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM USER");
             while (result.next()) {
-                listUsers.add(new User(result.getString("NAME"),result.getString("PASS"),
-                        result.getString("SALT"),result.getInt("ID")));
+                listUsers.add(new User(result.getString("NAME"), result.getString("PASS"),
+                        result.getString("SALT"), result.getInt("ID")));
             }
             result = statement.executeQuery("SELECT * FROM RESOURCE");
             while (result.next()) {
@@ -49,7 +47,7 @@ public class Application {
                         Roles.valueOf(result.getString("ROLE"))));
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.debug(e.getMessage());
         } finally {
             try {
                 dbConnection.close();
@@ -67,25 +65,31 @@ public class Application {
         //Найти юзера по логину
         reqUser = service.findUserByLogin(userInput.getLogin(), listUsers);
         if (reqUser == null) {
+            logger.error(String.format("Пользоваля %s не существует.(Код ошибки - 1)",
+                    userInput.getLogin()));
             System.exit(1);
         }
 
         //проверить пароль
         if (!service.checkPasswordByUser(userInput.getPassword(), reqUser)) {
+            logger.error(String.format("Пароль %s для пользователя %s неверный.(Код ошибки - 2)",
+                    userInput.getPassword(), userInput.getLogin()));
             System.exit(2);
         }
 
-        System.out.println("Authentication: success");
+        logger.debug("Authentication: success");
 
         if (userInput.isAuthorisation()) {
             try {
                 reqRes = service.getResource(userInput.getResource(), listRes, Roles.valueOf(userInput.getRole()));
             } catch (Exception e) {
+                logger.error(String.format("Роли %s не существует.(Код ошибки - 3)", userInput.getRole()));
                 System.exit(3);
             }
 
             //вылавливаем неизвестные ресурсы
             if (reqRes == null) {
+                logger.error(String.format("Ресурс %s не найден.(Код ошибки - 4)", userInput.getResource()));
                 System.exit(4);
             }
 
@@ -98,12 +102,14 @@ public class Application {
             }
 
             if (!accessToRes) {
+                logger.error(String.format("У пользователя %s нет доступа к ресурсу %s.(Код ошибки - 4)",
+                        userInput.getLogin(), userInput.getResource()));
                 System.exit(4);
             }
 
-            System.out.println("Resource " + reqRes.getPath() + " - ok");
+            logger.debug(String.format("Resource %s - ok", reqRes.getPath()));
+            logger.debug("Authorisation: success");
 
-            System.out.println("Authorisation: success");
             if (userInput.isAccounting()) {
                 //ловим ошибку 5
                 service.isDateValid(userInput.getDateEnd(), userInput.getDateStart());
@@ -114,9 +120,11 @@ public class Application {
                 int volume = service.tryGetVolume(userInput.getVolume());
 
                 accountings.add(new Accounting(dateS, dateE, volume, reqRes, reqUser));
-                System.out.println(accountings.get(0).toString());
+                logger.debug(accountings.get(0).toString());
+                logger.debug("Accounting: success");
             }
         }
+        logger.debug("End session");
     }
 
     private static Connection getDBConnection() {
@@ -124,13 +132,13 @@ public class Application {
         try {
             Class.forName("org.h2.Driver");
         } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+            logger.debug(e.getMessage());
         }
         try {
             dbConnection = DriverManager.getConnection(URL, USER, PASSWORD);
             return dbConnection;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.debug(e.getMessage());
         }
         return dbConnection;
     }

@@ -38,13 +38,7 @@ public class Accounting {
 
     @Override
     public String toString() {
-        return String.format("Add record:\n" +
-                        "DateStart - %1$s\n" +
-                        "DateEnd - %2$s\n" +
-                        "UserId - %3$s\n" +
-                        "Resource - %4$s\n" +
-                        "Volume - %5$s\nAccounting: success"
-                , this.dateStart, this.dateEnd, this.user.getId(),
-                this.resource.getPath(), this.volume);
+        return String.format("Add record: DateStart - %1$s, DateEnd - %2$s, UserId - %3$s, Resource - %4$s, Volume - %5$s",
+                this.dateStart, this.dateEnd, this.user.getId(), this.resource.getPath(), this.volume);
     }
 }
