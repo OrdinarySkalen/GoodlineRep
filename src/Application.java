@@ -1,75 +1,52 @@
 import org.flywaydb.core.Flyway;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.*;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class Application {
 
     private static final String URL = "jdbc:h2:./res/db/applicationDB";
     private static final String USER = "artem";
     private static final String PASSWORD = "123";
+    private static final Logger logger = LogManager.getLogger(Application.class);
 
     public static void main(String[] args) {
-
+        logger.trace("Entering application.");
         Flyway flyway = new Flyway();
         flyway.setDataSource(URL, USER, PASSWORD);
         try {
+            logger.trace("Trying make migrations.");
             flyway.migrate();
+            logger.trace("Success migrations.");
         } catch (Exception e) {
+            logger.error("Migrations failed. Get now base.");
             flyway.baseline();
         }
 
+        logger.trace("Work this data base complited.");
         Validator validator = new Validator();
         UserInput userInput = new UserInput();
         AAAService service = new AAAService();
         Connection dbConnection = null;
         Statement statement;
-        String query;
 
-        User johnDoe = new User("jdoe", "sup3rpaZZ", 1);
-        User janeRow = new User("jrow", "Qweqrty12", 2);
         ArrayList<User> listUsers = new ArrayList<>();
-        listUsers.add(johnDoe);
-        listUsers.add(janeRow);
-
-        Resource res1 = new Resource("a", new int[]{johnDoe.getId()}, Roles.READ);
-        Resource res2 = new Resource("a.b", new int[]{johnDoe.getId()}, Roles.WRITE);
-        Resource res3 = new Resource("a.b.c", new int[]{janeRow.getId()}, Roles.EXECUTE);
-        Resource res4 = new Resource("a.bc", new int[]{johnDoe.getId()}, Roles.EXECUTE);
         ArrayList<Resource> listRes = new ArrayList<>();
-        listRes.add(res1);
-        listRes.add(res2);
-        listRes.add(res3);
-        listRes.add(res4);
 
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
-            // Очиcтим таблицы
-            //statement.execute("DELETE FROM USER ALL");
-            //statement.execute("DELETE FROM RESOURCE ALL");
-            // Заполняем таблицу USER
-            /*for (User user : listUsers
-                    ) {
-                query = String.format("INSERT INTO USER (NAME,PASS,SALT, ID) VALUES ('%s','%s','%s','%s')",
-                        user.getLogin(), user.getHashPassword(), user.getSalt(), user.getId());
-                statement.executeUpdate(query);
-            }
-            // Заполняем таблицу RESOURCE
-            for (Resource res: listRes
-                 ) {
-                query = String.format("INSERT INTO RESOURCE (PATH,USER_ID,ROLE) VALUES ('%s','%s','%s')",
-                        res.getPath(), res.getUsersId()[0], res.getRole());
-                statement.executeUpdate(query);
-            }*/
             ResultSet result = statement.executeQuery("SELECT * FROM USER");
             while (result.next()) {
-                System.out.println(result.getString("ID") + " " + result.getString("NAME") + " " + result.getString("PASS") + " " + result.getString("SALT"));
+                listUsers.add(new User(result.getString("NAME"),result.getString("PASS"),
+                        result.getString("SALT"),result.getInt("ID")));
             }
             result = statement.executeQuery("SELECT * FROM RESOURCE");
             while (result.next()) {
-                System.out.println(result.getString("USER_ID") + " " + result.getString("PATH") + " " + result.getString("ROLE"));
+                listRes.add(new Resource(result.getString("PATH"), new int[]{result.getInt("USER_ID")},
+                        Roles.valueOf(result.getString("ROLE"))));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -80,7 +57,6 @@ public class Application {
                 e.printStackTrace();
             }
         }
-
 
         validator.getUserInput(userInput, args);
         User reqUser;

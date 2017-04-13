@@ -1,0 +1,4 @@
+13-04-2017 17:41:00 [TRACE][Application] [main:16] - Entering application.
+13-04-2017 17:41:00 [TRACE][Application] [main:20] - Trying make migrations.
+13-04-2017 17:41:00 [TRACE][Application] [main:22] - Success migrations.
+13-04-2017 17:41:00 [TRACE][Application] [main:28] - Work this data base complited.
