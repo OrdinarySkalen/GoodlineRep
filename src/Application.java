@@ -21,27 +21,22 @@ public class Application {
             flyway.baseline();
         }
 
+        Connector connector = new Connector();
         Validator validator = new Validator();
         UserInput userInput = new UserInput();
         AAAService service = new AAAService();
-        Connector connector = new Connector();
-        Connection dbConnection = null;
+        Connection dbConnection = connector.getConnection(URL, USER, PASSWORD);
         Statement statement;
 
         validator.getUserInput(userInput, args);
-        User reqUser = null;
+        User reqUser;
         Resource reqRes = new Resource();
 
 
         try {
-            dbConnection = connector.getDBConnection(URL, USER, PASSWORD);
             statement = dbConnection.createStatement();
-            //Найти юзера по логину
-            ResultSet result = statement.executeQuery(String.format("SELECT * FROM USER WHERE (USER.NAME LIKE '%s')", userInput.getLogin())); //сделать методом в коннекторе
-            while (result.next()) {
-                reqUser = new User(result.getString("NAME"), result.getString("PASS"),
-                        result.getString("SALT"), result.getInt("ID"));
-            }
+            reqUser = connector.getUserFromDataBase(userInput, statement);
+
             if (reqUser == null) {
                 logger.error(String.format("User %s doesn't exist.(Exit-code 1)",
                         userInput.getLogin()));
@@ -58,12 +53,7 @@ public class Application {
 
             if (userInput.isAuthorisation()) {
                 try {
-                    result = statement.executeQuery(String.format("SELECT * FROM RESOURCE WHERE ((PATH='%s') or (PATH LIKE '%s')) AND (ROLE='%s') AND (USER_ID=%s)",
-                            userInput.getResource(), userInput.getResource() + ".%", userInput.getRole(), reqUser.getId()));
-                    while (result.next()) {
-                        String role = result.getString("ROLE");
-                        reqRes = new Resource(result.getString("PATH"), result.getInt("USER_ID"), Roles.valueOf(result.getString("ROLE")), result.getInt("ID"));
-                    }
+                    reqRes = connector.getResourceFromDataBase(userInput,statement);
                 } catch (Exception e) {
                     logger.error(String.format("Role %s doesn't exist.(Exit-code - 3)", userInput.getRole()));
                     System.exit(3);
