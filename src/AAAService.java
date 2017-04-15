@@ -50,7 +50,7 @@ class AAAService {
     Resource getResource(String path, ArrayList<Resource> resources, Roles role) {
         Resource parentRes = this.findParentResource(path + ".", resources, role);
         if (parentRes.getPath() != null) {
-            return new Resource(path, parentRes.getUsersId(), role);
+            return new Resource(path, parentRes.getUserId(), role,parentRes.getId());
         } else {
             return null;
         }

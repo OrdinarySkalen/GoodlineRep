@@ -1,12 +1,14 @@
 public class Resource {
+    private int id;
     private String path;
-    private int[] usersId;
+    private int usersId;
     private Roles role;
 
-    public Resource(String path, int[] masId, Roles role) {
+    public Resource(String path, int userId, Roles role, int id) {
         this.setPath(path);
-        this.setUsersId(masId);
+        this.setUserId(userId);
         this.setRole(role);
+        this.setId(id);
     }
 
     public Resource() {
@@ -20,11 +22,11 @@ public class Resource {
         this.path = path;
     }
 
-    public int[] getUsersId() {
+    public int getUserId() {
         return usersId;
     }
 
-    public void setUsersId(int[] usersId) {
+    public void setUserId(int usersId) {
         this.usersId = usersId;
     }
 
@@ -34,5 +36,13 @@ public class Resource {
 
     public void setRole(Roles role) {
         this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

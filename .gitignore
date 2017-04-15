@@ -11,3 +11,5 @@ Application.jar
 О базе данных.txt
 res/db/applicationDB.mv.db
 res/db/applicationDB.mv.db
+res/db/applicationDB.trace.db
+*.db
