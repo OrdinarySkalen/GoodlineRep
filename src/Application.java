@@ -1,5 +1,7 @@
 import org.flywaydb.core.Flyway;
+
 import java.sql.*;
+
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -51,12 +53,7 @@ public class Application {
             logger.debug("Authentication: success");
 
             if (userInput.isAuthorisation()) {
-                try {
-                    reqRes = connector.getResourceFromDataBase(userInput,statement);
-                } catch (Exception e) {
-                    logger.error(String.format("Role %s doesn't exist.(Exit-code - 3)", userInput.getRole()));
-                    System.exit(3);
-                }
+                reqRes = connector.getResourceFromDataBase(userInput, statement);
 
                 //Вылавить неизвестные ресурсы
                 if (reqRes == null) {
@@ -83,7 +80,7 @@ public class Application {
                     service.tryGetDate(userInput.getDateStart());
                     service.tryGetVolume(userInput.getVolume());
                     //добавляем запись о использовании ресурса в БД
-                    connector.insertRecordIntoDataBase(userInput,reqRes,statement);
+                    connector.insertRecordIntoDataBase(userInput, reqRes, statement);
                     logger.debug("Accounting: success");
                 }
             }
