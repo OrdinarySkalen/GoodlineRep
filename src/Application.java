@@ -1,7 +1,5 @@
 import org.flywaydb.core.Flyway;
-
 import java.sql.*;
-
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -14,6 +12,7 @@ public class Application {
     public static void main(String[] args) {
         logger.debug("Start session");
         Flyway flyway = new Flyway();
+
         flyway.setDataSource(URL, USER, PASSWORD);
         try {
             flyway.migrate();
@@ -29,7 +28,7 @@ public class Application {
 
         validator.getUserInput(userInput, args);
         User reqUser;
-        Resource reqRes = new Resource();
+        Resource reqRes;
 
 
         try {

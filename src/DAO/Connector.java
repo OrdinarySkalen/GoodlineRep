@@ -47,13 +47,22 @@ class Connector {
     Resource getResourceFromDataBase(UserInput userInput, Statement statement) {
         Resource resource = null;
         ResultSet result;
+        String[] masOfPath = userInput.getResource().split("\\.");
+        String currentPath = masOfPath[0];
         try {
             try {
-                result = statement.executeQuery(String.format("SELECT * FROM RESOURCE WHERE ((PATH='%s') or (PATH LIKE '%s')) AND (ROLE='%s')",
-                        userInput.getResource(), userInput.getResource() + ".%", userInput.getRole()));
-                while (result.next()) {
-                    resource = new Resource(result.getString("PATH"), result.getInt("USER_ID"),
-                            Roles.valueOf(result.getString("ROLE")), result.getInt("ID"));
+                for (String nextLevel : masOfPath
+                        ) {
+                    result = statement.executeQuery(String.format("SELECT * FROM RESOURCE WHERE (PATH='%s') AND (ROLE='%s')",
+                            currentPath, userInput.getRole()));
+                    currentPath += '.'+nextLevel;
+                    if (result != null) {
+                        while (result.next()) {
+                            resource = new Resource(userInput.getResource(), result.getInt("USER_ID"),
+                                    Roles.valueOf(result.getString("ROLE")), result.getInt("ID"));
+                        }
+                        break;
+                    }
                 }
             } catch (Exception e) {
                 logger.error(String.format("Role %s doesn't exist.(Exit-code - 3)", userInput.getRole()));
