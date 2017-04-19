@@ -1,7 +1,8 @@
 #!/bin/bash
 mkdir bin #
 javac -cp "./libs/*" -d "./bin/" src/*.java src/DAO/Connector.java #
+cp -R -v ./res/* ./bin #
 echo "Classes create" 
-jar cvmf manifest.mf Application.jar -C ./bin / ./libs/ ./res/db/migration /db/migration ./res/*.xml /res/ #
+jar cvmf manifest.mf Application.jar -C ./bin / ./libs/ #
 echo "Jar good"
-rm -rf bin #
+# rm -rf bin #
