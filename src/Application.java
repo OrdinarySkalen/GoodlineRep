@@ -54,6 +54,8 @@ public class Application {
             if (userInput.isAuthorisation()) {
                 reqRes = connector.getResourceFromDataBase(userInput, statement);
 
+                service.isRoleValid(userInput.getRole());
+
                 //Вылавить неизвестные ресурсы
                 if (reqRes == null) {
                     logger.error(String.format("Resource %s with role %s isn't found.(Exit-code - 4)", userInput.getResource(), userInput.getRole()));

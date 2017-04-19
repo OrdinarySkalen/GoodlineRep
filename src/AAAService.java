@@ -1,10 +1,12 @@
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 class AAAService {
-
+    private static final Logger logger = LogManager.getLogger(Connector.class);
     /**
      * Поиск пользователя по логину
      *
@@ -80,6 +82,15 @@ class AAAService {
             LocalDate.parse(dateE);
         } catch (Exception e) {
             System.exit(5);
+        }
+    }
+
+    void isRoleValid(String role) {
+        try {
+            Roles.valueOf(role);
+        } catch (Exception e) {
+            logger.error(String.format("Role %s isn't exist.(Exit-code - 3)", role));
+            System.exit(3);
         }
     }
 
