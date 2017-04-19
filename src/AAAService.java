@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 class AAAService {
     private static final Logger logger = LogManager.getLogger(Connector.class);
+
     /**
      * Поиск пользователя по логину
      *
