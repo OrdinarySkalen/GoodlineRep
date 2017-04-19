@@ -5,4 +5,4 @@ cp -R -v ./res/* ./bin #
 echo "Classes create" 
 jar cvmf manifest.mf Application.jar -C ./bin / ./libs/ #
 echo "Jar good"
-# rm -rf bin #
+rm -rf bin #
