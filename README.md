@@ -19,4 +19,4 @@
 * Ссылка на [GitPages](https://ordinaryskalen.github.io/GoodlineRep/).
 * [ROADMAP - план разработки приложения](./ROADMAP.md)
 * [ROADMAP2 - план разработки документации](./ROADMAP2.md)
-* [ROADMAP2 - план разработки документации](./ROADMAP3.md)
+* [ROADMAP3 - план перевода приложения на работу с БД и добавления логирования](./ROADMAP3.md)
