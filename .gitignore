@@ -13,3 +13,4 @@ res/db/applicationDB.mv.db
 res/db/applicationDB.mv.db
 res/db/applicationDB.trace.db
 *.db
+log/aaa.log
