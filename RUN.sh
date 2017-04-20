@@ -1,2 +1,2 @@
 #!/bin/bash
-java -jar Application.jar $1
+java -jar praclab1.Application.jar $1
