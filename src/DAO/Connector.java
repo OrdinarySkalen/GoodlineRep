@@ -55,7 +55,7 @@ class Connector {
                         ) {
                     result = statement.executeQuery(String.format("SELECT * FROM RESOURCE WHERE (PATH='%s') AND (ROLE='%s')",
                             currentPath, userInput.getRole()));
-                    currentPath += '.'+nextLevel;
+                    currentPath += '.' + nextLevel;
                     if (result != null) {
                         while (result.next()) {
                             resource = new Resource(userInput.getResource(), result.getInt("USER_ID"),
@@ -65,7 +65,7 @@ class Connector {
                     }
                 }
             } catch (Exception e) {
-                logger.error(String.format("Role %s doesn't exist.(Exit-code - 3)", userInput.getRole()));
+                logger.error("Role {} doesn't exist.(Exit-code - 3)", userInput.getRole());
                 System.exit(3);
             }
             return resource;

@@ -36,7 +36,7 @@ public class Validator {
             for (String s : args) {
                 input = String.format("%s %s", input, s);
             }
-            logger.debug(String.format("User input:%s", input));
+            logger.debug("User input:{}", input);
             if (line.hasOption("h") || (usIn.getLogin() == null) || (usIn.getPassword() == null)) {
                 HelpFormatter helpFormatter = new HelpFormatter();
                 helpFormatter.printHelp("Help", options);

@@ -90,7 +90,7 @@ class AAAService {
         try {
             Roles.valueOf(role);
         } catch (Exception e) {
-            logger.error(String.format("Role %s isn't exist.(Exit-code - 3)", role));
+            logger.error("Role {} isn't exist.(Exit-code - 3)", role);
             System.exit(3);
         }
     }

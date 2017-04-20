@@ -39,15 +39,15 @@ public class Application {
 
             //Проверить существоание пользователя
             if (reqUser == null) {
-                logger.error(String.format("User %s doesn't exist.(Exit-code 1)",
-                        userInput.getLogin()));
+                logger.error("User {} doesn't exist.(Exit-code 1)",
+                        userInput.getLogin());
                 System.exit(1);
             }
 
             //Проверить пароль
             if (!service.checkPasswordByUser(userInput.getPassword(), reqUser)) {
-                logger.error(String.format("Password %s is incorrect for the user %s.(Exit-code - 2)",
-                        userInput.getPassword(), userInput.getLogin()));
+                logger.error("Password {} is incorrect for the user {}.(Exit-code - 2)",
+                        userInput.getPassword(), userInput.getLogin());
                 System.exit(2);
             }
 
@@ -60,18 +60,18 @@ public class Application {
 
                 //Вылавить неизвестные ресурсы
                 if (reqRes == null) {
-                    logger.error(String.format("Resource %s with role %s isn't found.(Exit-code - 4)", userInput.getResource(), userInput.getRole()));
+                    logger.error("Resource {} with role {} isn't found.(Exit-code - 4)", userInput.getResource(), userInput.getRole());
                     System.exit(4);
                 }
 
                 //Проверить доступ
                 if (reqUser.getId() != reqRes.getUserId()) {
-                    logger.error(String.format("User %s don't have access to the resource %s.(Exit-code - 4)",
-                            userInput.getLogin(), userInput.getResource()));
+                    logger.error("User {} don't have access to the resource {}.(Exit-code - 4)",
+                            userInput.getLogin(), userInput.getResource());
                     System.exit(4);
                 }
 
-                logger.debug(String.format("Resource %s - ok", reqRes.getPath()));
+                logger.debug("Resource {} - ok", reqRes.getPath());
                 logger.debug("Authorisation: success");
 
                 if (userInput.isAccounting()) {
