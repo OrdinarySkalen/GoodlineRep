@@ -33,8 +33,7 @@ public class Validator {
             usIn.setDateEnd(line.getOptionValue("de"));
             usIn.setVolume(line.getOptionValue("volume"));
             String input = "";
-            for (String s : args
-                    ) {
+            for (String s : args) {
                 input = String.format("%s %s", input, s);
             }
             logger.debug(String.format("User input:%s", input));
