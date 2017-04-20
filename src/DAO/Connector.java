@@ -1,12 +1,13 @@
+package DAO;
+import DomainClasses.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.sql.*;
 
-class Connector {
+public class Connector {
     private static final Logger logger = LogManager.getLogger(Connector.class);
 
-    Connection getConnection(String url, String user, String password) {
+    public Connection getConnection(String url, String user, String password) {
         try {
             Class.forName("org.h2.Driver");
         } catch (ClassNotFoundException e) {
@@ -20,7 +21,7 @@ class Connector {
         return null;
     }
 
-    static void closeConnection(Connection dbConnection) {
+    public static void closeConnection(Connection dbConnection) {
         try {
             dbConnection.close();
         } catch (SQLException e) {
@@ -28,7 +29,7 @@ class Connector {
         }
     }
 
-    User getUserFromDataBase(UserInput userInput, Statement statement) {
+    public User getUserFromDataBase(UserInput userInput, Statement statement) {
         User user = null;
         ResultSet result;
         try {
@@ -44,7 +45,7 @@ class Connector {
         return user;
     }
 
-    Resource getResourceFromDataBase(UserInput userInput, Statement statement) {
+    public Resource getResourceFromDataBase(UserInput userInput, Statement statement) {
         Resource resource = null;
         ResultSet result;
         String[] masOfPath = userInput.getResource().split("\\.");
@@ -75,7 +76,7 @@ class Connector {
         return resource;
     }
 
-    void insertRecordIntoDataBase(UserInput userInput, Resource resource, Statement statement) {
+    public void insertRecordIntoDataBase(UserInput userInput, Resource resource, Statement statement) {
         try {
             statement.executeUpdate(String.format("INSERT INTO ACCOUNTING VALUES('%s', PARSEDATETIME('%s','yyyy-MM-dd'), PARSEDATETIME('%s','yyyy-MM-dd'),'%s')",
                     resource.getId(), userInput.getDateStart(), userInput.getDateEnd(), userInput.getVolume()));
