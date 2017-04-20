@@ -1,68 +1,46 @@
-14-04-2017 01:02:02 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:02 [DEBUG][Validator  ] [getUserInput:40] - User input:  
-14-04-2017 01:02:02 [DEBUG][Validator  ] [getUserInput:44] - Unknown parameters
-14-04-2017 01:02:02 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:03 [DEBUG][Validator  ] [getUserInput:40] - User input:  -h 
-14-04-2017 01:02:03 [DEBUG][Validator  ] [getUserInput:44] - Unknown parameters
-14-04-2017 01:02:03 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:03 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login XXX -pass XXX 
-14-04-2017 01:02:03 [ERROR][Application] [main        :66] - User XXX doesn't exist.(Exit-code 1)
-14-04-2017 01:02:04 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:04 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login jdoe -pass XXX 
-14-04-2017 01:02:04 [ERROR][Application] [main        :73] - Password XXX is incorrect for the user jdoe.(Exit-code - 2)
-14-04-2017 01:02:05 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:05 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login jdoe -pass sup3rpaZZ 
-14-04-2017 01:02:05 [DEBUG][Application] [main        :78] - Authentication: success
-14-04-2017 01:02:05 [DEBUG][Application] [main        :125] - End session
-14-04-2017 01:02:06 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:06 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login jdoe -pass sup3rpaZZ -role READ -res a 
-14-04-2017 01:02:06 [DEBUG][Application] [main        :78] - Authentication: success
-14-04-2017 01:02:06 [DEBUG][Application] [main        :108] - Resource a - ok
-14-04-2017 01:02:06 [DEBUG][Application] [main        :109] - Authorisation: success
-14-04-2017 01:02:06 [DEBUG][Application] [main        :125] - End session
-14-04-2017 01:02:06 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:07 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login jdoe -pass sup3rpaZZ -role READ -res a.b 
-14-04-2017 01:02:07 [DEBUG][Application] [main        :78] - Authentication: success
-14-04-2017 01:02:07 [DEBUG][Application] [main        :108] - Resource a.b - ok
-14-04-2017 01:02:07 [DEBUG][Application] [main        :109] - Authorisation: success
-14-04-2017 01:02:07 [DEBUG][Application] [main        :125] - End session
-14-04-2017 01:02:07 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:07 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login jdoe -pass sup3rpaZZ -role XXX -res a.b 
-14-04-2017 01:02:07 [DEBUG][Application] [main        :78] - Authentication: success
-14-04-2017 01:02:07 [ERROR][Application] [main        :84] - Role XXX doesn't exist.(Exit-code - 3)
-14-04-2017 01:02:08 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:08 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login jdoe -pass sup3rpaZZ -role READ -res XXX 
-14-04-2017 01:02:08 [DEBUG][Application] [main        :78] - Authentication: success
-14-04-2017 01:02:08 [ERROR][Application] [main        :90] - Resource XXX with role READ isn't found.(Exit-code - 4)
-14-04-2017 01:02:09 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:09 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login jdoe -pass sup3rpaZZ -role WRITE -res a 
-14-04-2017 01:02:09 [DEBUG][Application] [main        :78] - Authentication: success
-14-04-2017 01:02:09 [ERROR][Application] [main        :90] - Resource a with role WRITE isn't found.(Exit-code - 4)
-14-04-2017 01:02:10 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:10 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login jdoe -pass sup3rpaZZ -role WRITE -res a.bc 
-14-04-2017 01:02:10 [DEBUG][Application] [main        :78] - Authentication: success
-14-04-2017 01:02:10 [ERROR][Application] [main        :90] - Resource a.bc with role WRITE isn't found.(Exit-code - 4)
-14-04-2017 01:02:10 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:11 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 2015-01-01 -de 2015-12-31 -vol 100 
-14-04-2017 01:02:11 [DEBUG][Application] [main        :78] - Authentication: success
-14-04-2017 01:02:11 [DEBUG][Application] [main        :108] - Resource a.b - ok
-14-04-2017 01:02:11 [DEBUG][Application] [main        :109] - Authorisation: success
-14-04-2017 01:02:11 [DEBUG][Application] [main        :121] - Add record: DateStart - 2015-01-01, DateEnd - 2015-12-31, UserId - 1, Resource - a.b, Volume - 100
-14-04-2017 01:02:11 [DEBUG][Application] [main        :122] - Accounting: success
-14-04-2017 01:02:11 [DEBUG][Application] [main        :125] - End session
-14-04-2017 01:02:11 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:12 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 01-01-2015 -de 2015-12-31 -vol 100 
-14-04-2017 01:02:12 [DEBUG][Application] [main        :78] - Authentication: success
-14-04-2017 01:02:12 [DEBUG][Application] [main        :108] - Resource a.b - ok
-14-04-2017 01:02:12 [DEBUG][Application] [main        :109] - Authorisation: success
-14-04-2017 01:02:12 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:12 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 2015-01-01 -de 2015-12-31 -vol XXX 
-14-04-2017 01:02:12 [DEBUG][Application] [main        :78] - Authentication: success
-14-04-2017 01:02:12 [DEBUG][Application] [main        :108] - Resource a.b - ok
-14-04-2017 01:02:12 [DEBUG][Application] [main        :109] - Authorisation: success
-14-04-2017 01:02:13 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:13 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login X -pass X -role READ -res X -ds 2015-01-01 -de 2015-12-31 -vol XXX 
-14-04-2017 01:02:13 [ERROR][Application] [main        :66] - User X doesn't exist.(Exit-code 1)
-14-04-2017 01:02:14 [DEBUG][Application] [main        :16] - Start session
-14-04-2017 01:02:14 [DEBUG][Validator  ] [getUserInput:40] - User input:  -login X -pass X -role READ -res X 
-14-04-2017 01:02:14 [ERROR][Application] [main        :66] - User X doesn't exist.(Exit-code 1)
+19-04-2017 22:23:04 [DEBUG][Application] [main        :13] - Start session
+19-04-2017 22:23:04 [DEBUG][Validator  ] [getUserInput:40] - User input: -login jdoe -pass sup3rpaZZ -role READ -res a.b
+19-04-2017 22:23:05 [DEBUG][Application] [main        :52] - Authentication: success
+19-04-2017 22:23:05 [ERROR][Application] [main        :59] - Resource a.b with role READ isn't found.(Exit-code - 4)
+19-04-2017 22:24:32 [DEBUG][Application] [main        :13] - Start session
+19-04-2017 22:24:32 [DEBUG][Validator  ] [getUserInput:40] - User input: -login jdoe -pass sup3rpaZZ -role READ -res a.b
+19-04-2017 22:24:32 [DEBUG][Application] [main        :52] - Authentication: success
+19-04-2017 22:24:32 [ERROR][Application] [main        :59] - Resource a.b with role READ isn't found.(Exit-code - 4)
+19-04-2017 22:43:00 [DEBUG][Application] [main        :13] - Start session
+19-04-2017 22:43:00 [DEBUG][Validator  ] [getUserInput:40] - User input: -login jdoe -pass sup3rpaZZ -role READ -res a.b
+19-04-2017 22:43:00 [DEBUG][Application] [main        :52] - Authentication: success
+19-04-2017 22:43:00 [ERROR][Application] [main        :59] - Resource a.b with role READ isn't found.(Exit-code - 4)
+19-04-2017 22:43:18 [DEBUG][Application] [main        :13] - Start session
+19-04-2017 22:43:19 [DEBUG][Validator  ] [getUserInput:40] - User input: -login jdoe -pass sup3rpaZZ -role READ -res a.b
+19-04-2017 22:43:19 [DEBUG][Application] [main        :52] - Authentication: success
+19-04-2017 22:44:11 [ERROR][Application] [main        :59] - Resource a.b with role READ isn't found.(Exit-code - 4)
+19-04-2017 22:44:16 [DEBUG][Application] [main        :13] - Start session
+19-04-2017 22:44:16 [DEBUG][Validator  ] [getUserInput:40] - User input: -login jdoe -pass sup3rpaZZ -role READ -res a.b
+19-04-2017 22:44:16 [DEBUG][Application] [main        :52] - Authentication: success
+19-04-2017 22:44:16 [DEBUG][Application] [main        :70] - Resource a.b - ok
+19-04-2017 22:44:16 [DEBUG][Application] [main        :71] - Authorisation: success
+19-04-2017 22:44:16 [DEBUG][Application] [main        :91] - End session
+19-04-2017 22:49:10 [DEBUG][Application] [main        :13] - Start session
+19-04-2017 22:49:10 [DEBUG][Validator  ] [getUserInput:40] - User input: -login jdoe -pass sup3rpaZZ -role XXX -res a.b
+19-04-2017 22:49:10 [DEBUG][Application] [main        :52] - Authentication: success
+19-04-2017 22:49:10 [ERROR][Application] [main        :59] - Resource a.b with role XXX isn't found.(Exit-code - 4)
+19-04-2017 22:57:28 [DEBUG][Application] [main        :13] - Start session
+19-04-2017 22:57:28 [DEBUG][Validator  ] [getUserInput:40] - User input: -login jdoe -pass sup3rpaZZ -role XXX -res a.b
+19-04-2017 22:57:28 [DEBUG][Application] [main        :52] - Authentication: success
+19-04-2017 22:57:28 [ERROR][Connector  ] [isRoleValid :92] - Role XXX isn't exist.(Exit-code - 3)
+20-04-2017 15:43:30 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:31 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:31 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:32 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:33 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:34 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:35 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:35 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:36 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:37 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:38 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:39 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:39 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:40 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:41 [DEBUG][Application] [main        :15] - Start session
+20-04-2017 15:43:42 [DEBUG][Application] [main        :15] - Start session
