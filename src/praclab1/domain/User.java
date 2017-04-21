@@ -1,4 +1,5 @@
 package praclab1.domain;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 

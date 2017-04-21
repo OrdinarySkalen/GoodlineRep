@@ -3,7 +3,9 @@ package praclab1;
 import praclab1.dao.*;
 import praclab1.domain.*;
 import org.flywaydb.core.Flyway;
+
 import java.sql.*;
+
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 

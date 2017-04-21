@@ -1,8 +1,10 @@
 package praclab1.dao;
+
 import praclab1.UserInput;
 import praclab1.domain.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 
 public class Connector {
@@ -33,8 +35,9 @@ public class Connector {
     public User getUserFromDataBase(UserInput userInput, Statement statement) {
         User user = null;
         ResultSet result;
+        String query = "SELECT * FROM USER WHERE (USER.NAME LIKE '" + userInput.getLogin() + "')";
         try {
-            result = statement.executeQuery(String.format("SELECT * FROM USER WHERE (USER.NAME LIKE '%s')", userInput.getLogin()));
+            result = statement.executeQuery(query);
             while (result.next()) {
                 user = new User(result.getString("NAME"), result.getString("PASS"),
                         result.getString("SALT"), result.getInt("ID"));
@@ -51,12 +54,12 @@ public class Connector {
         ResultSet result;
         String[] masOfPath = userInput.getResource().split("\\.");
         String currentPath = masOfPath[0];
+        String query;
         try {
             try {
-                for (String nextLevel : masOfPath
-                        ) {
-                    result = statement.executeQuery(String.format("SELECT * FROM RESOURCE WHERE (PATH='%s') AND (ROLE='%s')",
-                            currentPath, userInput.getRole()));
+                for (String nextLevel : masOfPath) {
+                    query = "SELECT * FROM RESOURCE WHERE (PATH='" + currentPath + "') AND (ROLE='" + userInput.getRole() + "')";
+                    result = statement.executeQuery(query);
                     currentPath += '.' + nextLevel;
                     if (result != null) {
                         while (result.next()) {
@@ -79,8 +82,9 @@ public class Connector {
 
     public void insertRecordIntoDataBase(UserInput userInput, Resource resource, Statement statement) {
         try {
-            statement.executeUpdate(String.format("INSERT INTO ACCOUNTING VALUES('%s', PARSEDATETIME('%s','yyyy-MM-dd'), PARSEDATETIME('%s','yyyy-MM-dd'),'%s')",
-                    resource.getId(), userInput.getDateStart(), userInput.getDateEnd(), userInput.getVolume()));
+            String query = "INSERT INTO ACCOUNTING VALUES('" + resource.getId() + "', PARSEDATETIME('" + userInput.getDateStart()
+                    + "','yyyy-MM-dd'), PARSEDATETIME('" + userInput.getDateEnd() + "','yyyy-MM-dd'),'" + userInput.getVolume() + "')";
+            statement.executeUpdate(query);
         } catch (SQLException e) {
             logger.debug(e.getMessage());
         }

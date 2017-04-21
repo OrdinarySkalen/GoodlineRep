@@ -1,4 +1,5 @@
 package praclab1.domain;
+
 public class Resource {
     private int id;
     private String path;
