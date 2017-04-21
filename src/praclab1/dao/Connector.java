@@ -32,12 +32,15 @@ public class Connector {
         }
     }
 
-    public User getUserFromDataBase(UserInput userInput, Statement statement) {
+    public User getUserFromDataBase(UserInput userInput, Connection connection) {
         User user = null;
         ResultSet result;
-        String query = "SELECT * FROM USER WHERE (USER.NAME LIKE '" + userInput.getLogin() + "')";
+        PreparedStatement statement;
+
         try {
-            result = statement.executeQuery(query);
+            statement = connection.prepareStatement("SELECT * FROM USER WHERE (USER.NAME LIKE ?)");
+            statement.setString(1, userInput.getLogin());
+            result = statement.executeQuery();
             while (result.next()) {
                 user = new User(result.getString("NAME"), result.getString("PASS"),
                         result.getString("SALT"), result.getInt("ID"));
@@ -49,17 +52,21 @@ public class Connector {
         return user;
     }
 
-    public Resource getResourceFromDataBase(UserInput userInput, Statement statement) {
+    public Resource getResourceFromDataBase(UserInput userInput, Connection connection) {
         Resource resource = null;
         ResultSet result;
         String[] masOfPath = userInput.getResource().split("\\.");
         String currentPath = masOfPath[0];
-        String query;
+        PreparedStatement statement;
+
         try {
             try {
+                statement = connection.prepareStatement("SELECT * FROM RESOURCE WHERE (PATH=?) AND (ROLE=?)");
+
                 for (String nextLevel : masOfPath) {
-                    query = "SELECT * FROM RESOURCE WHERE (PATH='" + currentPath + "') AND (ROLE='" + userInput.getRole() + "')";
-                    result = statement.executeQuery(query);
+                    statement.setString(1, currentPath);
+                    statement.setString(2, userInput.getRole());
+                    result = statement.executeQuery();
                     currentPath += '.' + nextLevel;
                     if (result != null) {
                         while (result.next()) {
@@ -80,11 +87,15 @@ public class Connector {
         return resource;
     }
 
-    public void insertRecordIntoDataBase(UserInput userInput, Resource resource, Statement statement) {
+    public void insertRecordIntoDataBase(UserInput userInput, Resource resource, Connection connection) {
+        PreparedStatement statement;
         try {
-            String query = "INSERT INTO ACCOUNTING VALUES('" + resource.getId() + "', PARSEDATETIME('" + userInput.getDateStart()
-                    + "','yyyy-MM-dd'), PARSEDATETIME('" + userInput.getDateEnd() + "','yyyy-MM-dd'),'" + userInput.getVolume() + "')";
-            statement.executeUpdate(query);
+            statement = connection.prepareStatement("INSERT INTO ACCOUNTING VALUES(?, PARSEDATETIME(?,'yyyy-MM-dd'), PARSEDATETIME(?,'yyyy-MM-dd'),?");
+            statement.setInt(1, resource.getId());
+            statement.setString(2, userInput.getDateStart());
+            statement.setString(3, userInput.getDateEnd());
+            statement.setString(4, userInput.getVolume());
+            statement.executeUpdate();
         } catch (SQLException e) {
             logger.debug(e.getMessage());
         }

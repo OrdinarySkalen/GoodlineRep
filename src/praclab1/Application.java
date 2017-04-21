@@ -39,7 +39,7 @@ public class Application {
 
         try {
             Statement statement = dbConnection.createStatement();
-            reqUser = connector.getUserFromDataBase(userInput, statement);
+            reqUser = connector.getUserFromDataBase(userInput, dbConnection);
 
             //Проверить существоание пользователя
             if (reqUser == null) {
@@ -58,7 +58,7 @@ public class Application {
             logger.debug("Authentication: success");
 
             if (userInput.isAuthorisation()) {
-                reqRes = connector.getResourceFromDataBase(userInput, statement);
+                reqRes = connector.getResourceFromDataBase(userInput, dbConnection);
 
                 service.isRoleValid(userInput.getRole());
 
@@ -87,7 +87,7 @@ public class Application {
                     service.tryGetDate(userInput.getDateStart());
                     service.tryGetVolume(userInput.getVolume());
                     //добавляем запись о использовании ресурса в БД
-                    connector.insertRecordIntoDataBase(userInput, reqRes, statement);
+                    connector.insertRecordIntoDataBase(userInput, reqRes, dbConnection);
                     logger.debug("Accounting: success");
                 }
             }
