@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class Connector {
     private static final Logger logger = LogManager.getLogger(Connector.class);
@@ -89,13 +90,15 @@ public class Connector {
 
     public void insertRecordIntoDataBase(UserInput userInput, Resource resource, Connection connection) {
         PreparedStatement statement;
+
         try {
-            statement = connection.prepareStatement("INSERT INTO ACCOUNTING VALUES(?, PARSEDATETIME(?,'yyyy-MM-dd'), PARSEDATETIME(?,'yyyy-MM-dd'),?");
+            statement = connection.prepareStatement("INSERT INTO ACCOUNTING VALUES(?, ?, ?, ?)");
             statement.setInt(1, resource.getId());
-            statement.setString(2, userInput.getDateStart());
-            statement.setString(3, userInput.getDateEnd());
+            statement.setDate(2, Date.valueOf(userInput.getDateStart()));
+            statement.setDate(3, Date.valueOf(userInput.getDateEnd()));
             statement.setString(4, userInput.getVolume());
             statement.executeUpdate();
+
         } catch (SQLException e) {
             logger.debug(e.getMessage());
         }
