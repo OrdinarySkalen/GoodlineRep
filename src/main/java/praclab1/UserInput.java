@@ -17,6 +17,10 @@ public class UserInput {
         return this.getDateEnd() != null && this.getDateStart() != null;
     }
 
+    public boolean isEmpty() {
+        return (this.getLogin() == null) || (this.getPassword() == null);
+    }
+
     public UserInput() {
     }
 

@@ -9,14 +9,11 @@ public class Validator {
     private CommandLineParser parser = new DefaultParser();
     private Options options = new Options();
     private static final Logger logger = LogManager.getLogger(Validator.class);
+    private HelpFormatter helpFormatter = new HelpFormatter();
+    private CommandLine line;
 
-    /**
-     * Преобразовать введенные параметры в объект класса praclab1.UserInput
-     *
-     * @param usIn Пустой объект класса praclab1.UserInput
-     * @param args массив аргументов переданных в программу
-     */
-    void getUserInput(UserInput usIn, String[] args) {
+    public Validator()
+    {
         options.addOption("l", "login", true, "Login");
         options.addOption("pass", "pass", true, "Password");
         options.addOption("res", "resource", true, "Resource");
@@ -25,8 +22,17 @@ public class Validator {
         options.addOption("de", "de", true, "Date End");
         options.addOption("vol", "volume", true, "Volume");
         options.addOption("h", "help", true, "Help");
+    }
+
+    /**
+     * Преобразовать введенные параметры в объект класса praclab1.UserInput
+     *
+     * @param usIn Пустой объект класса praclab1.UserInput
+     * @param args массив аргументов переданных в программу
+     */
+    void getUserInput(UserInput usIn, String[] args) {
         try {
-            CommandLine line = parser.parse(options, args);
+            line = parser.parse(options, args);
             usIn.setLogin(line.getOptionValue("login"));
             usIn.setPassword(line.getOptionValue("pass"));
             usIn.setResource(line.getOptionValue("resource"));
@@ -34,19 +40,18 @@ public class Validator {
             usIn.setDateStart(line.getOptionValue("ds"));
             usIn.setDateEnd(line.getOptionValue("de"));
             usIn.setVolume(line.getOptionValue("volume"));
+
             String input = "";
             for (String s : args) {
                 input = String.format("%s %s", input, s);
             }
             logger.debug("User input:{}", input);
-            if (line.hasOption("h") || (usIn.getLogin() == null) || (usIn.getPassword() == null)) {
-                HelpFormatter helpFormatter = new HelpFormatter();
+            if (line.hasOption("h") || (usIn.isEmpty())) {
                 helpFormatter.printHelp("Help", options);
                 logger.debug("Unknown parameters");
                 System.exit(0);
             }
         } catch (ParseException exp) {
-            HelpFormatter helpFormatter = new HelpFormatter();
             helpFormatter.printHelp("Help", options);
             logger.debug("There is not any parameters");
             System.exit(0);
