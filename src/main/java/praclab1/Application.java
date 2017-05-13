@@ -97,6 +97,7 @@ public class Application {
             connector.closeConnection(dbConnection);
         }
         logger.debug("End session");
+        logger.debug("THE End session");
     }
 }
 
