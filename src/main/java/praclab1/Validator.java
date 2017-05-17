@@ -12,8 +12,7 @@ public class Validator {
     private HelpFormatter helpFormatter = new HelpFormatter();
     private CommandLine line;
 
-    public Validator()
-    {
+    public Validator() {
         options.addOption("l", "login", true, "Login");
         options.addOption("pass", "pass", true, "Password");
         options.addOption("res", "resource", true, "Resource");
@@ -27,10 +26,10 @@ public class Validator {
     /**
      * Преобразовать введенные параметры в объект класса praclab1.UserInput
      *
-     * @param usIn Пустой объект класса praclab1.UserInput
      * @param args массив аргументов переданных в программу
      */
-    void getUserInput(UserInput usIn, String[] args) {
+    UserInput getUserInput(String[] args) {
+        UserInput usIn = new UserInput();
         try {
             line = parser.parse(options, args);
             usIn.setLogin(line.getOptionValue("login"));
@@ -51,10 +50,12 @@ public class Validator {
                 logger.debug("Unknown parameters");
                 System.exit(0);
             }
+
         } catch (ParseException exp) {
             helpFormatter.printHelp("Help", options);
             logger.debug("There is not any parameters");
             System.exit(0);
         }
+        return usIn;
     }
 }

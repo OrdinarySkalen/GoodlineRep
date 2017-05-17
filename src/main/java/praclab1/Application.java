@@ -28,11 +28,11 @@ public class Application {
 
         Connector connector = new Connector();
         Validator validator = new Validator();
-        UserInput userInput = new UserInput();
+        //UserInput userInput = new UserInput();
         AAAService service = new AAAService();
         Connection dbConnection = connector.getConnection(URL, USER, PASSWORD);
 
-        validator.getUserInput(userInput, args);
+        UserInput userInput = validator.getUserInput(args);
         User reqUser;
         Resource reqRes;
 
