@@ -7,10 +7,10 @@ import org.apache.logging.log4j.LogManager;
 public class Validator {
 
     private CommandLineParser parser = new DefaultParser();
-    private Options options = new Options();
+    public Options options = new Options();
     private static final Logger logger = LogManager.getLogger(Validator.class);
     private HelpFormatter helpFormatter = new HelpFormatter();
-    private CommandLine line;
+    public CommandLine line;
 
     public Validator() {
         options.addOption("l", "login", true, "Login");
@@ -20,7 +20,12 @@ public class Validator {
         options.addOption("ds", "ds", true, "Date Start");
         options.addOption("de", "de", true, "Date End");
         options.addOption("vol", "volume", true, "Volume");
-        options.addOption("h", "help", true, "Help");
+        options.addOption("h", "help", false, "Help");
+
+    }
+
+    public boolean isHelp() {
+        return line.hasOption("h");
     }
 
     /**
@@ -28,7 +33,7 @@ public class Validator {
      *
      * @param args массив аргументов переданных в программу
      */
-    UserInput getUserInput(String[] args) {
+    public UserInput getUserInput(String[] args) {
         UserInput usIn = new UserInput();
         try {
             line = parser.parse(options, args);
@@ -45,7 +50,7 @@ public class Validator {
                 input = String.format("%s %s", input, s);
             }
             logger.debug("User input:{}", input);
-            if (line.hasOption("h") || (usIn.isEmpty())) {
+            if (isHelp() || (usIn.isEmpty())) {
                 helpFormatter.printHelp("Help", options);
                 logger.debug("Unknown parameters");
                 System.exit(0);

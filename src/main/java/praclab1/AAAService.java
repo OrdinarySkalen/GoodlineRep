@@ -11,59 +11,8 @@ import praclab1.domain.User;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-class AAAService {
+public class AAAService {
     private static final Logger logger = LogManager.getLogger(Connector.class);
-
-    /**
-     * Поиск пользователя по логину
-     *
-     * @param login логин пользователя
-     * @param users лист пользователей
-     * @return искомый пользователь
-     */
-    User findUserByLogin(String login, ArrayList<User> users) {
-        for (User user : users) {
-            if (user.getLogin().equals(login)) {
-                return user;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Поиск родительского ресурса
-     *
-     * @param path      путь ресурса, родителя которого требуется найти
-     * @param resources лист ресурсов-родителей
-     * @param role      роль ресурса, родителя которого требуется найти
-     * @return ресурс-родитель
-     */
-    private Resource findParentResource(String path, ArrayList<Resource> resources,
-                                        Roles role) {
-        for (Resource res : resources) {
-            if (path.startsWith(res.getPath() + ".") && res.getRole().equals(role)) {
-                return res;
-            }
-        }
-        return new Resource();
-    }
-
-    /**
-     * Получить искомый ресурс
-     *
-     * @param path      путь искомого ресурса
-     * @param resources лист ресурсов-родителей
-     * @param role      роль искомого ресурса
-     * @return искомый ресурс
-     */
-    Resource getResource(String path, ArrayList<Resource> resources, Roles role) {
-        Resource parentRes = this.findParentResource(path + ".", resources, role);
-        if (parentRes.getPath() != null) {
-            return new Resource(path, parentRes.getUserId(), role, parentRes.getId());
-        } else {
-            return null;
-        }
-    }
 
     /**
      * Проверить пароль пользователя
@@ -72,7 +21,7 @@ class AAAService {
      * @param user пользователь подвергающийся проверке
      * @return результат проверки
      */
-    boolean checkPasswordByUser(String pass, User user) {
+    public boolean checkPasswordByUser(String pass, User user) {
         return DigestUtils.md5Hex(DigestUtils.md2Hex(pass) +
                 user.getSalt()).equals(user.getHashPassword());
     }
@@ -83,7 +32,7 @@ class AAAService {
      * @param dateS дата начала
      * @param dateE дата конца
      */
-    void isDateValid(String dateS, String dateE) {
+    public void isDateValid(String dateS, String dateE) {
         try {
             LocalDate.parse(dateS);
             LocalDate.parse(dateE);
@@ -92,7 +41,7 @@ class AAAService {
         }
     }
 
-    void isRoleValid(String role) {
+    public void isRoleValid(String role) {
         try {
             Roles.valueOf(role);
         } catch (Exception e) {
@@ -106,7 +55,7 @@ class AAAService {
      *
      * @param volume объем
      */
-    void isVolumeValid(String volume) {
+    public void isVolumeValid(String volume) {
         try {
             Integer.valueOf(volume);
         } catch (Exception e) {
@@ -120,7 +69,7 @@ class AAAService {
      * @param date дата в текстовом формате
      * @return дата в формате LocalDate
      */
-    LocalDate tryGetDate(String date) {
+    public LocalDate tryGetDate(String date) {
         return LocalDate.parse(date);
     }
 
@@ -130,7 +79,7 @@ class AAAService {
      * @param volume объем в текстовом формате
      * @return объем в числовом формате
      */
-    int tryGetVolume(String volume) {
+    public int tryGetVolume(String volume) {
         return Integer.valueOf(volume);
     }
 }
