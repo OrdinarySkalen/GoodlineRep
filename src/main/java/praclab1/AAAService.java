@@ -26,27 +26,28 @@ public class AAAService {
                 user.getSalt()).equals(user.getHashPassword());
     }
 
+    public boolean isRoleValid(String role) {
+        try {
+            Roles.valueOf(role);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     /**
      * Проверка валидности дат
      *
      * @param dateS дата начала
      * @param dateE дата конца
      */
-    public void isDateValid(String dateS, String dateE) {
+    public boolean isDateValid(String dateS, String dateE) {
         try {
             LocalDate.parse(dateS);
             LocalDate.parse(dateE);
+            return true;
         } catch (Exception e) {
-            System.exit(5);
-        }
-    }
-
-    public void isRoleValid(String role) {
-        try {
-            Roles.valueOf(role);
-        } catch (Exception e) {
-            logger.error("Role {} isn't exist.(Exit-code - 3)", role);
-            System.exit(3);
+            return false;
         }
     }
 
@@ -55,11 +56,12 @@ public class AAAService {
      *
      * @param volume объем
      */
-    public void isVolumeValid(String volume) {
+    public boolean isVolumeValid(String volume) {
         try {
             Integer.valueOf(volume);
+            return true;
         } catch (Exception e) {
-            System.exit(5);
+            return false;
         }
     }
 
@@ -69,9 +71,9 @@ public class AAAService {
      * @param date дата в текстовом формате
      * @return дата в формате LocalDate
      */
-    public LocalDate tryGetDate(String date) {
+    /*public LocalDate tryGetDate(String date) {
         return LocalDate.parse(date);
-    }
+    }*/
 
     /**
      * Получить объем в числовом формате
@@ -79,7 +81,7 @@ public class AAAService {
      * @param volume объем в текстовом формате
      * @return объем в числовом формате
      */
-    public int tryGetVolume(String volume) {
+    /*public int tryGetVolume(String volume) {
         return Integer.valueOf(volume);
-    }
+    }*/
 }

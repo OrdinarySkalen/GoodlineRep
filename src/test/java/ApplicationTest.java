@@ -28,7 +28,7 @@ public class ApplicationTest {
     /**
      * UserInput = " "
      */
-    public void test1() {
+    public void testEmptyInput() {
         UserInput userInput = new UserInput();
         assertEquals(true, userInput.isEmpty());
     }
@@ -37,10 +37,10 @@ public class ApplicationTest {
     /**
      * UserInput = "-h"
      */
-    public void test2() {
+    public void testHelpInput() {
         Validator validator = new Validator();
         CommandLineParser parser = new DefaultParser();
-        String[] args = new String[] {"-h"};
+        String[] args = new String[]{"-h"};
         try {
             validator.line = parser.parse(validator.options, args);
         } catch (ParseException e) {
@@ -53,12 +53,12 @@ public class ApplicationTest {
      * UserInput = "-login XXX -pass XXX"
      */
     @Test
-    public void test3() {
+    public void testUnknownLogin() {
         UserInput userInput = new UserInput();
         userInput.setLogin("XXX");
         userInput.setPassword("XXX");
         Connector connector = mock(Connector.class);
-        when(connector.getUserFromDataBase(userInput,null)).thenReturn(null);
+        when(connector.getUserFromDataBase(userInput, null)).thenReturn(null);
         User reqUser = connector.getUserFromDataBase(userInput, null);
         assertEquals(null, reqUser);
     }
@@ -67,23 +67,26 @@ public class ApplicationTest {
      * UserInput = "-login jdoe -pass XXX "
      */
     @Test
-    public void test4() {
+    public void testWrongPassword() {
+        AAAService service = new AAAService();
+
         UserInput userInput = new UserInput();
         userInput.setLogin("jdoe");
         userInput.setPassword("XXX");
+
         User reqUser = new User();
-        AAAService service = new AAAService();
         reqUser.setLogin("jdoe");
         reqUser.setPassword("595cae237d58197a0ce09f8a2b5498df");
         reqUser.setSalt2("]cGlR");
-        assertFalse(service.checkPasswordByUser(userInput.getPassword(),reqUser));
+
+        assertFalse(service.checkPasswordByUser(userInput.getPassword(), reqUser));
     }
 
     /**
      * UserInput = "-login jdoe -pass sup3rpaZZ"
      */
     @Test
-    public void test5() {
+    public void testSuccessfulAuthentication() {
         UserInput userInput = new UserInput();
         userInput.setLogin("jdoe");
         userInput.setPassword("sup3rpaZZ");
@@ -92,109 +95,143 @@ public class ApplicationTest {
         reqUser.setPassword("595cae237d58197a0ce09f8a2b5498df");
         reqUser.setLogin("jdoe");
         reqUser.setSalt2("]cGlR");
-        assertTrue(service.checkPasswordByUser(userInput.getPassword(),reqUser));
+        assertTrue(service.checkPasswordByUser(userInput.getPassword(), reqUser));
     }
 
     /**
      * UserInput = "-login jdoe -pass sup3rpaZZ -role READ -res a"
      */
     @Test
-    public void test6() {
+    public void testSuccessfulAuthorisation() {
         UserInput userInput = new UserInput();
         userInput.setRole("READ");
         userInput.setResource("a");
-        Resource resource = new Resource(userInput.getResource(),1,
-                Roles.valueOf(userInput.getRole()),1);
+        Resource resource = new Resource(userInput.getResource(), 1,
+                Roles.valueOf(userInput.getRole()), 1);
 
         Connector connector = mock(Connector.class);
-        when(connector.getResourceFromDataBase(userInput,null)).thenReturn(resource);
-        assertEquals(resource,connector.getResourceFromDataBase(userInput,null));
+        when(connector.getResourceFromDataBase(userInput, null)).thenReturn(resource);
+        assertEquals(resource, connector.getResourceFromDataBase(userInput, null));
     }
 
     /**
      * UserInput = "-login jdoe -pass sup3rpaZZ -role READ -res a.b"
      */
     @Test
-    public void test7() {
+    public void testSuccessfulAuthorisation2() {
         UserInput userInput = new UserInput();
         userInput.setRole("READ");
         userInput.setResource("a.b");
-        Resource resource = new Resource(userInput.getResource(),1,
-                Roles.valueOf(userInput.getRole()),1);
+        Resource resource = new Resource(userInput.getResource(), 1,
+                Roles.valueOf(userInput.getRole()), 1);
 
         Connector connector = mock(Connector.class);
-        when(connector.getResourceFromDataBase(userInput,null)).thenReturn(resource);
-        assertEquals(resource,connector.getResourceFromDataBase(userInput,null));
+        when(connector.getResourceFromDataBase(userInput, null)).thenReturn(resource);
+        assertEquals(resource, connector.getResourceFromDataBase(userInput, null));
     }
 
     /**
      * UserInput = "-login jdoe -pass sup3rpaZZ -role XXX -res a.b"
      */
     @Test
-    public void test8() {
+    public void testUnknownRole() {
         UserInput userInput = new UserInput();
         userInput.setRole("XXX");
         AAAService service = new AAAService();
-        try {
-
-        }
-        assertTrue(Roles.valueOf(userInput.getRole())!=null);
+        assertFalse(service.isRoleValid(userInput.getRole()));
     }
 
     /**
      * UserInput = "-login jdoe -pass sup3rpaZZ -role READ -res XXX"
      */
     @Test
-    public void test9() {
+    public void testUnknownResource() {
+        UserInput userInput = new UserInput();
+        userInput.setRole("READ");
+        userInput.setResource("XXX");
+
+        Connector connector = mock(Connector.class);
+        when(connector.getResourceFromDataBase(userInput, null)).thenReturn(null);
+        assertEquals(null, connector.getResourceFromDataBase(userInput, null));
     }
 
     /**
      * UserInput = "-login jdoe -pass sup3rpaZZ -role WRITE -res a"
      */
     @Test
-    public void test10() {
+    public void testWrongRoleForResource() {
+        UserInput userInput = new UserInput();
+        userInput.setRole("WRITE");
+        userInput.setResource("a");
+
+        Connector connector = mock(Connector.class);
+        when(connector.getResourceFromDataBase(userInput, null)).thenReturn(null);
+        assertEquals(null, connector.getResourceFromDataBase(userInput, null));
     }
 
     /**
      * UserInput = "-login jdoe -pass sup3rpaZZ -role WRITE -res a.bc"
      */
     @Test
-    public void test11() {
+    public void testWrongRoleForResource2() {
+        UserInput userInput = new UserInput();
+        userInput.setRole("WRITE");
+        userInput.setResource("a.bc");
+
+        Connector connector = mock(Connector.class);
+        when(connector.getResourceFromDataBase(userInput, null)).thenReturn(null);
+        assertEquals(null, connector.getResourceFromDataBase(userInput, null));
     }
 
     /**
      * UserInput = "-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 2015-01-01 -de 2015-12-31 -vol 100"
      */
     @Test
-    public void test12() {
+    public void testSuccessfulAccounting() {
+        UserInput userInput = new UserInput();
+        userInput.setDateStart("2015-01-01");
+        userInput.setDateEnd("2015-12-31");
+        userInput.setVolume("100");
+        AAAService service = new AAAService();
+
+        assertTrue(service.isVolumeValid(userInput.getVolume()));
+        assertTrue(service.isDateValid(userInput.getDateStart(),userInput.getDateEnd()));
     }
 
     /**
      * UserInput = "-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 01-01-2015 -de 2015-12-31 -vol 100"
      */
     @Test
-    public void test13() {
+    public void testNotValidDate() {
+        UserInput userInput = new UserInput();
+        userInput.setDateStart("01-01-2015");
+        userInput.setDateEnd("2015-12-31");
+        userInput.setVolume("100");
+        AAAService service = new AAAService();
+
+        assertTrue(service.isVolumeValid(userInput.getVolume()));
+        assertFalse(service.isDateValid(userInput.getDateStart(),userInput.getDateEnd()));
     }
 
     /**
      * UserInput = "-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 2015-01-01 -de 2015-12-31 -vol XXX"
      */
     @Test
-    public void test14() {
+    public void testNotValidVolume() {
     }
 
     /**
      * UserInput = "-login X -pass X -role READ -res X -ds 2015-01-01 -de 2015-12-31 -vol XXX"
      */
     @Test
-    public void test15() {
+    public void testAccountingWithoutAuthentication() {
     }
 
     /**
      * UserInput = "-login X -pass X -role READ -res X"
      */
     @Test
-    public void test16() {
+    public void testAuthorisationWithoutAuthentication() {
     }
 
 }

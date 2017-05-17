@@ -60,7 +60,11 @@ public class Application {
             if (userInput.isAuthorisation()) {
                 reqRes = connector.getResourceFromDataBase(userInput, dbConnection);
 
-                service.isRoleValid(userInput.getRole());
+                if (service.isRoleValid(userInput.getRole())==false)
+                {
+                    logger.error("Role {} doesn't exist.(Exit-code - 3)", userInput.getRole());
+                    System.exit(3);
+                }
 
                 //Вылавить неизвестные ресурсы
                 if (reqRes == null) {
@@ -80,12 +84,23 @@ public class Application {
 
                 if (userInput.isAccounting()) {
                     //ловим ошибку 5
-                    service.isDateValid(userInput.getDateEnd(), userInput.getDateStart());
-                    service.isVolumeValid(userInput.getVolume());
+                    if(service.isDateValid(userInput.getDateEnd(), userInput.getDateStart())==false)
+                    {
+                        logger.error("Date {} or {} doesn't correct.(Exit-code - 5)",
+                                userInput.getDateStart(), userInput.getDateEnd());
+                        System.exit(5);
+                    }
 
-                    service.tryGetDate(userInput.getDateEnd());
+                    if (service.isVolumeValid(userInput.getVolume())==false);
+                    {
+                        logger.error("Volume {} doesn't correct.(Exit-code - 5)",
+                                userInput.getVolume());
+                        System.exit(5);
+                    }
+                    // дублирование?
+                    /*service.tryGetDate(userInput.getDateEnd());
                     service.tryGetDate(userInput.getDateStart());
-                    service.tryGetVolume(userInput.getVolume());
+                    service.tryGetVolume(userInput.getVolume());*/
                     //добавляем запись о использовании ресурса в БД
                     connector.insertRecordIntoDataBase(userInput, reqRes, dbConnection);
                     logger.debug("Accounting: success");

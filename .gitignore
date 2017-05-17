@@ -18,3 +18,5 @@ praclab1.Application.jar
 !pom.xml
 target/original-PracLab1-1.0-SNAPSHOT.jar
 target/PracLab1-1.0-SNAPSHOT.jar
+target/PracLab1-1.0-SNAPSHOT-shaded.jar
+PracLab1-1.0-SNAPSHOT.jar
