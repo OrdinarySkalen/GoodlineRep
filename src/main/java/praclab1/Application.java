@@ -28,7 +28,6 @@ public class Application {
 
         Connector connector = new Connector();
         Validator validator = new Validator();
-        //UserInput userInput = new UserInput();
         AAAService service = new AAAService();
         Connection dbConnection = connector.getConnection(URL, USER, PASSWORD);
 
@@ -60,7 +59,7 @@ public class Application {
             if (userInput.isAuthorisation()) {
                 reqRes = connector.getResourceFromDataBase(userInput, dbConnection);
 
-                if (service.isRoleValid(userInput.getRole())==false)
+                if (!service.isRoleValid(userInput.getRole()))
                 {
                     logger.error("Role {} doesn't exist.(Exit-code - 3)", userInput.getRole());
                     System.exit(3);
@@ -84,23 +83,20 @@ public class Application {
 
                 if (userInput.isAccounting()) {
                     //ловим ошибку 5
-                    if(service.isDateValid(userInput.getDateEnd(), userInput.getDateStart())==false)
+                    if(!service.isDateValid(userInput.getDateEnd(), userInput.getDateStart()))
                     {
                         logger.error("Date {} or {} doesn't correct.(Exit-code - 5)",
                                 userInput.getDateStart(), userInput.getDateEnd());
                         System.exit(5);
                     }
 
-                    if (service.isVolumeValid(userInput.getVolume())==false);
+                    if (!service.isVolumeValid(userInput.getVolume()))
                     {
                         logger.error("Volume {} doesn't correct.(Exit-code - 5)",
                                 userInput.getVolume());
                         System.exit(5);
                     }
-                    // дублирование?
-                    /*service.tryGetDate(userInput.getDateEnd());
-                    service.tryGetDate(userInput.getDateStart());
-                    service.tryGetVolume(userInput.getVolume());*/
+
                     //добавляем запись о использовании ресурса в БД
                     connector.insertRecordIntoDataBase(userInput, reqRes, dbConnection);
                     logger.debug("Accounting: success");

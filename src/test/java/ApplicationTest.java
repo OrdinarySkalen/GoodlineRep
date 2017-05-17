@@ -90,12 +90,18 @@ public class ApplicationTest {
         UserInput userInput = new UserInput();
         userInput.setLogin("jdoe");
         userInput.setPassword("sup3rpaZZ");
-        User reqUser = new User();
+
         AAAService service = new AAAService();
+
+        User reqUser = new User();
         reqUser.setPassword("595cae237d58197a0ce09f8a2b5498df");
         reqUser.setLogin("jdoe");
         reqUser.setSalt2("]cGlR");
-        assertTrue(service.checkPasswordByUser(userInput.getPassword(), reqUser));
+
+        Connector connector = mock(Connector.class);
+        when(connector.getUserFromDataBase(userInput, null)).thenReturn(reqUser);
+
+        assertTrue(service.checkPasswordByUser(userInput.getPassword(), connector.getUserFromDataBase(userInput, null)));
     }
 
     /**
@@ -104,8 +110,11 @@ public class ApplicationTest {
     @Test
     public void testSuccessfulAuthorisation() {
         UserInput userInput = new UserInput();
+        userInput.setLogin("jdoe");
+        userInput.setPassword("sup3rpaZZ");
         userInput.setRole("READ");
         userInput.setResource("a");
+
         Resource resource = new Resource(userInput.getResource(), 1,
                 Roles.valueOf(userInput.getRole()), 1);
 
@@ -120,6 +129,8 @@ public class ApplicationTest {
     @Test
     public void testSuccessfulAuthorisation2() {
         UserInput userInput = new UserInput();
+        userInput.setLogin("jdoe");
+        userInput.setPassword("sup3rpaZZ");
         userInput.setRole("READ");
         userInput.setResource("a.b");
         Resource resource = new Resource(userInput.getResource(), 1,
@@ -136,8 +147,13 @@ public class ApplicationTest {
     @Test
     public void testUnknownRole() {
         UserInput userInput = new UserInput();
+        userInput.setLogin("jdoe");
+        userInput.setPassword("sup3rpaZZ");
         userInput.setRole("XXX");
+        userInput.setResource("a.b");
+
         AAAService service = new AAAService();
+
         assertFalse(service.isRoleValid(userInput.getRole()));
     }
 
@@ -147,6 +163,8 @@ public class ApplicationTest {
     @Test
     public void testUnknownResource() {
         UserInput userInput = new UserInput();
+        userInput.setLogin("jdoe");
+        userInput.setPassword("sup3rpaZZ");
         userInput.setRole("READ");
         userInput.setResource("XXX");
 
@@ -161,6 +179,8 @@ public class ApplicationTest {
     @Test
     public void testWrongRoleForResource() {
         UserInput userInput = new UserInput();
+        userInput.setLogin("jdoe");
+        userInput.setPassword("sup3rpaZZ");
         userInput.setRole("WRITE");
         userInput.setResource("a");
 
@@ -175,6 +195,8 @@ public class ApplicationTest {
     @Test
     public void testWrongRoleForResource2() {
         UserInput userInput = new UserInput();
+        userInput.setLogin("jdoe");
+        userInput.setPassword("sup3rpaZZ");
         userInput.setRole("WRITE");
         userInput.setResource("a.bc");
 
@@ -189,13 +211,17 @@ public class ApplicationTest {
     @Test
     public void testSuccessfulAccounting() {
         UserInput userInput = new UserInput();
+        userInput.setLogin("jdoe");
+        userInput.setPassword("sup3rpaZZ");
+        userInput.setRole("READ");
+        userInput.setResource("a.b");
         userInput.setDateStart("2015-01-01");
         userInput.setDateEnd("2015-12-31");
         userInput.setVolume("100");
         AAAService service = new AAAService();
 
         assertTrue(service.isVolumeValid(userInput.getVolume()));
-        assertTrue(service.isDateValid(userInput.getDateStart(),userInput.getDateEnd()));
+        assertTrue(service.isDateValid(userInput.getDateStart(), userInput.getDateEnd()));
     }
 
     /**
@@ -204,13 +230,17 @@ public class ApplicationTest {
     @Test
     public void testNotValidDate() {
         UserInput userInput = new UserInput();
+        userInput.setLogin("jdoe");
+        userInput.setPassword("sup3rpaZZ");
+        userInput.setRole("READ");
+        userInput.setResource("a.b");
         userInput.setDateStart("01-01-2015");
         userInput.setDateEnd("2015-12-31");
         userInput.setVolume("100");
         AAAService service = new AAAService();
 
         assertTrue(service.isVolumeValid(userInput.getVolume()));
-        assertFalse(service.isDateValid(userInput.getDateStart(),userInput.getDateEnd()));
+        assertFalse(service.isDateValid(userInput.getDateStart(), userInput.getDateEnd()));
     }
 
     /**
@@ -218,6 +248,18 @@ public class ApplicationTest {
      */
     @Test
     public void testNotValidVolume() {
+        UserInput userInput = new UserInput();
+        userInput.setLogin("jdoe");
+        userInput.setPassword("sup3rpaZZ");
+        userInput.setRole("READ");
+        userInput.setResource("a.b");
+        userInput.setDateStart("2015-01-01");
+        userInput.setDateEnd("2015-12-31");
+        userInput.setVolume("XXX");
+        AAAService service = new AAAService();
+
+        assertFalse(service.isVolumeValid(userInput.getVolume()));
+        assertTrue(service.isDateValid(userInput.getDateStart(), userInput.getDateEnd()));
     }
 
     /**
@@ -225,6 +267,18 @@ public class ApplicationTest {
      */
     @Test
     public void testAccountingWithoutAuthentication() {
+        UserInput userInput = new UserInput();
+        userInput.setLogin("X");
+        userInput.setPassword("X");
+        userInput.setRole("READ");
+        userInput.setResource("X");
+        userInput.setDateStart("2015-01-01");
+        userInput.setDateEnd("2015-12-31");
+        userInput.setVolume("XXX");
+        Connector connector = mock(Connector.class);
+        when(connector.getUserFromDataBase(userInput, null)).thenReturn(null);
+        User reqUser = connector.getUserFromDataBase(userInput, null);
+        assertEquals(null, reqUser);
     }
 
     /**
@@ -232,6 +286,16 @@ public class ApplicationTest {
      */
     @Test
     public void testAuthorisationWithoutAuthentication() {
+        UserInput userInput = new UserInput();
+        userInput.setLogin("X");
+        userInput.setPassword("X");
+        userInput.setRole("READ");
+        userInput.setResource("X");
+
+        Connector connector = mock(Connector.class);
+        when(connector.getUserFromDataBase(userInput, null)).thenReturn(null);
+        User reqUser = connector.getUserFromDataBase(userInput, null);
+        assertEquals(null, reqUser);
     }
 
 }

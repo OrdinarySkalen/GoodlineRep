@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ApplicationTest
 -------------------------------------------------------------------------------
-Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.849 sec
+Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.9 sec

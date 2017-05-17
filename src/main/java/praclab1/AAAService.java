@@ -64,24 +64,4 @@ public class AAAService {
             return false;
         }
     }
-
-    /**
-     * Получить дату в формате LocalDate
-     *
-     * @param date дата в текстовом формате
-     * @return дата в формате LocalDate
-     */
-    /*public LocalDate tryGetDate(String date) {
-        return LocalDate.parse(date);
-    }*/
-
-    /**
-     * Получить объем в числовом формате
-     *
-     * @param volume объем в текстовом формате
-     * @return объем в числовом формате
-     */
-    /*public int tryGetVolume(String volume) {
-        return Integer.valueOf(volume);
-    }*/
 }
