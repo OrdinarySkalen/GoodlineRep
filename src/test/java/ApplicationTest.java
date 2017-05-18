@@ -8,24 +8,15 @@ import praclab1.AAAService;
 import praclab1.dao.Connector;
 import praclab1.domain.*;
 
-
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ApplicationTest {
-    /*@org.junit.After
-    public void tearDown() throws Exception {
-
-    }*/
-
-    private static final String URL = "jdbc:h2:./res/db/applicationDB";
-    private static final String USER = "artem";
-    private static final String PASSWORD = "123";
-
     @Test
-    /**
+    /*
+     * Проверяем поведение приложения при вводе пустой строки
      * UserInput = " "
      */
     public void testEmptyInput() {
@@ -34,7 +25,8 @@ public class ApplicationTest {
     }
 
     @Test
-    /**
+    /*
+     * Проверяем поведение приложения при вводе параметра "-h"
      * UserInput = "-h"
      */
     public void testHelpInput() {
@@ -50,6 +42,7 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем поведение приложения при вводе неизвестного логина
      * UserInput = "-login XXX -pass XXX"
      */
     @Test
@@ -64,6 +57,7 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем поведение приложения при вводе неверного пароля к логину
      * UserInput = "-login jdoe -pass XXX "
      */
     @Test
@@ -83,6 +77,8 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем поведение приложения при вводе верного логина и пароля
+     * (успешная аутентификация)
      * UserInput = "-login jdoe -pass sup3rpaZZ"
      */
     @Test
@@ -105,6 +101,8 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем поведение приложения при вводе верного логина, пароля и ресурса
+     * (успешная авторизация)
      * UserInput = "-login jdoe -pass sup3rpaZZ -role READ -res a"
      */
     @Test
@@ -124,6 +122,9 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем поведение приложения при вводе верного логина, пароля и
+     * ресурса, являющегося, дочерним по отношению к доступному поьзователю
+     * (успешная авторизация 2)
      * UserInput = "-login jdoe -pass sup3rpaZZ -role READ -res a.b"
      */
     @Test
@@ -142,6 +143,7 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем поведение приложения при вводе неизвестной роли для ресурса
      * UserInput = "-login jdoe -pass sup3rpaZZ -role XXX -res a.b"
      */
     @Test
@@ -158,6 +160,7 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем поведение приложения при получении достпа к неизвестному ресурсу
      * UserInput = "-login jdoe -pass sup3rpaZZ -role READ -res XXX"
      */
     @Test
@@ -174,6 +177,8 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем поведение приложения при вводе неверной роли для ресурса
+     * ресурс доступен пользоватлю с ролью READ
      * UserInput = "-login jdoe -pass sup3rpaZZ -role WRITE -res a"
      */
     @Test
@@ -190,6 +195,8 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем поведение приложения при вводе неверной роли для дочернего ресурса
+     * родительский ресурс доступен пользоватлю с ролью READ
      * UserInput = "-login jdoe -pass sup3rpaZZ -role WRITE -res a.bc"
      */
     @Test
@@ -206,6 +213,7 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем поведение приложения при вводе валидных данных для аккаутинга
      * UserInput = "-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 2015-01-01 -de 2015-12-31 -vol 100"
      */
     @Test
@@ -225,6 +233,7 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем поведение приложения при вводе невалидной даты для аккаутинга
      * UserInput = "-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 01-01-2015 -de 2015-12-31 -vol 100"
      */
     @Test
@@ -244,6 +253,7 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем поведение приложения при вводе невалидного объема для аккаутинга
      * UserInput = "-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 2015-01-01 -de 2015-12-31 -vol XXX"
      */
     @Test
@@ -263,6 +273,7 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем невозможность аккаунитинга без аутентификации и авторизации
      * UserInput = "-login X -pass X -role READ -res X -ds 2015-01-01 -de 2015-12-31 -vol XXX"
      */
     @Test
@@ -282,6 +293,7 @@ public class ApplicationTest {
     }
 
     /**
+     * Проверяем невозможность авторизации без аутентификации
      * UserInput = "-login X -pass X -role READ -res X"
      */
     @Test

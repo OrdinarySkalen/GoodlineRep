@@ -20,7 +20,7 @@ public class Resource {
         return path;
     }
 
-    public void setPath(String path) {
+    private void setPath(String path) {
         this.path = path;
     }
 
@@ -28,7 +28,7 @@ public class Resource {
         return usersId;
     }
 
-    public void setUserId(int usersId) {
+    private void setUserId(int usersId) {
         this.usersId = usersId;
     }
 
@@ -44,7 +44,7 @@ public class Resource {
         return id;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 }

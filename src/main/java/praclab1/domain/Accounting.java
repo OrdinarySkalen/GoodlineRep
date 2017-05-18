@@ -18,11 +18,11 @@ public class Accounting {
         this.setUser(user);
     }
 
-    public void setDateStart(LocalDate dateStart) {
+    private void setDateStart(LocalDate dateStart) {
         this.dateStart = dateStart;
     }
 
-    public void setVolume(int volume) {
+    private void setVolume(int volume) {
         this.volume = volume;
     }
 
@@ -34,7 +34,7 @@ public class Accounting {
         this.user = user;
     }
 
-    public void setDateEnd(LocalDate dateEnd) {
+    private void setDateEnd(LocalDate dateEnd) {
         this.dateEnd = dateEnd;
     }
 

@@ -26,10 +26,6 @@ public class User {
         this.setPassword(pass);
     }
 
-    public String getLogin() {
-        return login;
-    }
-
     public void setLogin(String login) {
         this.login = login;
     }
@@ -38,7 +34,7 @@ public class User {
         return salt;
     }
 
-    public void setSalt() {
+    private void setSalt() {
         this.salt = RandomStringUtils.randomAscii(5);
     }
 
@@ -50,7 +46,7 @@ public class User {
         return id;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 
@@ -58,11 +54,15 @@ public class User {
         return hashPassword;
     }
 
-    public void setHashPassword(String pass) {
+    private void setHashPassword(String pass) {
         this.hashPassword = DigestUtils.md5Hex(DigestUtils.md2Hex(pass) + this.getSalt());
     }
 
     public void setPassword(String pass) {
         this.hashPassword = pass;
+    }
+
+    public String getLogin() {
+        return login;
     }
 }

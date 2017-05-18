@@ -33,7 +33,7 @@ public class Validator {
      *
      * @param args массив аргументов переданных в программу
      */
-    public UserInput getUserInput(String[] args) {
+    UserInput getUserInput(String[] args) {
         UserInput usIn = new UserInput();
         try {
             line = parser.parse(options, args);

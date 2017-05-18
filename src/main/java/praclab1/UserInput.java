@@ -9,11 +9,11 @@ public class UserInput {
     private String dateEnd;
     private String volume;
 
-    public boolean isAuthorisation() {
+    boolean isAuthorisation() {
         return this.getResource() != null && this.getRole() != null;
     }
 
-    public boolean isAccounting() {
+    boolean isAccounting() {
         return this.getDateEnd() != null && this.getDateStart() != null;
     }
 

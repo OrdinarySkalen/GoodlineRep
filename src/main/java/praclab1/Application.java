@@ -37,7 +37,6 @@ public class Application {
 
 
         try {
-            Statement statement = dbConnection.createStatement();
             reqUser = connector.getUserFromDataBase(userInput, dbConnection);
 
             //Проверить существоание пользователя
@@ -59,8 +58,7 @@ public class Application {
             if (userInput.isAuthorisation()) {
                 reqRes = connector.getResourceFromDataBase(userInput, dbConnection);
 
-                if (!service.isRoleValid(userInput.getRole()))
-                {
+                if (!service.isRoleValid(userInput.getRole())) {
                     logger.error("Role {} doesn't exist.(Exit-code - 3)", userInput.getRole());
                     System.exit(3);
                 }
@@ -83,15 +81,13 @@ public class Application {
 
                 if (userInput.isAccounting()) {
                     //ловим ошибку 5
-                    if(!service.isDateValid(userInput.getDateEnd(), userInput.getDateStart()))
-                    {
+                    if (!service.isDateValid(userInput.getDateEnd(), userInput.getDateStart())) {
                         logger.error("Date {} or {} doesn't correct.(Exit-code - 5)",
                                 userInput.getDateStart(), userInput.getDateEnd());
                         System.exit(5);
                     }
 
-                    if (!service.isVolumeValid(userInput.getVolume()))
-                    {
+                    if (!service.isVolumeValid(userInput.getVolume())) {
                         logger.error("Volume {} doesn't correct.(Exit-code - 5)",
                                 userInput.getVolume());
                         System.exit(5);
@@ -102,10 +98,8 @@ public class Application {
                     logger.debug("Accounting: success");
                 }
             }
-        } catch (SQLException e) {
-            logger.debug(e.getMessage());
         } finally {
-            connector.closeConnection(dbConnection);
+            Connector.closeConnection(dbConnection);
         }
         logger.debug("End session");
     }
