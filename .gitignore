@@ -4,8 +4,9 @@
 .idea/.name
 /idea/*
 /out/*
-/h2/*
 /src/META-INF/*
+/libs/*
+/target/*
 *.MF
 Application.jar
 О базе данных.txt
@@ -14,9 +15,9 @@ res/db/applicationDB.mv.db
 res/db/applicationDB.trace.db
 *.db
 *.log
+BUILD.sh
+RUN.sh
+TEST.sh
 praclab1.Application.jar
 !pom.xml
-target/original-PracLab1-1.0-SNAPSHOT.jar
-target/PracLab1-1.0-SNAPSHOT.jar
-target/PracLab1-1.0-SNAPSHOT-shaded.jar
 PracLab1-1.0-SNAPSHOT.jar
