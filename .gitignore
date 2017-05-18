@@ -16,7 +16,6 @@ res/db/applicationDB.trace.db
 *.db
 *.log
 BUILD.sh
-RUN.sh
 TEST.sh
 praclab1.Application.jar
 !pom.xml
