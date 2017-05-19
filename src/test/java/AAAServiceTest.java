@@ -5,7 +5,7 @@ import praclab1.domain.*;
 
 import static org.junit.Assert.*;
 
-public class AAAServiseTest {
+public class AAAServiceTest {
     /**
      * Проверяем правильность проверки пароля, позитивное тестирование
      */
