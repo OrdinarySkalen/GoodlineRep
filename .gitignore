@@ -13,6 +13,7 @@ Application.jar
 res/db/applicationDB.mv.db
 res/db/applicationDB.mv.db
 res/db/applicationDB.trace.db
+!/src/main/resources/log4j2.xml
 *.db
 *.log
 BUILD.sh
