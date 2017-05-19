@@ -28,6 +28,10 @@ public class Validator {
         return line.hasOption("h");
     }
 
+    public boolean isEmpty(UserInput userInput) {
+        return userInput.isEmpty();
+    }
+
     /**
      * Преобразовать введенные параметры в объект класса praclab1.UserInput
      *
@@ -45,22 +49,31 @@ public class Validator {
             usIn.setDateEnd(line.getOptionValue("de"));
             usIn.setVolume(line.getOptionValue("volume"));
 
-            String input = "";
-            for (String s : args) {
-                input = String.format("%s %s", input, s);
-            }
+            String input = printUserInput(args);
             logger.debug("User input:{}", input);
-            if (isHelp() || (usIn.isEmpty())) {
+
+            if (isHelp()) {
+                helpFormatter.printHelp("Help", options);
+                logger.debug("Call Help");
+                System.exit(0);
+            }
+
+            if (isEmpty(usIn)) {
                 helpFormatter.printHelp("Help", options);
                 logger.debug("Unknown parameters");
                 System.exit(0);
             }
 
-        } catch (ParseException exp) {
-            helpFormatter.printHelp("Help", options);
-            logger.debug("There is not any parameters");
-            System.exit(0);
+        } catch (ParseException ignored) {
         }
         return usIn;
+    }
+
+    private String printUserInput(String[] args) {
+        String input = "";
+        for (String s : args) {
+            input = String.format("%s %s", input, s);
+        }
+        return input;
     }
 }

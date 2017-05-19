@@ -5,29 +5,43 @@ import org.junit.Test;
 import praclab1.UserInput;
 import praclab1.Validator;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-/**
- * Created by Artem 2 on 19.05.2017.
- */
 public class ValidatorTest {
     @Test
     /*
-     * Проверяем поведение приложения при вводе пустой строки
-     * UserInput = " "
+     * Проверяем ввод пустой строки, позитивное тестирование
      */
     public void testEmptyInput() {
+        Validator validator = new Validator();
+
         UserInput userInput = new UserInput();
-        assertEquals(true, userInput.isEmpty());
+
+        assertTrue(validator.isEmpty(userInput));
     }
 
     @Test
     /*
-     * Проверяем поведение приложения при вводе параметра "-h"
-     * UserInput = "-h"
+     * Проверяем ввод пустой строки, негативное тестирование
+     */
+    public void testNotEmptyInput() {
+        Validator validator = new Validator();
+
+        UserInput userInput = new UserInput();
+        userInput.setLogin("test");
+        userInput.setPassword("test");
+
+        assertFalse(validator.isEmpty(userInput));
+    }
+
+    @Test
+    /*
+     * Проверяем ввод параметра "-h"
      */
     public void testHelpInput() {
         Validator validator = new Validator();
+
         CommandLineParser parser = new DefaultParser();
         String[] args = new String[]{"-h"};
         try {
@@ -35,6 +49,7 @@ public class ValidatorTest {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        assertEquals(true, validator.isHelp());
+
+        assertTrue(validator.isHelp());
     }
 }
